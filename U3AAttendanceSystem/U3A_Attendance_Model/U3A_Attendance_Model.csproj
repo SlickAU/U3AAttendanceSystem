@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B451A73A-22DF-4019-B0CD-B6065B95ECFA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>U3A_Attendance_Model</RootNamespace>
+    <AssemblyName>U3A_Attendance_Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="App.Config" />
+    <None Include="Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
+    </None>
+    <None Include="Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attendance.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Coordinator.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CourseDescription.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CourseInstance.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Facade.cs" />
+    <Compile Include="Interfaces\IAttendance.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\ICoordinator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\ICourseDescription.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\ICourseInstance.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\ILocation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\IMember.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\IRegion.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\ISession.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\ISuburb.cs" />
+    <Compile Include="Interfaces\IU3A.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\IVenue.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Location.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Member.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Partials\BusinessRuleException.cs" />
+    <Compile Include="Partials\CourseState\Active.cs" />
+    <Compile Include="Partials\Attendance.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Partials\Coordinator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Partials\CourseDescription.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Partials\CourseInstance.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Partials\CourseInstanceState.cs" />
+    <Compile Include="Partials\CourseState\Cancelled.cs" />
+    <Compile Include="Partials\CourseState\Complete.cs" />
+    <Compile Include="Partials\Location.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Partials\Member.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Partials\Region.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Partials\CourseState\Scheduled.cs" />
+    <Compile Include="Partials\Session.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Partials\Suburb.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Partials\U3A.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Partials\Venue.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Region.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Session.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Suburb.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="U3A.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Venue.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

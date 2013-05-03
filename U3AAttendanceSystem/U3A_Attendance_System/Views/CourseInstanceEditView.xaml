@@ -1,0 +1,133 @@
+﻿<UserControl x:Class="U3A_Attendance_System.Views.CourseInstanceEditView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:cal="http://www.caliburnproject.org"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="1062">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <!--Course Instance Management-->
+        <Grid Grid.Row="0" VerticalAlignment="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition Height="2" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Vertical">
+                <Label Content="Course Management" />
+                <Label Content="{Binding Path=CDTitle, Mode=TwoWay}" />
+            </StackPanel>
+            <GroupBox Header="Course Information" Grid.Row="1">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25" />
+                        <RowDefinition Height="25" />
+                        <RowDefinition Height="25" />
+                    </Grid.RowDefinitions>
+
+
+
+                    <Label Content="Course Code" Grid.Column="0" Grid.Row="0" />
+                    <Label Content="Start Date" Grid.Column="1" Grid.Row="0" />
+                    <Label Content="Region" Grid.Column="2" Grid.Row="0" />
+                    <Label Content="Suburb" Grid.Column="3" Grid.Row="0" />
+                    <Label Content="Venue" Grid.Column="4" Grid.Row="0" />
+                    <Label Content="Location" Grid.Column="5" Grid.Row="0" />
+                    <Label Content="Coordinator" Grid.Column="6" Grid.Row="0" />
+
+                    <TextBox Name="CourseCode" Grid.Column="0" Grid.Row="1" />
+                    <DatePicker Name="StartDate" Text="Choose a date..."  Grid.Column="1" Grid.Row="1" />
+                    <ComboBox Name="Regions" Grid.Column="2" Grid.Row="1" DisplayMemberPath="Description" SelectedValuePath="Id" cal:Message.Attach="UpdateSuburbs(Regions.SelectedValue)"/>
+                    <ComboBox Name="Suburbs" Grid.Column="3" Grid.Row="1" DisplayMemberPath="Name" SelectedValuePath="Id" cal:Message.Attach="UpdateVenues" IsEnabled="{Binding Path=IsSuburbsEnabled}"/>
+                    <ComboBox Name="Venues" Grid.Column="4" Grid.Row="1" DisplayMemberPath="Name" SelectedValuePath="Id" cal:Message.Attach="UpdateLocations(Venues.SelectedValue)" IsEnabled="{Binding Path=IsVenuesEnabled}" />
+                    <ComboBox Name="Locations" Grid.Column="5" Grid.Row="1" DisplayMemberPath="Room" SelectedValuePath="Id" IsEnabled="{Binding Path=IsLocationsEnabled}" />
+                    <ComboBox Name="Coordinators" Grid.Column="6" Grid.Row="1" DisplayMemberPath="Name" SelectedValuePath="Id"  />
+
+                    <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Button Content="Cancel" />
+                        <Button Name="Save" Content="Save" />
+                    </StackPanel>
+
+                </Grid>
+            </GroupBox>
+        </Grid>
+        <!--Sessions Management-->
+        <Grid Grid.Row="1" IsEnabled="{Binding Path=IsSessionsEditEnabled}">
+            <GroupBox Header="Sessions &amp; Attendance">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <GroupBox Header="Create new sessions" Grid.Column="0" VerticalAlignment="Top">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <Label Content="Start Date" Grid.Column="0" Grid.Row="0" />
+
+                            <Label Content="Frequency" Grid.Column="2" Grid.Row="0" />
+                            <Label Content="Occurances" Grid.Column="3" Grid.Row="0" />
+                            <Label Content="Location" Grid.Column="4" Grid.Row="0" />
+
+                            <DatePicker Name="SessionStartDate" Grid.Column="0" Grid.Row="1" />
+                            <Label Name="SessionStartDateDay" Grid.Column="1" Grid.Row="1" />
+                            <ComboBox Text="Frequency..." Grid.Column="2" Grid.Row="1"></ComboBox>
+                            <TextBox Name="txtOccurances" Grid.Column="3" Grid.Row="1" />
+                            <TextBox Name="txtLocation"  Grid.Column="4" Grid.Row="1" />
+                            <Button Name="CreateSession" Content="Create" Grid.Column="5" Grid.Row="1" />
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="Edit existing session" Grid.Column="2" VerticalAlignment="Top">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Sessions List" />
+                            <ComboBox Width="85" />
+                            <Button Content="Edit" />
+                            <Button Content="Delete" />
+                        </StackPanel>
+                    </GroupBox>
+
+                    <Grid Grid.Row="1" Grid.ColumnSpan="3">
+                        <DataGrid Name="CISessions">
+                            <DataGridCell Content="{Binding Path=Date}"></DataGridCell>
+                        </DataGrid>       
+                    </Grid>
+
+                </Grid>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</UserControl>
