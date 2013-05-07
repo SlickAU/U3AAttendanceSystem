@@ -8,6 +8,41 @@ namespace U3A_Attendance_Model
 {
     internal partial class Region : IRegion
     {
+        //Region constructor
+        public Region(string codeId, string description, Guid u3aId)
+        {
+            CodeId = codeId;
+            Description = description;
+            U3AId = u3aId;
+        }
+
+        #region Region Management
+
+        internal Region update(string codeId, string description, Guid u3aId)
+        {
+            CodeId = codeId;
+            Description = description;
+            U3AId = u3aId;
+
+            return this;
+        }
+
+        internal void delete(Action<Region> action)
+        {
+            if (this.CourseInstances.Count > 0)
+            {
+                throw new BusinessRuleException("Region cannot be deleted as it is associated with Course Instances.");
+            }
+            else if(this.Suburbs.Count > 0)
+            {
+                throw new BusinessRuleException("Region cannot be deleted as it is associated with Suburbs.");
+            }
+
+            action(this);
+        }
+
+        #endregion
+
         #region Course Instance Management
 
         internal CourseInstance createCourseInstance(CourseDescription description, Coordinator coordinator, Guid suburbId,Guid venueId,Guid defaultLocationId, DateTime startDate, string courseCode)
@@ -62,10 +97,10 @@ namespace U3A_Attendance_Model
 
         internal Session createSession(Guid courseInstanceId, Guid suburbId, Guid venueId, Guid locationId, DateTime date)
         {
-            var session = fetchCourseInstance(courseInstanceId);
+            var courseInstance = fetchCourseInstance(courseInstanceId);
             var location = fetchLocation(venueId, suburbId, locationId);
 
-            return session.createSession(location, date);
+            return courseInstance.createSession(location, date);
         }
 
         internal Session updateSession(Guid sessionId, Guid locationId, DateTime date, int visitorCount, Guid courseInstanceId)
@@ -90,6 +125,35 @@ namespace U3A_Attendance_Model
 
         #endregion
 
+        #region Attendance Management
+
+        internal Attendance createAttendance(Guid courseInstanceId, Guid sessionId, Member member, string presence)
+        {
+            return fetchCourseInstance(courseInstanceId).createAttendance(sessionId, member, presence);
+        }
+
+        internal Attendance fetchAttendance(Guid courseInstanceId, Guid sessionId, Guid attendanceId)
+        {
+            return fetchCourseInstance(courseInstanceId).fetchAttendance(sessionId, attendanceId);
+        }
+
+        internal IEnumerable<Attendance> fetchAttendances(Guid courseInstanceId, Guid sessionId)
+        {
+            return fetchCourseInstance(courseInstanceId).fetchAttendances(sessionId);
+        }
+
+        internal Attendance updateAttendance(Guid courseInstanceId, Guid sessionId, Guid attendanceId, Member member, string presence)
+        {
+            return fetchCourseInstance(courseInstanceId).updateAttendance(sessionId, attendanceId, member, presence);
+        }
+
+        internal void deleteAttendance(Guid courseInstanceId, Guid sessionId, Guid attendanceId, Action<Attendance> action)
+        {
+            fetchCourseInstance(courseInstanceId).deleteAttendance(sessionId, attendanceId, action);
+        }
+
+        #endregion
+
         #region Suburb Management
 
         internal Suburb fetchSuburb(Guid suburbId)
@@ -104,9 +168,28 @@ namespace U3A_Attendance_Model
             return result;
         }
 
-        internal IEnumerable<ISuburb> fetchSuburbs()
+        internal IEnumerable<Suburb> fetchSuburbs()
         {
-            return Suburbs.AsEnumerable();
+            var result = Suburbs.AsEnumerable();
+
+            if (result == null)
+            {
+                throw new BusinessRuleException("Invalid Suburb identifier supplied");
+            }
+
+            return result;
+        }
+
+        internal IEnumerable<Suburb> fetchAllSuburbs()
+        {
+            var result = Suburbs.AsEnumerable();
+
+            if (result == null)
+            {
+                throw new BusinessRuleException("Invalid Suburb identifier supplied");
+            }
+
+            return result;
         }
 
         #endregion
@@ -131,6 +214,26 @@ namespace U3A_Attendance_Model
         internal IEnumerable<Venue> fetchVenues(Guid suburbId)
         {
             return fetchSuburb(suburbId).fetchVenues();
+        }
+
+        internal IEnumerable<Venue> fetchAllVenues()
+        {
+            List<Venue> venueList = new List<Venue>();
+
+            foreach (var s in Suburbs)
+            {
+                var value = s.fetchAllVenues();
+
+                if (!value.Count().Equals(0))
+                {
+                    foreach(var v in value.ToList())
+                    {
+                        venueList.Add(v);
+                    }
+                }
+            }
+
+            return venueList.AsEnumerable();
         }
 
         internal void deleteVenue(Guid venueId, Guid suburbId, Action<Venue> action)
@@ -168,6 +271,6 @@ namespace U3A_Attendance_Model
         }
 
         #endregion
+
     }
 }
- 

@@ -8,6 +8,14 @@ namespace U3A_Attendance_Model
 {
     internal partial class CourseDescription : ICourseDescription
     {
+        public bool HasInstances
+        {
+            get
+            {
+                return CourseInstances.Count > 0;
+            }
+        }
+
         public CourseDescription(string title, string description, Guid u3aId)
         {
             Title = title;
@@ -35,20 +43,20 @@ namespace U3A_Attendance_Model
             }
 
             action(this);
-
         }
 
         internal IEnumerable<CourseInstance> fetchCourseInstances()
         {
-            return this.CourseInstances.AsEnumerable();
+            var value = CourseInstances.AsEnumerable();
+
+            if (value.Count().Equals(0))
+            {
+                throw new BusinessRuleException("Could not obtain collection of Course Instances");
+            }
+
+            return value;
         }
 
         #endregion
-
-
-        public bool HasInstances
-        {
-            get { return CourseInstances.Count > 0; }
-        }
     }
 }

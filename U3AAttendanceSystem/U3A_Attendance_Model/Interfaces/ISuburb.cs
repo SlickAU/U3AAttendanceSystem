@@ -9,6 +9,10 @@ namespace U3A_Attendance_Model
     public interface ISuburb
     {
         Guid Id { get; }
+        Guid RegionId { get; }
         string Name { get; }
+        int PostCode { get; }
+        string Description { get; }
+        bool HasVenues { get; }
     }
 }

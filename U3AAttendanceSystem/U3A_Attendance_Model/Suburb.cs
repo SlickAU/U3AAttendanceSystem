@@ -62,8 +62,8 @@ namespace U3A_Attendance_Model
 				ObjectPropertyChanged("Name");
 			}
 		}
-    	private Nullable<int> _postcode;
-        public  Nullable<int> PostCode 
+    	private int _postcode;
+        public  int PostCode 
 		{ 
 			get
 			{ 

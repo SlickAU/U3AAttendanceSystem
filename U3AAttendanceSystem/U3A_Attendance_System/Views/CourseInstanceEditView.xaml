@@ -121,9 +121,21 @@
                     </GroupBox>
 
                     <Grid Grid.Row="1" Grid.ColumnSpan="3">
-                        <DataGrid Name="CISessions">
+                        <!--<DataGrid Name="CISessions">
                             <DataGridCell Content="{Binding Path=Date}"></DataGridCell>
-                        </DataGrid>       
+                        </DataGrid>       -->
+                        <ItemsControl Name="CISessions">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding Date}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
                     </Grid>
 
                 </Grid>

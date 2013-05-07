@@ -9,7 +9,8 @@ namespace U3A_Attendance_Model
     public interface IAttendance
     {
         Guid Id { get; }
-        Guid MemberId { get; }
+        int MemberId { get; }
         string Presence { get; }
+        Guid SessionId { get; }
     }
 }

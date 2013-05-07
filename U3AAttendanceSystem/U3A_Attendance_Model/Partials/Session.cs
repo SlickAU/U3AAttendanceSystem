@@ -18,10 +18,45 @@ namespace U3A_Attendance_Model
 
         #region Attendance Management
 
-        internal Attendance FetchAttendance(int memberId)
+        internal Attendance createAttendance(Member member, string presence)
         {
-            return Attendances.Where(a => a.MemberId.Equals(memberId)).FirstOrDefault();
-        } 
+            var attendance = new Attendance(member, presence, this);
+            this.Attendances.Add(attendance);
+            return attendance;
+        }
+
+        internal Attendance fetchAttendance(Guid attendanceId)
+        {
+            var attendance = Attendances.Where(a => a.Id.Equals(attendanceId)).FirstOrDefault();
+
+            if(attendance == null)
+            {
+                throw new BusinessRuleException("Invalid attendance identifier supplied");
+            }
+            return attendance;
+        }
+
+        internal IEnumerable<Attendance> fetchAttendances()
+        {
+            var attendance = Attendances.AsEnumerable();
+
+            if (attendance == null)
+            {
+                throw new BusinessRuleException("Invalid attendance identifier supplied");
+            }
+
+            return attendance;
+        }
+
+        internal Attendance updateAttendance(Guid attendanceId, Member member, string presence)
+        {
+            return fetchAttendance(attendanceId).update(member, presence, this);
+        }
+
+        internal void deleteAttendance(Guid attendanceId, Action<Attendance> action)
+        {
+            fetchAttendance(attendanceId).delete(action);
+        }
 
         #endregion
 
@@ -37,7 +72,6 @@ namespace U3A_Attendance_Model
 
         internal void delete(Action<Session> action)
         {
-            //Implement check for associated attendance records. If found, session cannot be deleted.
             if (Attendances.Count > 0)
             {
                 throw new Exception("This session cannot be deleted as it has associated Attendance records");
