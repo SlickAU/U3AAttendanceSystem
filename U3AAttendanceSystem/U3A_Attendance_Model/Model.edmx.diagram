@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c0a460d3eb604e498ed1a91ca796b281" Name="Diagram1" ZoomLevel="76">
+      <Diagram DiagramId="c0a460d3eb604e498ed1a91ca796b281" Name="Diagram1" ZoomLevel="77">
         <EntityTypeShape EntityType="U3AAttendanceModel.Attendance" Width="1.5" PointX="16.5" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="U3AAttendanceModel.Coordinator" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="U3AAttendanceModel.CourseDescription" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="U3AAttendanceModel.CourseInstance" Width="1.5" PointX="12" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="U3AAttendanceModel.Location" Width="1.5" PointX="9.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="U3AAttendanceModel.Location" Width="1.5" PointX="9.75" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="U3AAttendanceModel.Member" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="U3AAttendanceModel.Region" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="U3AAttendanceModel.Session" Width="1.5" PointX="14.25" PointY="7.5" IsExpanded="true" />

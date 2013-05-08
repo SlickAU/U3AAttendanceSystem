@@ -151,14 +151,25 @@ namespace U3A_Attendance_System.ViewModels
                 return SessionStartDate.DayOfWeek.ToString();
             }
         }
-        /*public IEnumerable<ISession> CISessions
+        
+        public IEnumerable<ISession> CISessions
         {
             get
             {
                 return _ci.CourseSessions;
             }
             set {}
-        }*/
+        }
+        #endregion
+
+        #region Attendance Specific Properties
+
+        public int MemberId
+        {
+            get;
+            set;
+        }
+
         #endregion
 
         #region Methods
@@ -235,7 +246,20 @@ namespace U3A_Attendance_System.ViewModels
 
         public void CreateSession()
         {
-            _facade.CreateSession(_ci.Id, _ci.RegionId, SelectedSuburb.Id, SelectedVenue.Id, _ci.DefaultLocationId, _ci.StartDate);
+            _facade.CreateSession(_ci.Id, _ci.RegionId, SelectedSuburb.Id, SelectedVenue.Id, _ci.DefaultLocationId, SessionStartDate);
+            _ci = _facade.FetchCourseInstance(_ci.Id, _ci.RegionId);
+            this.Refresh();
+        }
+
+        //Attendance Management
+
+        public void AddAttendance()
+        {
+            foreach (ISession sesh in CISessions)
+            {
+                _facade.CreateAttendance(_ci.RegionId, _ci.Id, sesh.Id, MemberId, "");
+            }
+            //IMember member = _facade.CreateAttendance(_ci.RegionId, _ci.Id, 
         }
 
         #endregion

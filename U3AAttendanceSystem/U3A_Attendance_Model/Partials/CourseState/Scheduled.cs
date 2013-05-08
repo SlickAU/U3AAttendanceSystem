@@ -8,5 +8,9 @@ namespace U3A_Attendance_Model.Partials.CourseState
 {
     internal class Scheduled : CourseInstanceState
     {
+        internal override void delete(Action action)
+        {
+            action();
+        }
     }
 }

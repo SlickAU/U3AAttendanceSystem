@@ -11,7 +11,7 @@ namespace U3A_Attendance_System.ViewModels
     {
         public IEnumerable<IVenue> VenueList
         {
-            get { return _facade.AllVenues(); }
+            get { return _facade.FetchAllVenues(); }
         }
 
     }

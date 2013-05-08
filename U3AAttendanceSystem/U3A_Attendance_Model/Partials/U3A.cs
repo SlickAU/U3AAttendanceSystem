@@ -29,7 +29,7 @@ namespace U3A_Attendance_Model
         //Fetches CourseDescription
         internal CourseDescription fetchCourseDescription(Guid courseDescriptionId)
         {
-            var result = CourseDescriptions.Where(c => c.Id.Equals(courseDescriptionId)).SingleOrDefault();
+            var result = CourseDescriptions.Where(c => c.Id.Equals(courseDescriptionId)).FirstOrDefault();
             
             if (result == null)
             {
@@ -50,6 +50,12 @@ namespace U3A_Attendance_Model
             }
 
             return result;
+        }
+
+        //Fetches CourseDescriptionInstances
+        internal IEnumerable<CourseInstance> fetchCourseDescriptionInstances(Guid courseDescriptionId)
+        {
+            return fetchCourseDescription(courseDescriptionId).fetchCourseInstances();
         }
 
         //Delete a CourseDescription
@@ -85,9 +91,9 @@ namespace U3A_Attendance_Model
             return fetchRegion(regionId).fetchCourseInstances();
         }
 
-        internal IEnumerable<CourseInstance> fetchCourseInstancesByDescription(Guid descriptionId)
+        internal IEnumerable<CourseInstance> fetchCourseInstancesByDescription(Guid courseDescriptionId)
         {
-            return fetchCourseDescription(descriptionId).fetchCourseInstances().AsEnumerable();
+            return fetchCourseDescription(courseDescriptionId).fetchCourseInstances();
         }
 
         internal void deleteCourseInstance(Guid courseInstanceId, Guid regionId, Action<CourseInstance> action)
@@ -126,8 +132,48 @@ namespace U3A_Attendance_Model
         }
 
         #endregion
-       
+
+        #region Attendance Management
+
+        internal Attendance createAttendance(Guid regionId, Guid courseInstanceId, Guid sessionId, int memberId, string presence)
+        {
+            var member = fetchMember(memberId);
+
+            return fetchRegion(regionId).createAttendance(courseInstanceId, sessionId, member, presence);
+        }
+
+        internal Attendance fetchAttendance(Guid regionId, Guid courseInstanceId, Guid sessionId, Guid attendanceId)
+        {
+            return fetchRegion(regionId).fetchAttendance(courseInstanceId, sessionId, attendanceId);
+        }
+
+        internal IEnumerable<Attendance> fetchAttendances(Guid regionId, Guid courseInstanceId, Guid sessionId)
+        {
+            return fetchRegion(regionId).fetchAttendances(courseInstanceId, sessionId);
+        }
+
+        internal Attendance updateAttendance(Guid regionId, Guid courseInstanceId, Guid sessionId, Guid attendanceId, int memberId, string presence)
+        {
+            var member = fetchMember(memberId);
+
+            return fetchRegion(regionId).updateAttendance(courseInstanceId, sessionId, attendanceId, member, presence);
+        }
+
+        internal void deleteAttendance(Guid regionId, Guid courseInstanceId, Guid sessionId, Guid attendanceId, Action<Attendance> action)
+        {
+            fetchRegion(regionId).deleteAttendance(courseInstanceId, sessionId, attendanceId, action);
+        }
+
+        #endregion
+
         #region Region Management
+
+        internal Region createRegion(string codeId, string description)
+        {
+            var region = new Region(codeId, description, this.Id);
+            this.Regions.Add(region);
+            return region;
+        }
 
         internal Region fetchRegion(Guid regionid)
         {
@@ -143,14 +189,30 @@ namespace U3A_Attendance_Model
 
         internal IEnumerable<Region> fetchRegions()
         {
-            return Regions;
+            var result = Regions.AsEnumerable();
+
+            if (result == null)
+            {
+                throw new BusinessRuleException("No regions exist.");
+            }
+
+            return result; 
         }
 
+        internal Region updateRegion(Guid regionId, string codeId, string description)
+        {
+            return fetchRegion(regionId).update(codeId, description, this.Id);
+        }
+
+        internal void deleteRegion(Guid regionId, Action<Region> action)
+        {
+            fetchRegion(regionId).delete(action);
+        }
         #endregion
 
         #region Suburb Management
 
-        internal IEnumerable<ISuburb> fetchSuburbs(Guid regionId)
+        internal IEnumerable<Suburb> fetchSuburbs(Guid regionId)
         {
             return fetchRegion(regionId).fetchSuburbs();
         }
@@ -178,22 +240,26 @@ namespace U3A_Attendance_Model
         {
             return fetchRegion(regionId).fetchVenues(suburbId);
         }
-        internal IEnumerable<Venue> allVenues()
+
+        internal IEnumerable<Venue> fetchAllVenues()
         {
-            List<Venue> listOfVenues = new List<Venue>();
+            List<Venue> venueList = new List<Venue>();
 
             foreach (var r in Regions)
             {
-                foreach (var s in r.Suburbs)
+                var value = r.fetchAllVenues() ;
+
+                if (value != null)
                 {
-                    foreach (var v in s.Venues)
+                    foreach (var v in value)
                     {
-                        listOfVenues.Add(v);
+                        venueList.Add(v);
                     }
                 }
             }
 
-            return listOfVenues;
+            return venueList.AsEnumerable();
+
         }
 
         internal void deleteVenue(Guid venueId, Guid regionId, Guid suburbId, Action<Venue> action)
@@ -262,6 +328,56 @@ namespace U3A_Attendance_Model
         internal void deleteLocation(Guid regionId, Guid suburbId, Guid venueId, Guid locationId, Action<Location> action)
         {
             fetchRegion(regionId).deleteLocation(suburbId, venueId, locationId, action);
+        }
+
+        #endregion
+
+        #region Member Management
+
+        //Creates Member
+        internal Member createMember(int memberId)
+        {
+            var member = new Member(memberId, this.Id);
+            this.Members.Add(member);
+            return member;
+        }
+
+        //Updates Member
+        internal Member updateMember(int memberId)
+        {
+           return fetchMember(memberId).update(this.Id);
+        }
+
+        //Fetches single Member
+        internal Member fetchMember(int memberId)
+        {
+            var result = Members.Where(m => m.MemberId.Equals(memberId)).FirstOrDefault();
+
+            if (result == null)
+            {
+                throw new BusinessRuleException("Invalid Member Identifier supplied");
+            }
+
+            return result;
+        }
+
+        //Fetches collection of members
+        internal IEnumerable<Member> fetchMembers()
+        {
+            var result = Members.AsEnumerable();
+
+            if (result == null)
+            {
+                throw new BusinessRuleException("Could not obtain collection of Members.");
+            }
+
+            return result;
+        }
+
+        //Deletes a Member
+        internal void deleteMember(int memberId, Action<Member> action)
+        {
+            fetchMember(memberId).delete(action);
         }
 
         #endregion

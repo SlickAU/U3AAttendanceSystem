@@ -24,21 +24,19 @@ namespace U3A_Attendance_Model
 
         #region U3A Management
 
+        //Retrives first instance of U3A in database
         private U3A fetchU3a()
         {
             var u3a = _context.U3A
-                .Include("Regions")
-                .Include("CourseDescriptions")
-                .Include("CourseDescriptions.CourseInstances")
+                .Include("Regions.Suburbs.Venues.Locations")
                 .Include("CourseDescriptions.CourseInstances.Sessions")
                 .Include("Coordinators")
-                .Include("Regions.Suburbs.Venues")
-                .Include("Regions.Suburbs.Venues.Locations")
-                .Include("Regions.Suburbs").FirstOrDefault();
-
+                .Include("Members.Attendances")
+                .FirstOrDefault();
+            
             if (u3a == null)
             {
-                throw new BusinessRuleException("Unable to locate U3A");
+                throw new BusinessRuleException("Could not locate U3A instance");
             }
 
             return u3a;
@@ -48,8 +46,10 @@ namespace U3A_Attendance_Model
         private U3A fetchU3a(Guid u3aId)
         {
             var u3a = _context.U3A
-                .Include("Regions")
-                .Include("Regions.Suburbs")
+                .Include("Regions.Suburbs.Venues.Locations")
+                .Include("CourseDescriptions.CourseInstances.Sessions")
+                .Include("Coordinators")
+                .Include("Members.Attendances")
                 .Where(u => u.Id.Equals(u3aId)).First();
             
             if (u3a == null)
@@ -92,6 +92,12 @@ namespace U3A_Attendance_Model
             return _u3a.fetchCourseDescriptions();
         }
 
+        //Fetches CourseDescriptionInstances
+        public IEnumerable<ICourseInstance> FetchCourseDescriptionInstances(Guid courseDescriptionId)
+        {
+            return _u3a.fetchCourseDescriptionInstances(courseDescriptionId);
+        }
+
         //Deletes CourseDescription
         public void DeleteCourseDescription(Guid courseDescriptionId)
         {
@@ -129,9 +135,10 @@ namespace U3A_Attendance_Model
             return _u3a.fetchCourseInstances(regionId);
         }
 
-        public IEnumerable<ICourseInstance> FetchCourseInstancesByDescription(Guid descriptionId)
+        //Fetches CourseInstances that share the same CourseDescription Template
+        public IEnumerable<ICourseInstance> FetchCourseInstancesByDescription(Guid courseDescriptionId)
         {
-            return _u3a.fetchCourseInstancesByDescription(descriptionId);
+            return _u3a.fetchCourseInstancesByDescription(courseDescriptionId);
         }
 
         //Updates a CourseInstance
@@ -159,7 +166,7 @@ namespace U3A_Attendance_Model
         public string GenerateCourseCode(DateTime startDate, Guid venueId, Guid regionId, Guid suburbId)
         {
             var venue = FetchVenue(venueId, regionId, suburbId);
-            var region = retrieveRegion(regionId);
+            var region = FetchRegion(regionId);
             string courseCode;
             string semester;
 
@@ -207,12 +214,6 @@ namespace U3A_Attendance_Model
             return session;
         }
 
-        //Updates a session
-        public ISession UpdateSession(Guid sessionId, Guid locationId, DateTime date, int visitorCount, Guid courseInstanceId, Guid regionId)
-        {
-            return _u3a.updateSession(sessionId, locationId, date, visitorCount, courseInstanceId, regionId);
-        }
-
         //Fetches a single session
         public ISession FetchSession(Guid sessionId, Guid courseInstanceId, Guid regionId)
         {
@@ -223,6 +224,14 @@ namespace U3A_Attendance_Model
         public IEnumerable<ISession> FetchSessions(Guid courseInstanceId, Guid regionId)
         {
             return _u3a.fetchSessions(courseInstanceId, regionId);
+        }
+
+        //Updates a session
+        public ISession UpdateSession(Guid sessionId, Guid locationId, DateTime date, int visitorCount, Guid courseInstanceId, Guid regionId)
+        {
+            var session = _u3a.updateSession(sessionId, locationId, date, visitorCount, courseInstanceId, regionId);
+            _context.SaveChanges();
+            return session;
         }
 
         //Deletes a Session 
@@ -242,7 +251,6 @@ namespace U3A_Attendance_Model
 
         #region Suburb Management
 
-        //Fetches all suburbs for a region
         public IEnumerable<ISuburb> FetchSuburbs(Guid regionId)
         {
             return _u3a.fetchSuburbs(regionId);
@@ -266,10 +274,16 @@ namespace U3A_Attendance_Model
             return _u3a.fetchVenue(venueId, regionId, suburbId);
         }
 
-        //Fetches multiple Venues
+        //Fetches multiple Venues related to a suburb
         public IEnumerable<IVenue> FetchVenues(Guid regionId, Guid suburbId)
         {
             return _u3a.fetchVenues(regionId, suburbId);
+        }
+
+        //Fetches all venues in the database
+        public IEnumerable<IVenue> FetchAllVenues()
+        {
+            return _u3a.fetchAllVenues();
         }
 
         //Updates a Venue
@@ -278,11 +292,6 @@ namespace U3A_Attendance_Model
             var venue = _u3a.updateVenue(venueId, regionId, suburbId, name, address, codeId);            
             _context.SaveChanges();
             return venue;
-        }
-
-        public IEnumerable<IVenue> AllVenues()
-        {
-            return _u3a.allVenues();
         }
 
         //Deletes a Venue
@@ -347,15 +356,41 @@ namespace U3A_Attendance_Model
 
         #region Attendance Management
 
-        //int memberNumber, string presence, Guid sessionId
-
-        public IAttendance AddAttendance()
+        public IAttendance CreateAttendance(Guid regionId, Guid courseInstanceId, Guid sessionId, int memberId, string presence)
         {
-            //var member = retrieveMember(at.memberNumber);
-            //var a = new Attendance(member.Id, presence, sessionId);
-            return null; //TODO:
+            var attendance = _u3a.createAttendance(regionId, courseInstanceId, sessionId, memberId, presence);
+            _context.SaveChanges();
+            return attendance;
         }
 
+        public IAttendance FetchAttendance(Guid regionId, Guid courseInstanceId, Guid sessionId, Guid attendanceId)
+        {
+            return _u3a.fetchAttendance(regionId, courseInstanceId, sessionId, attendanceId);
+        }
+
+        public IEnumerable<IAttendance> FetchAttendances(Guid regionId, Guid courseInstanceId, Guid sessionId)
+        {
+            return _u3a.fetchAttendances(regionId, courseInstanceId, sessionId);
+        }
+
+        public IAttendance UpdateAttendance(Guid regionId, Guid courseInstanceId, Guid sessionId, Guid attendanceId, int memberId, string presence)
+        {
+            var attendance = _u3a.updateAttendance(regionId, courseInstanceId, sessionId, attendanceId, memberId, presence);
+            _context.SaveChanges();
+            return attendance;
+        }
+
+        public void DeleteAttendance(Guid regionId, Guid courseInstanceId, Guid sessionId, Guid attendanceId)
+        {
+            Action<Attendance> action = 
+                delegate(Attendance a)
+                {
+                    _context.Attendances.Remove(a);
+                    _context.SaveChanges();
+                };
+
+            _u3a.deleteAttendance(regionId, courseInstanceId, sessionId, attendanceId, action);
+        }
         
         #endregion
 
@@ -405,52 +440,86 @@ namespace U3A_Attendance_Model
         #endregion
 
         #region Region Management
-        /// <summary>
-        /// Fetch U3A Regions
-        /// NOTE: Added by Kevin
-        /// </summary>
-        /// <returns></returns>
+
+        public IRegion CreateRegion(string codeId, string description)
+        {
+            var region = _u3a.createRegion(codeId, description);
+            _context.SaveChanges();
+            return region;
+        }
+
+        public IRegion FetchRegion(Guid regionId) 
+        {
+            return _u3a.fetchRegion(regionId);
+        }
+
         public IEnumerable<IRegion> FetchRegions()
         {
             return _u3a.fetchRegions();
         }
 
-        internal Region retrieveRegion(Guid Id)
+        public IRegion UpdateRegion(Guid regionId, string codeId, string description)
         {
-            return _context.Regions.FirstOrDefault(region => region.Id.Equals(Id));
+            var region = _u3a.updateRegion(regionId, codeId, description);
+            _context.SaveChanges();
+            return region;
         }
+
+        public void DeleteRegion(Guid regionId)
+        {
+            Action<Region> action = 
+                delegate(Region r)
+                {
+                    _context.Regions.Remove(r);
+                    _context.SaveChanges();
+                };
+
+            _u3a.deleteRegion(regionId, action);
+        }
+
         #endregion
 
-        #region MemberManagement
+        #region Member Management
 
-        private Member retrieveMember(int memberNumber)
+        //Creates a Member
+        public IMember CreateMember(int memberId)
         {
-            var memberExists = _context.Members.FirstOrDefault(m => m.MemberId.Equals(memberNumber));
-
-            if (memberExists == null)
-            {
-                createMember(memberNumber);
-            }
-
-            return _context.Members.FirstOrDefault(member => member.MemberId.Equals(memberNumber));
-        }
-
-        /// <summary>
-        /// Testing for duplicates etc...
-        /// </summary>
-        /// <param name="memberNumber"></param>
-        public void CreateMember(int memberNumber)
-        {
-            CreateMember(memberNumber);
-        }
-
-        private Member createMember(int memberNumber)
-        {
-            var member = new Member();
-            _context.Members.Add(member);
+            var member = _u3a.createMember(memberId);
             _context.SaveChanges();
-
             return member;
+        }
+
+        //Fetches single Member
+        public IMember FetchMember(int memberId)
+        {
+            return _u3a.fetchMember(memberId);
+        }
+
+        //Fetches collection of Members
+        public IEnumerable<IMember> FetchMembers()
+        {
+            return _u3a.fetchMembers();
+        }
+
+        //Updates a Member
+        public IMember UpdateMember(int memberId)
+        {
+            var member = _u3a.updateMember(memberId);
+            _context.SaveChanges();
+            return member;
+        }
+
+        //Deletes a Member
+        public void DeleteMember(int memberId)
+        {
+            Action<Member> action =  
+                delegate(Member m)
+                {
+                    _context.Members.Remove(m);
+                    _context.SaveChanges();
+                };
+
+            _u3a.deleteMember(memberId, action);
         }
 
         #endregion

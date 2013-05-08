@@ -7,6 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="1062">
 
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*" />
@@ -78,6 +79,7 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition />
+                        <RowDefinition Height="65" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
@@ -120,10 +122,40 @@
                         </StackPanel>
                     </GroupBox>
 
-                    <Grid Grid.Row="1" Grid.ColumnSpan="3">
-                        <DataGrid Name="CISessions">
+                    <Grid Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Right">
+                        <GroupBox Header="Record Members Attendance">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Label Content="Member #" Grid.Column="0" Grid.Row="0" />
+                                <TextBox Name="MemberId" Grid.Column="0" Grid.Row="1" />
+                                <Button Name="AddAttendance" Content="Add Attendance" Grid.Column="1" Grid.Row="1" />
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
+                    
+                    <Grid Grid.Row="2" Grid.ColumnSpan="3">
+                        <!--<DataGrid Name="CISessions">
                             <DataGridCell Content="{Binding Path=Date}"></DataGridCell>
-                        </DataGrid>       
+                        </DataGrid>       -->
+                        <HeaderedItemsControl Name="CISessions" Header="Session Dates">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding Date}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </HeaderedItemsControl>
                     </Grid>
 
                 </Grid>

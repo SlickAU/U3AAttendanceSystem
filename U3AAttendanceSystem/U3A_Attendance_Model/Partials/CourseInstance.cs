@@ -11,6 +11,22 @@ namespace U3A_Attendance_Model
     {
         private CourseInstanceState _state;
 
+        public Guid SuburbId
+        {
+            get 
+            { 
+                return Location.Venue.SuburbId; 
+            }
+        }
+
+        public Guid VenueId
+        {
+            get
+            {
+                return Location.VenueId;
+            }
+        }
+
         public CourseInstance(Guid regionId, CourseDescription description, Coordinator coordinator, Location location, DateTime startDate, string courseCode)
         {
             StartDate = startDate;
@@ -23,11 +39,6 @@ namespace U3A_Attendance_Model
             if(startDate > DateTime.Today)
             {
                 StateId = 2;
-            }
-
-            else 
-            {
-                StateId = 1;
             }
         }
 
@@ -53,10 +64,29 @@ namespace U3A_Attendance_Model
 
         #region Attendance Management
 
-        internal Attendance fetchAttendance(int memberId, Guid sessionId)
+        internal Attendance createAttendance(Guid sessionId, Member member, string presence)
         {
-            var session = Sessions.Where(s => s.Id.Equals(sessionId)).FirstOrDefault();
-            return session.FetchAttendance(memberId);
+            return fetchSession(sessionId).createAttendance(member, presence);
+        }
+
+        internal Attendance fetchAttendance(Guid sessionId, Guid attendanceId)
+        {
+            return fetchSession(sessionId).fetchAttendance(attendanceId);
+        }
+
+        internal IEnumerable<Attendance> fetchAttendances(Guid sessionId)
+        {
+            return fetchSession(sessionId).fetchAttendances();
+        }
+
+        internal Attendance updateAttendance(Guid sessionId, Guid attendanceId, Member member, string presence)
+        {
+            return fetchSession(sessionId).updateAttendance(attendanceId, member, presence);
+        }
+
+        internal void deleteAttendance(Guid sessionId, Guid attendanceId, Action<Attendance> action)
+        {
+            fetchSession(sessionId).deleteAttendance(attendanceId, action);
         }
 
         #endregion
@@ -65,6 +95,15 @@ namespace U3A_Attendance_Model
 
         internal Session createSession(Location location, DateTime date)
         {
+            //Check for overlapping sessions(needs to be refined for session time check)
+            foreach (var s in fetchSessions())
+            {
+                if (s.Date.Equals(date))
+                {
+                    throw new BusinessRuleException("Cannot create session as one already exists");
+                }
+            }
+
             var session = new Session(this.Id, location.Id, date);
             this.Sessions.Add(session);
 
@@ -141,21 +180,10 @@ namespace U3A_Attendance_Model
         #endregion
 
 
-        public Guid SuburbId
-        {
-            get { return Location.Venue.SuburbId; }
-        }
-
-
-        public Guid VenueId
-        {
-            get { return Location.VenueId; }
-        }
-
 
         public IEnumerable<ISession> CourseSessions
         {
-            get { return Sessions; }
+            get { return Sessions.OrderBy(sesh => sesh.Date); }
         }
     }
 }

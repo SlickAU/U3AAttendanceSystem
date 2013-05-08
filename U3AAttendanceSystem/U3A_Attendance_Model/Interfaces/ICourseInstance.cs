@@ -12,12 +12,12 @@ namespace U3A_Attendance_Model
         DateTime StartDate { get; }
         Guid CourseId { get; }
         Guid RegionId { get; }
-        Guid SuburbId { get; }
-        Guid VenueId { get; }
         Guid CoordinatorId { get; }
         Guid DefaultLocationId { get; }
-        IEnumerable<ISession> CourseSessions { get; }
         string CourseCode { get; }
         int StateId { get; }
+        Guid SuburbId { get; }
+        Guid VenueId { get; }
+        IEnumerable<ISession> CourseSessions { get; }
     }
 }

@@ -40,10 +40,17 @@ namespace U3A_Attendance_Model
         {
             var result = Venues.AsEnumerable();
 
-            if (result == null)
+            if (result.Count().Equals(0))
             {
                 throw new BusinessRuleException("Could not obtain collection of Venues");
             }
+
+            return result;
+        }
+
+        internal IEnumerable<Venue> fetchAllVenues()
+        {
+            var result = Venues.AsEnumerable();
 
             return result;
         }
@@ -83,5 +90,6 @@ namespace U3A_Attendance_Model
         }
 
         #endregion
+
     }
 }

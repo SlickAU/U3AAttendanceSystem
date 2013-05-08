@@ -91,9 +91,6 @@
     <Compile Include="Interfaces\IMember.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Interfaces\IRegion.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Interfaces\ISession.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -104,6 +101,7 @@
     <Compile Include="Interfaces\IVenue.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interfaces\IRegion.cs" />
     <Compile Include="Location.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
