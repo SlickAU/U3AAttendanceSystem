@@ -14,7 +14,11 @@ namespace U3A_Attendance_Model
         {
             MemberId = member.MemberId;
             Presence = presence;
+<<<<<<< HEAD
             SessionId = session.Id;
+=======
+            SessionId = Session.Id;
+>>>>>>> 6d5054e480df10374ac7726ba5977f89b0cce2c9
         }
 
         #region Attendance Management

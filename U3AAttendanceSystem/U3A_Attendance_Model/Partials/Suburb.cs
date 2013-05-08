@@ -8,6 +8,13 @@ namespace U3A_Attendance_Model
 {
     internal partial class Suburb : ISuburb
     {
+        public bool HasVenues
+        {
+            get
+            {
+                return Venues.Count > 0;
+            }
+        }
 
         #region Venue Management
 

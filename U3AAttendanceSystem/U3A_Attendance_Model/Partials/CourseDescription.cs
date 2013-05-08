@@ -8,6 +8,14 @@ namespace U3A_Attendance_Model
 {
     internal partial class CourseDescription : ICourseDescription
     {
+        public bool HasInstances
+        {
+            get
+            {
+                return CourseInstances.Count > 0;
+            }
+        }
+
         public CourseDescription(string title, string description, Guid u3aId)
         {
             Title = title;
