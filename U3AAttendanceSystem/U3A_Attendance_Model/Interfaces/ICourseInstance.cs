@@ -18,12 +18,6 @@ namespace U3A_Attendance_Model
         int StateId { get; }
         Guid SuburbId { get; }
         Guid VenueId { get; }
-<<<<<<< HEAD
-<<<<<<< HEAD
         IEnumerable<ISession> CourseSessions { get; }
-=======
->>>>>>> 6d5054e480df10374ac7726ba5977f89b0cce2c9
-=======
->>>>>>> 6d5054e480df10374ac7726ba5977f89b0cce2c9
     }
 }

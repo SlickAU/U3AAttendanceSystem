@@ -122,7 +122,6 @@
                         </StackPanel>
                     </GroupBox>
 
-<<<<<<< HEAD
                     <Grid Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Right">
                         <GroupBox Header="Record Members Attendance">
                             <Grid>
@@ -146,16 +145,6 @@
                             <DataGridCell Content="{Binding Path=Date}"></DataGridCell>
                         </DataGrid>       -->
                         <HeaderedItemsControl Name="CISessions" Header="Session Dates">
-=======
-                    <Grid Grid.Row="1" Grid.ColumnSpan="3">
-                        <!--<DataGrid Name="CISessions">
-                            <DataGridCell Content="{Binding Path=Date}"></DataGridCell>
-                        </DataGrid>       -->
-                        <ItemsControl Name="CISessions">
-<<<<<<< HEAD
->>>>>>> 6d5054e480df10374ac7726ba5977f89b0cce2c9
-=======
->>>>>>> 6d5054e480df10374ac7726ba5977f89b0cce2c9
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Label Content="{Binding Date}" />
@@ -166,15 +155,7 @@
                                     <StackPanel Orientation="Horizontal" />
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
-<<<<<<< HEAD
-<<<<<<< HEAD
                         </HeaderedItemsControl>
-=======
-                        </ItemsControl>
->>>>>>> 6d5054e480df10374ac7726ba5977f89b0cce2c9
-=======
-                        </ItemsControl>
->>>>>>> 6d5054e480df10374ac7726ba5977f89b0cce2c9
                     </Grid>
 
                 </Grid>
