@@ -14,6 +14,10 @@ namespace U3A_Attendance_Model
          string Description { get; }
          Guid U3AId { get; }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+         bool HasInstances { get; }
+>>>>>>> 6d5054e480df10374ac7726ba5977f89b0cce2c9
 =======
          bool HasInstances { get; }
 >>>>>>> 6d5054e480df10374ac7726ba5977f89b0cce2c9

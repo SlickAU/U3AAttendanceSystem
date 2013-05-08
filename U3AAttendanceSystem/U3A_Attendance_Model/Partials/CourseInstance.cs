@@ -180,12 +180,15 @@ namespace U3A_Attendance_Model
         #endregion
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
         public IEnumerable<ISession> CourseSessions
         {
             get { return Sessions.OrderBy(sesh => sesh.Date); }
         }
+=======
+>>>>>>> 6d5054e480df10374ac7726ba5977f89b0cce2c9
 =======
 >>>>>>> 6d5054e480df10374ac7726ba5977f89b0cce2c9
     }

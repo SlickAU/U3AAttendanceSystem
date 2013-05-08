@@ -152,6 +152,9 @@
                             <DataGridCell Content="{Binding Path=Date}"></DataGridCell>
                         </DataGrid>       -->
                         <ItemsControl Name="CISessions">
+<<<<<<< HEAD
+>>>>>>> 6d5054e480df10374ac7726ba5977f89b0cce2c9
+=======
 >>>>>>> 6d5054e480df10374ac7726ba5977f89b0cce2c9
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
@@ -164,7 +167,11 @@
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
 <<<<<<< HEAD
+<<<<<<< HEAD
                         </HeaderedItemsControl>
+=======
+                        </ItemsControl>
+>>>>>>> 6d5054e480df10374ac7726ba5977f89b0cce2c9
 =======
                         </ItemsControl>
 >>>>>>> 6d5054e480df10374ac7726ba5977f89b0cce2c9
