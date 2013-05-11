@@ -482,7 +482,7 @@
           <Property Name="CourseId" Type="Guid" Nullable="false" />
           <Property Name="RegionId" Type="Guid" Nullable="false" />
           <Property Name="CoordinatorId" Type="Guid" Nullable="false" />
-          <Property Name="StateId" Type="Int32" Nullable="false" />
+          <Property Name="StateId" Type="Int32" Nullable="false" DefaultValue="1" />
           <Property Name="DefaultLocationId" Type="Guid" Nullable="false" />
           <Property Name="CourseCode" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Coordinator" Relationship="U3AAttendanceModel.FK_Course_Instance_Coordinator1" FromRole="CourseInstance" ToRole="Coordinator" />

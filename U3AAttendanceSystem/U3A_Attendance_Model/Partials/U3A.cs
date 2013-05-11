@@ -152,6 +152,11 @@ namespace U3A_Attendance_Model
             return fetchRegion(regionId).fetchAttendances(courseInstanceId, sessionId);
         }
 
+        internal IEnumerable<Member> fetchAttendances(Guid regionId, Guid courseInstanceId)
+        {
+            return fetchRegion(regionId).fetchAttendances(courseInstanceId);
+        }
+
         internal Attendance updateAttendance(Guid regionId, Guid courseInstanceId, Guid sessionId, Guid attendanceId, int memberId, string presence)
         {
             var member = fetchMember(memberId);

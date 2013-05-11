@@ -29,7 +29,7 @@ namespace U3A_Attendance_Model
         {
             var u3a = _context.U3A
                 .Include("Regions.Suburbs.Venues.Locations")
-                .Include("CourseDescriptions.CourseInstances.Sessions")
+                .Include("CourseDescriptions.CourseInstances.Sessions.Attendances")
                 .Include("Coordinators")
                 .Include("Members.Attendances")
                 .FirstOrDefault();
@@ -371,6 +371,11 @@ namespace U3A_Attendance_Model
         public IEnumerable<IAttendance> FetchAttendances(Guid regionId, Guid courseInstanceId, Guid sessionId)
         {
             return _u3a.fetchAttendances(regionId, courseInstanceId, sessionId);
+        }
+
+        public IEnumerable<IMember> FetchAttendances(Guid regionId, Guid courseInstanceId)
+        {
+            return _u3a.fetchAttendances(regionId, courseInstanceId);
         }
 
         public IAttendance UpdateAttendance(Guid regionId, Guid courseInstanceId, Guid sessionId, Guid attendanceId, int memberId, string presence)

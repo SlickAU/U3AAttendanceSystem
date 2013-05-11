@@ -40,7 +40,6 @@ namespace U3A_Attendance_System.Views
             else
                 facade.UpdateCourse(_course.Id, courseName_txt.Text, description_txt.Text);*/
 
-
         }
 
         public string DisplayName

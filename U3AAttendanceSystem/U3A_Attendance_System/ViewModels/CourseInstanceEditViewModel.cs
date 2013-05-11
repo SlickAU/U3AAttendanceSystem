@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using U3A_Attendance_Model;
 
 namespace U3A_Attendance_System.ViewModels
@@ -156,7 +158,27 @@ namespace U3A_Attendance_System.ViewModels
         {
             get
             {
-                return _ci.CourseSessions;
+
+
+
+                var sessions = _ci.Sessions;
+                _ci.Sessions.SelectMany(s => s.Attendances); 
+                var attendances = sessions.SelectMany(s => s.Attendances).ToList();
+                var members = attendances.Select(a => a.Member).Distinct().ToList();
+                int width = sessions.Count();
+                int height = members.Count();
+
+                var m = _ci.Sessions.SelectMany(s => s.Attendances).Select(a => a.Member).Distinct().ToList();
+
+                var x = m.ToList();
+
+
+                //if (_ci != null)
+                //{
+                //    var sessions = _facade.FetchSessions(_ci.Id, _ci.RegionId);
+                //    return (sessions == null) ? null : sessions;
+                //}
+                return null;
             }
             set {}
         }
@@ -169,7 +191,7 @@ namespace U3A_Attendance_System.ViewModels
             get;
             set;
         }
-
+        
         #endregion
 
         #region Methods
@@ -259,8 +281,10 @@ namespace U3A_Attendance_System.ViewModels
             {
                 _facade.CreateAttendance(_ci.RegionId, _ci.Id, sesh.Id, MemberId, "");
             }
-            //IMember member = _facade.CreateAttendance(_ci.RegionId, _ci.Id, 
+            
         }
+
+        
 
         #endregion
 

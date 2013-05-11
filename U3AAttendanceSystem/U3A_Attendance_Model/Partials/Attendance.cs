@@ -35,5 +35,11 @@ namespace U3A_Attendance_Model
 
 	#endregion
 
+
+
+        IMember IAttendance.Member
+        {
+            get { return Member; }
+        }
     }
 }
