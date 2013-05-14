@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,10 +36,14 @@ namespace U3A_Attendance_Model
             CoordinatorId = coordinator.Id;
             DefaultLocationId = location.Id;
             CourseCode = courseCode;
-            
-            if(startDate > DateTime.Today)
+
+            if (startDate > DateTime.Today)
             {
                 StateId = 2;
+            }
+            else
+            {
+                StateId = 1;
             }
         }
 
@@ -72,6 +77,25 @@ namespace U3A_Attendance_Model
         internal Attendance fetchAttendance(Guid sessionId, Guid attendanceId)
         {
             return fetchSession(sessionId).fetchAttendance(attendanceId);
+        }
+
+        internal IEnumerable<Member> fetchAttendances()
+        {
+            var sessions = fetchSessions();
+
+            ArrayList members = new ArrayList();
+
+            foreach (Session s in sessions)
+            {
+                foreach(Attendance a in s.Attendances)
+                {
+                    if (!members.Contains(a.Member))
+                        members.Add(a.Member);
+                }
+            }
+
+            return (IEnumerable<Member>)members.ToArray().AsEnumerable();
+
         }
 
         internal IEnumerable<Attendance> fetchAttendances(Guid sessionId)
@@ -124,7 +148,7 @@ namespace U3A_Attendance_Model
 
         internal IEnumerable<Session> fetchSessions()
         {
-            var result =  Sessions.AsEnumerable();
+            var result =  Sessions.OrderBy(s => s.Date).AsEnumerable();
 
             if (result == null)
             {
@@ -179,5 +203,11 @@ namespace U3A_Attendance_Model
 
         #endregion
 
+
+
+        IEnumerable<ISession> ICourseInstance.Sessions
+        {
+            get { return Sessions; }
+        }
     }
 }

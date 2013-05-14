@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace U3A_Attendance_Model
 {
     internal partial class Venue : IVenue 
-    {       
+    {
+
         public Venue(string name, string address, string codeId, Guid suburbId)
         {
             Name = name;

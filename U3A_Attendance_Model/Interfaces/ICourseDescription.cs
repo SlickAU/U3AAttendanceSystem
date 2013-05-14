@@ -8,10 +8,11 @@ namespace U3A_Attendance_Model
 {
     public interface ICourseDescription
     {
-         Guid Id { get; }
-         int CourseNumber { get; }
-         string Title { get; }
-         string Description { get; }
-         Guid U3AId { get; }
+        Guid Id { get; }
+        int CourseNumber { get; }
+        string Title { get; }
+        string Description { get; }
+        Guid U3AId { get; }
+        bool HasInstances { get; }
     }
 }

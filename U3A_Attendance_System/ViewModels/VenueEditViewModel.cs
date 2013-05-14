@@ -12,6 +12,7 @@ namespace U3A_Attendance_System.ViewModels
         private IEnumerable<IRegion> _regions;
         private ISuburb _selectedSuburb;
         private IRegion _selectedRegion;
+        private IVenue _selectedVenue;
 
         public string VenueName { get; set; }
 
@@ -84,10 +85,6 @@ namespace U3A_Attendance_System.ViewModels
         public VenueEditViewModel(IVenue venue)
         {
             Regions = _facade.FetchRegions().ToList();
-            VenueName = venue.Name;
-            Address = venue.Address;
-            CodeId = venue.CodeId;
-            //Bind the region and suburb for the venue
         }
 
 
@@ -97,13 +94,14 @@ namespace U3A_Attendance_System.ViewModels
             this.Refresh();
         }
 
-        //public void UpdateVenues()
-        //{
-        //    if ((SelectedSuburb != null) && !SelectedSuburb.Id.Equals(Guid.Empty))
-        //    {                
-        //        this.Refresh();
-        //    }
-        //}
+        public void UpdateVenues()
+        {
+            if ((SelectedSuburb != null) && !SelectedSuburb.Id.Equals(Guid.Empty))
+            {
+                Venues = _facade.FetchVenues(_selectedRegion.Id, _selectedSuburb.Id).ToList();
+                this.Refresh();
+            }
+        }
 
         public void Update()
         {

@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using U3A_Attendance_Model;
 
 namespace U3A_Attendance_System.ViewModels
@@ -23,6 +25,7 @@ namespace U3A_Attendance_System.ViewModels
         #region Properties
         //Course Instance Specific Properties
 
+        public IEnumerable<Presence> Presences { get { return Enum.GetValues(typeof(Presence)).OfType<Presence>(); } set { } }
         public string CDTitle { get; set; }
         public string CourseCode { get; set; }
         public DateTime StartDate { get; set; }
@@ -151,14 +154,45 @@ namespace U3A_Attendance_System.ViewModels
                 return SessionStartDate.DayOfWeek.ToString();
             }
         }
-        /*public IEnumerable<ISession> CISessions
+        
+        public IEnumerable<ISession> CISessions
         {
             get
             {
-                return _ci.CourseSessions;
+
+
+
+                var sessions = _ci.Sessions;
+                _ci.Sessions.SelectMany(s => s.Attendances); 
+                var attendances = sessions.SelectMany(s => s.Attendances).ToList();
+                var members = attendances.Select(a => a.Member).Distinct().ToList();
+                int width = sessions.Count();
+                int height = members.Count();
+
+                var m = _ci.Sessions.SelectMany(s => s.Attendances).Select(a => a.Member).Distinct().ToList();
+
+                var x = m.ToList();
+
+
+                //if (_ci != null)
+                //{
+                //    var sessions = _facade.FetchSessions(_ci.Id, _ci.RegionId);
+                //    return (sessions == null) ? null : sessions;
+                //}
+                return null;
             }
             set {}
-        }*/
+        }
+        #endregion
+
+        #region Attendance Specific Properties
+
+        public int MemberId
+        {
+            get;
+            set;
+        }
+        
         #endregion
 
         #region Methods
@@ -196,24 +230,17 @@ namespace U3A_Attendance_System.ViewModels
 
         public void UpdateSuburbs(Guid regionId)
         {
-            Suburbs = _facade.FetchSuburbsWithVenues(regionId);
+            Suburbs = _facade.FetchSuburbs(regionId);
             this.Refresh();
         }
 
         public void UpdateVenues()
         {
             //SelectedRegion.Id = regionId;
-            try
+            if ((SelectedSuburb != null) && !SelectedSuburb.Id.Equals(Guid.Empty))
             {
-                if ((SelectedSuburb != null) && !SelectedSuburb.Id.Equals(Guid.Empty))
-                {
-                    Venues = _facade.FetchVenues(_selectedRegion.Id, _selectedSuburb.Id).ToList();
-                    this.Refresh();                   
-                }
-            }
-            catch (BusinessRuleException e)
-            {
-                e.Message.ToString();
+                Venues = _facade.FetchVenues(_selectedRegion.Id, _selectedSuburb.Id).ToList();
+                this.Refresh();
             }
         }
 
@@ -222,33 +249,6 @@ namespace U3A_Attendance_System.ViewModels
             //SelectedVenueId = venueId;
             Locations = _facade.FetchLocations(_selectedRegion.Id, _selectedSuburb.Id, venueId).ToList();
             this.Refresh();
-        }
-
-        public void GenerateCourseCode()
-        {            
-            string courseCode;
-            string semester;
-            string year = StartDate.Year.ToString().Substring(2);
-            int month = StartDate.Month;
-            string region = SelectedRegion.CodeId;
-            string venue = SelectedVenue.CodeId;
-
-            if (month <= 6)
-            {
-                semester = "1";
-            }
-
-            else
-            {
-                semester = "2";
-            }
-
-            courseCode = string.Format("{0}{1}{2}{3}", year, semester, region, venue);
-
-            _facade.CheckCourseCode(courseCode);
-
-            CourseCode = courseCode;
-            this.Refresh();           
         }
 
         public void Save()
@@ -269,8 +269,23 @@ namespace U3A_Attendance_System.ViewModels
 
         public void CreateSession()
         {
-            _facade.CreateSession(_ci.Id, _ci.RegionId, SelectedSuburb.Id, SelectedVenue.Id, _ci.DefaultLocationId, _ci.StartDate);
+            _facade.CreateSession(_ci.Id, _ci.RegionId, SelectedSuburb.Id, SelectedVenue.Id, _ci.DefaultLocationId, SessionStartDate);
+            _ci = _facade.FetchCourseInstance(_ci.Id, _ci.RegionId);
+            this.Refresh();
         }
+
+        //Attendance Management
+
+        public void AddAttendance()
+        {
+            foreach (ISession sesh in CISessions)
+            {
+                _facade.CreateAttendance(_ci.RegionId, _ci.Id, sesh.Id, MemberId, "");
+            }
+            
+        }
+
+        
 
         #endregion
 

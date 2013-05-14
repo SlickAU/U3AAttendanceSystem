@@ -12,5 +12,6 @@ namespace U3A_Attendance_Model
         int MemberId { get; }
         string Presence { get; }
         Guid SessionId { get; }
+        IMember Member { get; }
     }
 }

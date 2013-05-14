@@ -13,6 +13,6 @@ namespace U3A_Attendance_Model
         string Name { get; }
         int PostCode { get; }
         string Description { get; }
-        bool HasInstances { get; }
+        bool HasVenues { get; }
     }
 }

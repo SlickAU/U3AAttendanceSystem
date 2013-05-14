@@ -162,6 +162,7 @@
     <Compile Include="Partials\Venue.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Presence.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

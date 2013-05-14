@@ -18,5 +18,6 @@ namespace U3A_Attendance_Model
         int StateId { get; }
         Guid SuburbId { get; }
         Guid VenueId { get; }
+        IEnumerable<ISession> Sessions { get; }
     }
 }

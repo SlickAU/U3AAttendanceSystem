@@ -8,7 +8,7 @@ namespace U3A_Attendance_Model
 {
     internal partial class Suburb : ISuburb
     {
-        public bool HasInstances
+        public bool HasVenues
         {
             get
             {

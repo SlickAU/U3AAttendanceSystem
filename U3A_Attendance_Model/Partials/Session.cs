@@ -81,5 +81,11 @@ namespace U3A_Attendance_Model
         } 
 
         #endregion
+
+
+        IEnumerable<IAttendance> ISession.Attendances
+        {
+            get { return Attendances; }
+        }
     }
 }

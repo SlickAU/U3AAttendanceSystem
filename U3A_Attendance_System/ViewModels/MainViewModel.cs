@@ -34,22 +34,15 @@ namespace U3A_Attendance_System.ViewModels
         {
             ActivateItem(new CourseDescriptionInstancesViewModel(cd));
         }
-        
-        public void ShowCDEdit()
-        {
-            settings.Title = "Create Course Description";
-            settings.SizeToContent = SizeToContent.Manual;
-            settings.WindowStyle = WindowStyle.None;
-            _wm.ShowDialog(new CourseDescriptionEditViewModel(), null, settings);         
-        }
-        
+
         public void ShowCDEdit(ICourseDescription cd)
         {
-            settings.Title = "Edit Course Description";
+            settings.Title = "Edit course description";
             settings.SizeToContent = SizeToContent.Manual;
-            settings.WindowStyle = WindowStyle.None;
-            _wm.ShowDialog(new CourseDescriptionEditViewModel(cd), null, settings);            
+
+            _wm.ShowWindow(new CourseDescriptionEditViewModel(cd), null, settings);
         }
+
 
         //TODO: For some reason it can distinquish between paramater types...
         public void ShowCIEdit(Object obj)
@@ -59,14 +52,22 @@ namespace U3A_Attendance_System.ViewModels
             else
                 ActivateItem(new CourseInstanceEditViewModel((ICourseInstance)obj));
         }
-      
+
+        public void ShowCDEdit()
+        {
+            settings.Title = "Create course description";
+            settings.SizeToContent = SizeToContent.Manual;
+
+
+            _wm.ShowWindow(new CourseDescriptionEditViewModel(), null, settings);
+        }
+
         public void DeleteDescriptionConfirm(ICourseDescription cd)
         {
-            if (MessageBox.Show("Are you sure you want to delete this Course Description?", "Confirm delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-            {
+            if (MessageBox.Show("Really delete?", "Confirm delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 _facade.DeleteCourseDescription(cd.Id);
-                this.Refresh();
-            }
+
+
         }
 
         public void ShowTabbedView()
@@ -78,16 +79,9 @@ namespace U3A_Attendance_System.ViewModels
         {
             settings.Title = "Create Venue";
             settings.SizeToContent = SizeToContent.Manual;
-            settings.WindowStyle = WindowStyle.None;
-            _wm.ShowDialog(new VenueEditViewModel(), null, settings);
-        }
 
-        public void ShowVenueEdit(IVenue v)
-        {
-            settings.Title = "Edit Venue";
-            settings.SizeToContent = SizeToContent.Manual;
-            settings.WindowStyle = WindowStyle.None;
-            _wm.ShowDialog(new VenueEditViewModel(v), null, settings);
+
+            _wm.ShowWindow(new VenueEditViewModel(), null, settings);
         }
 
     }

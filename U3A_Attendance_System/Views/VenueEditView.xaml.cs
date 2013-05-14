@@ -1,5 +1,4 @@
-﻿using Caliburn.Micro;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,16 +18,11 @@ namespace U3A_Attendance_System.Views
     /// <summary>
     /// Interaction logic for VenueEditView.xaml
     /// </summary>
-    public partial class VenueEditView : Window
+    public partial class VenueEditView : UserControl
     {
         public VenueEditView()
         {
             InitializeComponent();
-        }
-
-        private void Update_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
     }
 }

@@ -29,7 +29,7 @@ namespace U3A_Attendance_Model
         {
             var u3a = _context.U3A
                 .Include("Regions.Suburbs.Venues.Locations")
-                .Include("CourseDescriptions.CourseInstances.Sessions")
+                .Include("CourseDescriptions.CourseInstances.Sessions.Attendances")
                 .Include("Coordinators")
                 .Include("Members.Attendances")
                 .FirstOrDefault();
@@ -163,12 +163,41 @@ namespace U3A_Attendance_Model
         }
 
 
-        public string CheckCourseCode(string courseCode)
-        {           
+        public string GenerateCourseCode(DateTime startDate, Guid venueId, Guid regionId, Guid suburbId)
+        {
+            var venue = FetchVenue(venueId, regionId, suburbId);
+            var region = FetchRegion(regionId);
+            string courseCode;
+            string semester;
+
             //Implement increment checker to see if course code number already exists - Current value is hardcoded
             //Exception handling on UI to make sure Date, Venue and Region fields have been filled
-            
 
+            string tempYear = startDate.Year.ToString();
+            string year = tempYear.Substring(2);
+            int month = startDate.Month;
+            string regionL = region.CodeId.ToString();
+            string venueL = venue.CodeId.ToString();
+
+            if (month <= 6)
+            {
+                semester = "1";
+            }
+
+            else
+            {
+                semester = "2";
+            }
+
+            courseCode = string.Format("{0}{1}{2}{3}", year, semester, regionL, venueL);
+
+            //foreach (CourseInstance c in CourseInstances)
+            //{
+            //    if (c.CourseCode == courseCode)
+            //    {
+            //        //DO WORK HERE
+            //    }
+            //}
 
             return courseCode;
         }
@@ -225,12 +254,6 @@ namespace U3A_Attendance_Model
         public IEnumerable<ISuburb> FetchSuburbs(Guid regionId)
         {
             return _u3a.fetchSuburbs(regionId);
-            
-        }
-
-        public IEnumerable<ISuburb> FetchSuburbsWithVenues(Guid regionId)
-        {
-            return _u3a.fetchSuburbs(regionId).Where(v => v.HasInstances);
         }
 
         #endregion
@@ -348,6 +371,11 @@ namespace U3A_Attendance_Model
         public IEnumerable<IAttendance> FetchAttendances(Guid regionId, Guid courseInstanceId, Guid sessionId)
         {
             return _u3a.fetchAttendances(regionId, courseInstanceId, sessionId);
+        }
+
+        public IEnumerable<IMember> FetchAttendances(Guid regionId, Guid courseInstanceId)
+        {
+            return _u3a.fetchAttendances(regionId, courseInstanceId);
         }
 
         public IAttendance UpdateAttendance(Guid regionId, Guid courseInstanceId, Guid sessionId, Guid attendanceId, int memberId, string presence)

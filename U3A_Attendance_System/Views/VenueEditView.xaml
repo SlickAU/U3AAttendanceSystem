@@ -1,44 +1,19 @@
-﻿<Window x:Class="U3A_Attendance_System.Views.VenueEditView"
+﻿<UserControl x:Class="U3A_Attendance_System.Views.VenueEditView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             WindowStyle="None"
-             WindowStartupLocation="CenterScreen"
-             xmlns:cal="http://www.caliburnproject.org"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="400">
-    <Grid Height="400" Width="400">
+             xmlns:cal="http://www.caliburnproject.org">
+    <Grid Height="284" Width="268">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="40"/>
-            <ColumnDefinition Width="360"/>
+            <ColumnDefinition Width="81*"/>
+            <ColumnDefinition Width="619*"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Label Content="Venue Name" Grid.Column="1" Grid.Row="1" />
-        <TextBox Name="Venue" Grid.Column="1" Grid.Row="2"  />
-        <Label Content="Address" Grid.Column="1" Grid.Row="3" />
-        <TextBox Name="Address" Grid.Column="1" Grid.Row="4"/>
-        <Label Content="Code Identifier" Grid.Column="1" Grid.Row="5"/>
-        <TextBox Name="CodeId" Grid.Column="1" Grid.Row="6"/>
-        <Label Content="Region" Grid.Column="1" Grid.Row="7"/>
-        <ComboBox Name="Regions" DisplayMemberPath="Description" SelectedValuePath="Id" cal:Message.Attach="UpdateSuburbs(Regions.SelectedValue)"  Grid.Column="1" Grid.Row="8"/>
-        <Label Content="Suburb"  Grid.Column="2" Grid.Row="9"/>
-        <ComboBox Name="Suburbs" DisplayMemberPath="Name" SelectedValuePath="Id" cal:Message.Attach="UpdateVenues" IsEnabled="{Binding Path=IsSuburbsEnabled}" Grid.Column="1" Grid.Row="10" />
-       
-        <Button  Name="Update" Content="Save" HorizontalAlignment="Left" Grid.Column="1" Click="Update_Click" Grid.Row="11" />
-        <Button Content="Cancel" HorizontalAlignment="Right" Click="Update_Click" Grid.Column="1" Grid.Row="11" />
+        <TextBox Name="Description" HorizontalAlignment="Left" Height="35" Margin="10,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198" Grid.ColumnSpan="2"/>
+        <TextBox Name="Address" HorizontalAlignment="Left" Height="35" Margin="10,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198" Grid.ColumnSpan="2"/>
+        <TextBox Name="CodeId" HorizontalAlignment="Left" Height="35" Margin="10,21,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="198" Grid.ColumnSpan="2"/>
+        <ComboBox Name="Regions" DisplayMemberPath="Description" SelectedValuePath="Id" cal:Message.Attach="UpdateSuburbs(Regions.SelectedValue)" Margin="10,79,60,183" Grid.ColumnSpan="2"/>
+        <ComboBox Name="Suburbs" DisplayMemberPath="Name" SelectedValuePath="Id" cal:Message.Attach="UpdateVenues" IsEnabled="{Binding Path=IsSuburbsEnabled}" Margin="10,106,60,150" Grid.ColumnSpan="2"/>
+        <ComboBox Name="Venues" DisplayMemberPath="Name" SelectedValuePath="Id" cal:Message.Attach="UpdateLocations(Venues.SelectedValue)" IsEnabled="{Binding Path=IsVenuesEnabled}" Margin="10,139,60,122" Grid.ColumnSpan="2" />
+        <Button  Name="Update" Content="Save" HorizontalAlignment="Left" Margin="38,260,0,0" VerticalAlignment="Top" Width="75" Grid.ColumnSpan="2"/>
+
     </Grid>
-</Window>
+</UserControl>

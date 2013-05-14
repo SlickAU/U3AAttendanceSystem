@@ -31,7 +31,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Button Content="Edit" Width="80" cal:Message.Attach="ShowVenueEdit($dataContext)"></Button>
+                                <Button Content="Edit" Width="80"></Button>
                                 <Button Content="Delete" Width="80"></Button>             
                             </StackPanel>
                         </DataTemplate>
