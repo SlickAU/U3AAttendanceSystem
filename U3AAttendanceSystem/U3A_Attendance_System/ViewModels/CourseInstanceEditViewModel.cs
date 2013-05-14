@@ -25,6 +25,7 @@ namespace U3A_Attendance_System.ViewModels
         #region Properties
         //Course Instance Specific Properties
 
+        public IEnumerable<Presence> Presences { get { return Enum.GetValues(typeof(Presence)).OfType<Presence>(); } set { } }
         public string CDTitle { get; set; }
         public string CourseCode { get; set; }
         public DateTime StartDate { get; set; }
