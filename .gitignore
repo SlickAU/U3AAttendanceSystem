@@ -42,8 +42,23 @@ local.properties
 *.sln.docstates
 
 # Build results
+<<<<<<< HEAD
+
 [Dd]ebug/
 [Rr]elease/
+x64/
+build/
+[Bb]in/
+[Oo]bj/
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+=======
+[Dd]ebug/
+[Rr]elease/
+>>>>>>> 17db5b2aba73bab4d09847d6ff1c16eca3b3bce8
 *_i.c
 *_p.c
 *.ilk
@@ -59,12 +74,23 @@ local.properties
 *.tli
 *.tlh
 *.tmp
+<<<<<<< HEAD
+*.tmp_proj
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.log
+*.scc
+=======
 *.vspscc
 .builds
 *.dotCover
 
 ## TODO: If you have NuGet Package Restore enabled, uncomment this
 #packages/
+>>>>>>> 17db5b2aba73bab4d09847d6ff1c16eca3b3bce8
 
 # Visual C++ cache files
 ipch/
@@ -72,16 +98,44 @@ ipch/
 *.ncb
 *.opensdf
 *.sdf
+<<<<<<< HEAD
+*.cachefile
+=======
+>>>>>>> 17db5b2aba73bab4d09847d6ff1c16eca3b3bce8
 
 # Visual Studio profiler
 *.psess
 *.vsp
+<<<<<<< HEAD
+*.vspx
+
+# Guidance Automation Toolkit
+*.gpState
+
+# ReSharper is a .NET coding add-in
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# TeamCity is a build add-in
+_TeamCity*
+
+# DotCover is a Code Coverage Tool
+*.dotCover
+
+# NCrunch
+*.ncrunch*
+.*crunch*.local.xml
+
+# Installshield output folder
+[Ee]xpress/
+=======
 
 # ReSharper is a .NET coding add-in
 _ReSharper*
 
 # Installshield output folder
 [Ee]xpress
+>>>>>>> 17db5b2aba73bab4d09847d6ff1c16eca3b3bce8
 
 # DocProject is a documentation generator add-in
 DocProject/buildhelp/
@@ -94,6 +148,39 @@ DocProject/Help/Html2
 DocProject/Help/html
 
 # Click-Once directory
+<<<<<<< HEAD
+publish/
+
+# Publish Web Output
+*.Publish.xml
+*.pubxml
+
+# NuGet Packages Directory
+## TODO: If you have NuGet Package Restore enabled, uncomment the next line
+#packages/
+
+# Windows Azure Build Output
+csx
+*.build.csdef
+
+# Windows Store app package directory
+AppPackages/
+
+# Others
+sql/
+*.Cache
+ClientBin/
+[Ss]tyle[Cc]op.*
+~$*
+*~
+*.dbmdl
+*.[Pp]ublish.xml
+*.pfx
+*.publishsettings
+
+# RIA/Silverlight projects
+Generated_Code/
+=======
 publish
 
 # Others
@@ -107,12 +194,28 @@ stylecop.*
 ~$*
 *.dbmdl
 Generated_Code #added for RIA/Silverlight projects
+>>>>>>> 17db5b2aba73bab4d09847d6ff1c16eca3b3bce8
 
 # Backup & report files from converting an old project file to a newer
 # Visual Studio version. Backup files are not needed, because we have git ;-)
 _UpgradeReport_Files/
 Backup*/
 UpgradeLog*.XML
+<<<<<<< HEAD
+UpgradeLog*.htm
+
+# SQL Server files
+App_Data/*.mdf
+App_Data/*.ldf
+
+#############
+## Windows detritus
+#############
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+=======
 
 
 
@@ -122,10 +225,20 @@ UpgradeLog*.XML
 
 # Windows image file caches
 Thumbs.db
+>>>>>>> 17db5b2aba73bab4d09847d6ff1c16eca3b3bce8
 
 # Folder config file
 Desktop.ini
 
+<<<<<<< HEAD
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Mac crap
+.DS_Store
+
+=======
+>>>>>>> 17db5b2aba73bab4d09847d6ff1c16eca3b3bce8
 
 #############
 ## Python
@@ -136,6 +249,15 @@ Desktop.ini
 # Packages
 *.egg
 *.egg-info
+<<<<<<< HEAD
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+=======
 dist
 build
 eggs
@@ -144,6 +266,7 @@ bin
 var
 sdist
 develop-eggs
+>>>>>>> 17db5b2aba73bab4d09847d6ff1c16eca3b3bce8
 .installed.cfg
 
 # Installer logs
@@ -158,6 +281,9 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+<<<<<<< HEAD
+=======
 
 # Mac crap
 .DS_Store
+>>>>>>> 17db5b2aba73bab4d09847d6ff1c16eca3b3bce8
