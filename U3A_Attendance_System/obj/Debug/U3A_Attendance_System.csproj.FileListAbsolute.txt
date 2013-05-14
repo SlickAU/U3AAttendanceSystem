@@ -1,0 +1,152 @@
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\U3A_Attendance_System.exe.config
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System.csprojResolveAssemblyReference.cache
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseDescriptionEditView.baml
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseDescriptionInstancesView.baml
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseDescriptionListView.baml
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseInstanceEditView.baml
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\MainView.baml
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\VenueEditView.baml
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\VenueListView.baml
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseDescriptionEditView.g.cs
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseDescriptionInstancesView.g.cs
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseDescriptionListView.g.cs
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseInstanceEditView.g.cs
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\MainView.g.cs
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\TabbedView.g.cs
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\VenueEditView.g.cs
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\VenueListView.g.cs
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\App.g.cs
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System_MarkupCompile.cache
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System_MarkupCompile.lref
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\U3A_Attendance_System.exe
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\U3A_Attendance_System.pdb
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\Caliburn.Micro.dll
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\U3A_Attendance_Model.dll
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\EntityFramework.dll
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\U3A_Attendance_Model.pdb
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\Caliburn.Micro.xml
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\System.Windows.Interactivity.xml
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\EntityFramework.xml
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\App.baml
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\TabbedView.baml
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System.g.resources
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System.Properties.Resources.resources
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System.csproj.GenerateResource.Cache
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System.exe
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System.pdb
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\U3A_Attendance_System.exe.config
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System.exe
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System.pdb
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\U3A_Attendance_System.exe
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\U3A_Attendance_System.pdb
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\Caliburn.Micro.dll
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\U3A_Attendance_Model.dll
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\EntityFramework.dll
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\U3A_Attendance_Model.pdb
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\Caliburn.Micro.xml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\System.Windows.Interactivity.xml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\EntityFramework.xml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System.csprojResolveAssemblyReference.cache
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseDescriptionEditView.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseDescriptionInstancesView.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseDescriptionListView.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseInstanceEditView.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\MainView.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\VenueEditView.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\VenueListView.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseDescriptionEditView.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseDescriptionInstancesView.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseDescriptionListView.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseInstanceEditView.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\MainView.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\TabbedView.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\VenueEditView.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\VenueListView.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\App.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System_MarkupCompile.cache
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System_MarkupCompile.lref
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\App.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\TabbedView.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System.g.resources
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System.Properties.Resources.resources
+C:\Users\p402\Desktop\U3AAttendanceSystem-master\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System.csproj.GenerateResource.Cache
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\U3A_Attendance_System.exe.config
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System.exe
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System.pdb
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\U3A_Attendance_System.exe
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\U3A_Attendance_System.pdb
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\Caliburn.Micro.dll
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\U3A_Attendance_Model.dll
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\EntityFramework.dll
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\U3A_Attendance_Model.pdb
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\Caliburn.Micro.xml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\System.Windows.Interactivity.xml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\EntityFramework.xml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System.csprojResolveAssemblyReference.cache
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseDescriptionEditView.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseDescriptionInstancesView.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseDescriptionListView.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseInstanceEditView.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\MainView.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\VenueEditView.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\VenueListView.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseDescriptionEditView.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseDescriptionInstancesView.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseDescriptionListView.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseInstanceEditView.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\MainView.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\TabbedView.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\VenueEditView.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\VenueListView.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\App.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System_MarkupCompile.cache
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System_MarkupCompile.lref
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\App.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\TabbedView.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System.g.resources
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System.Properties.Resources.resources
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v2B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System.csproj.GenerateResource.Cache
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\U3A_Attendance_System.exe.config
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System.exe
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System.pdb
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\U3A_Attendance_System.exe
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\U3A_Attendance_System.pdb
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\Caliburn.Micro.dll
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\U3A_Attendance_Model.dll
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\EntityFramework.dll
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\U3A_Attendance_Model.pdb
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\Caliburn.Micro.xml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\System.Windows.Interactivity.xml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\bin\Debug\EntityFramework.xml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System.csprojResolveAssemblyReference.cache
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseDescriptionEditView.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseDescriptionInstancesView.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseDescriptionListView.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseInstanceEditView.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\MainView.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\VenueEditView.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\VenueListView.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseDescriptionEditView.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseDescriptionInstancesView.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseDescriptionListView.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\CourseInstanceEditView.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\MainView.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\TabbedView.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\VenueEditView.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\VenueListView.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\App.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System_MarkupCompile.cache
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System_MarkupCompile.lref
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\App.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\Views\TabbedView.baml
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System.g.resources
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System.Properties.Resources.resources
+C:\Users\p402\Desktop\U3AAttendanceSystem-master v3B\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\U3A_Attendance_System.csproj.GenerateResource.Cache

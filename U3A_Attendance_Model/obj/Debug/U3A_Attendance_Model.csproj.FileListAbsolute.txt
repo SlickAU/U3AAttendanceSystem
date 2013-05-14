@@ -1,0 +1,8 @@
+C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\bin\Debug\U3A_Attendance_Model.dll.config
+C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\bin\Debug\U3A_Attendance_Model.dll
+C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\bin\Debug\U3A_Attendance_Model.pdb
+C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\bin\Debug\EntityFramework.dll
+C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\bin\Debug\EntityFramework.xml
+C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\obj\Debug\U3A_Attendance_Model.csprojResolveAssemblyReference.cache
+C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\obj\Debug\U3A_Attendance_Model.dll
+C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\obj\Debug\U3A_Attendance_Model.pdb
