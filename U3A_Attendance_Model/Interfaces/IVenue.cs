@@ -13,5 +13,6 @@ namespace U3A_Attendance_Model
         string Address { get; }
         string CodeId { get; }
         Guid SuburbId { get; }
+        IEnumerable<ILocation> Locations {get;}
     }
 }

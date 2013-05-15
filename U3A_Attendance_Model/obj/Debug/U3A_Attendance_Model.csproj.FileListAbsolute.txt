@@ -6,6 +6,7 @@ C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\bin\Debu
 C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\obj\Debug\U3A_Attendance_Model.csprojResolveAssemblyReference.cache
 C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\obj\Debug\U3A_Attendance_Model.dll
 C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\obj\Debug\U3A_Attendance_Model.pdb
+<<<<<<< HEAD
 C:\Users\Kevin\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\bin\Debug\U3A_Attendance_Model.dll.config
 C:\Users\Kevin\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\bin\Debug\U3A_Attendance_Model.dll
 C:\Users\Kevin\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\bin\Debug\U3A_Attendance_Model.pdb
@@ -13,3 +14,12 @@ C:\Users\Kevin\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\bin\Deb
 C:\Users\Kevin\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\bin\Debug\EntityFramework.xml
 C:\Users\Kevin\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\obj\Debug\U3A_Attendance_Model.dll
 C:\Users\Kevin\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\obj\Debug\U3A_Attendance_Model.pdb
+=======
+C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\bin\Debug\U3A_Attendance_Model.dll.config
+C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\bin\Debug\U3A_Attendance_Model.dll
+C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\bin\Debug\U3A_Attendance_Model.pdb
+C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\bin\Debug\EntityFramework.dll
+C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\bin\Debug\EntityFramework.xml
+C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\obj\Debug\U3A_Attendance_Model.dll
+C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_Model\obj\Debug\U3A_Attendance_Model.pdb
+>>>>>>> 76c1a4f794054e581fb68e86977e33c5974e1252

@@ -4,16 +4,28 @@
 winexe
 C#
 .cs
+<<<<<<< HEAD
 C:\Users\Kevin\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\
+=======
+C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_System\obj\Debug\
+>>>>>>> 76c1a4f794054e581fb68e86977e33c5974e1252
 U3A_Attendance_System
 none
 false
 DEBUG;TRACE
+<<<<<<< HEAD
 C:\Users\Kevin\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_System\App.xaml
 81458139349
 
 25137831899
 17767121955
+=======
+C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\U3A_Attendance_System\App.xaml
+81458139349
+
+25137831899
+17163818914
+>>>>>>> 76c1a4f794054e581fb68e86977e33c5974e1252
 Views\CourseDescriptionEditView.xaml;Views\CourseDescriptionInstancesView.xaml;Views\CourseDescriptionListView.xaml;Views\CourseInstanceEditView.xaml;Views\MainView.xaml;Views\TabbedView.xaml;Views\VenueEditView.xaml;Views\VenueListView.xaml;
 
 False

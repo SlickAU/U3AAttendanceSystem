@@ -74,5 +74,11 @@ namespace U3A_Attendance_Model
         }
 
         #endregion
+
+
+        IEnumerable<ILocation> IVenue.Locations
+        {
+            get { return Locations; }
+        }
     }
 }
