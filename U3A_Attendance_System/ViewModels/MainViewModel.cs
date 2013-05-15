@@ -75,10 +75,17 @@ namespace U3A_Attendance_System.ViewModels
             ActivateItem(new TabbedViewModel());
         }
 
-        public void ShowVenueEdit()
+        public void ShowVenueEdit(IVenue venue)
+        {
+            settings.Title = "Edit Venue";
+
+            _wm.ShowWindow(new VenueEditViewModel(venue), null, settings);
+        }
+
+        public void ShowVenueCreate()
         {
             settings.Title = "Create Venue";
-            settings.SizeToContent = SizeToContent.Manual;
+           // settings.SizeToContent = SizeToContent.Manual;
 
 
             _wm.ShowWindow(new VenueEditViewModel(), null, settings);

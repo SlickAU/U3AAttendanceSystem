@@ -14,7 +14,7 @@
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Button Content="Create Venue" Width="200" VerticalAlignment="Center" HorizontalAlignment="Left" cal:Message.Attach="ShowVenueEdit()"/>
+        <Button Content="Create Venue" Width="200" VerticalAlignment="Center" HorizontalAlignment="Left" cal:Message.Attach="ShowVenueCreate()"/>
         <DataGrid Name="VenueList" HorizontalAlignment="Stretch" VerticalAlignment="Top" AutoGenerateColumns="False" Grid.Row="1" IsReadOnly="True">
             <DataGrid.Resources>
                 <ResourceDictionary>
@@ -31,7 +31,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Button Content="Edit" Width="80"></Button>
+                                <Button Content="Edit" Width="80" cal:Message.Attach="ShowVenueEdit($dataContext)"></Button>
                                 <Button Content="Delete" Width="80"></Button>             
                             </StackPanel>
                         </DataTemplate>

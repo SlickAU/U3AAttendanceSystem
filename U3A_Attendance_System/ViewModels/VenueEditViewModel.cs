@@ -9,29 +9,22 @@ namespace U3A_Attendance_System.ViewModels
 {
     public class VenueEditViewModel : BaseViewModel
     {
+        #region Fields
+        //--------------------------------------
         private IEnumerable<IRegion> _regions;
         private ISuburb _selectedSuburb;
         private IRegion _selectedRegion;
-        private IVenue _selectedVenue;
+        private ILocation _selectedLocation;
+        private IVenue existingVenue;
+        //--------------------------------------
+        #endregion
 
+        #region Properties
+        //--------------------------------------
         public string VenueName { get; set; }
-
         public string Address { get; set; }
-
-        public string CodeId { get; set; }
-
-        public IEnumerable<IVenue> Venues { get; set; }
-
-        public Boolean IsVenuesEnabled
-        {
-            get
-            {
-                return !(SelectedSuburb == null);
-            }
-        }
-
+        public string CodeId { get; set; }     
         public IEnumerable<ISuburb> Suburbs { get; set; }
-
         public Boolean IsSuburbsEnabled
         {
             get
@@ -39,7 +32,6 @@ namespace U3A_Attendance_System.ViewModels
                 return !(SelectedRegion == null);
             }
         }
-
         public ISuburb SelectedSuburb
         {
             get
@@ -52,7 +44,6 @@ namespace U3A_Attendance_System.ViewModels
                 NotifyOfPropertyChange("SelectedSuburb");
             }
         }
-
         public IEnumerable<IRegion> Regions
         { 
             get { return _regions; }
@@ -62,7 +53,6 @@ namespace U3A_Attendance_System.ViewModels
                 _regions = value;
             }
         }
-
         public IRegion SelectedRegion
         {
             get
@@ -75,37 +65,70 @@ namespace U3A_Attendance_System.ViewModels
                 NotifyOfPropertyChange("SelectedRegion");
             }
         }
+        //--------------------------------------
+        #endregion
 
-
+        #region Constructors
+        //--------------------------------------
         public VenueEditViewModel()
         {
             Regions = _facade.FetchRegions().ToList();
         }
-
         public VenueEditViewModel(IVenue venue)
         {
+            existingVenue = venue;
+            VenueName = existingVenue.Name;
+            Address = existingVenue.Address;
+            CodeId = existingVenue.CodeId;
             Regions = _facade.FetchRegions().ToList();
+
+            //SelectedRegion = Regions
         }
+        //--------------------------------------
+        #endregion
 
+        #region Methods
 
+        #region Location Manegement
+        //--------------------------------------
+        public List<string> ListOfLocations { get; set; }
+        public string RoomName { get; set; }
+        public Boolean IsLocationManagementEnabled
+        {
+            get { return !(existingVenue == null); }
+        }
+        public void UpdateLocations()
+        {
+            List<string> list = new List<string>();
+
+            if (RoomName != null)
+            {
+                list.Add(RoomName);
+                ListOfLocations = list;
+            }
+
+            _facade.CreateLocation(_selectedRegion.Id, existingVenue.SuburbId, existingVenue.Id, RoomName);
+
+            this.Refresh();
+        }
+        //--------------------------------------
+        #endregion
+
+        #region Venue Management
+        //--------------------------------------
         public void UpdateSuburbs(Guid regionId)
         {
             Suburbs = _facade.FetchSuburbs(regionId);
             this.Refresh();
         }
-
-        public void UpdateVenues()
-        {
-            if ((SelectedSuburb != null) && !SelectedSuburb.Id.Equals(Guid.Empty))
-            {
-                Venues = _facade.FetchVenues(_selectedRegion.Id, _selectedSuburb.Id).ToList();
-                this.Refresh();
-            }
-        }
-
         public void Update()
         {
-            _facade.CreateVenue(_selectedRegion.Id, _selectedSuburb.Id, VenueName, Address, CodeId);
+            existingVenue = _facade.CreateVenue(_selectedRegion.Id, _selectedSuburb.Id, VenueName, Address, CodeId);
+            this.Refresh();
         }
+        //--------------------------------------
+        #endregion
+
+        #endregion
     }
 }

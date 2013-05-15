@@ -8,7 +8,7 @@ using U3A_Attendance_Model.Partials;
 
 namespace U3A_Attendance_Model
 {
-    internal partial class U3A
+    internal partial class U3A : IU3A
     {
         #region Course Description Management
         
@@ -386,5 +386,21 @@ namespace U3A_Attendance_Model
         }
 
         #endregion
+
+
+        IEnumerable<IMember> IU3A.Members
+        {
+            get { return Members; }
+        }
+
+        IEnumerable<ICourseDescription> IU3A.CourseDescriptions
+        {
+            get { return CourseDescriptions; }
+        }
+
+        IEnumerable<IRegion> IU3A.Regions
+        {
+            get { return Regions; }
+        }
     }
 }
