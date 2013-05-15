@@ -15,6 +15,8 @@ namespace U3A_Attendance_Model
             MemberId = member.MemberId;
             Presence = presence;
             SessionId = session.Id;
+            Member = member;
+            Session = session;
         }
 
         #region Attendance Management
@@ -24,6 +26,8 @@ namespace U3A_Attendance_Model
             MemberId = member.MemberId;
             Presence = presence;
             SessionId = session.Id;
+            Member = member;
+            Session = session;
 
             return this;
         }

@@ -8,8 +8,7 @@ namespace U3A_Attendance_Model
 {
     public enum Presence
     {
-        Present = 'P',
-        Absent = 'a',
-        Excused = 'e'
+        Present,
+        Excused
     }
 }

@@ -444,7 +444,7 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MemberId" Type="Int32" Nullable="false" />
-          <Property Name="Presence" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+          <Property Name="Presence" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="SessionId" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Member" Relationship="U3AAttendanceModel.FK_Attendance_Member" FromRole="Attendance" ToRole="Member" />
           <NavigationProperty Name="Session" Relationship="U3AAttendanceModel.FK_Attendance_Session1" FromRole="Attendance" ToRole="Session" />

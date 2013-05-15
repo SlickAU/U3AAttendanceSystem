@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:cal="http://www.caliburnproject.org"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="1062">
+      d:DesignHeight="500" d:DesignWidth="1062">
 
 
     <Grid>
@@ -79,14 +79,13 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition />
-                        <RowDefinition Height="65" />
+                        <RowDefinition Height="75" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
                     <GroupBox Header="Create new sessions" Grid.Column="0" VerticalAlignment="Top">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                                 <ColumnDefinition />
@@ -102,50 +101,19 @@
 
                             <Label Content="Frequency" Grid.Column="2" Grid.Row="0" />
                             <Label Content="Occurances" Grid.Column="3" Grid.Row="0" />
-                            <Label Content="Location" Grid.Column="4" Grid.Row="0" />
 
                             <DatePicker Name="SessionStartDate" Grid.Column="0" Grid.Row="1" />
                             <Label Name="SessionStartDateDay" Grid.Column="1" Grid.Row="1" />
                             <ComboBox Text="Frequency..." Grid.Column="2" Grid.Row="1"></ComboBox>
                             <TextBox Name="txtOccurances" Grid.Column="3" Grid.Row="1" />
-                            <TextBox Name="txtLocation"  Grid.Column="4" Grid.Row="1" />
-                            <Button Name="CreateSession" Content="Create" Grid.Column="5" Grid.Row="1" />
+                            <Button Name="CreateSession" Content="Create" Grid.Column="4" Grid.Row="1" />
                         </Grid>
                     </GroupBox>
 
                     <GroupBox Header="Edit existing session" Grid.Column="2" VerticalAlignment="Top">
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Sessions List" />
-                            <ComboBox Width="85" />
-                            <Button Content="Edit" />
-                            <Button Content="Delete" />
-                        </StackPanel>
-                    </GroupBox>
-
-                    <Grid Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Right">
-                        <GroupBox Header="Record Members Attendance">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="85" />
-                                    <ColumnDefinition Width="85" />
-                                    <ColumnDefinition Width="85" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                    <RowDefinition />
-                                </Grid.RowDefinitions>
-                                <Label Content="Member #" Grid.Column="0" Grid.Row="0" />
-                                <Label Content="Presence" Grid.Column="1" Grid.Row="0" />
-                                <TextBox Name="MemberId" Grid.Column="0" Grid.Row="1" />
-                                <ComboBox Name="Presences" Grid.Column="1" Grid.Row="1" />
-                                <Button Name="AddAttendance" Content="Add Attendance" Grid.Column="2" Grid.Row="1" />
-                            </Grid>
-                        </GroupBox>
-                    </Grid>
-                    
-                    <Grid Grid.Row="2" Grid.ColumnSpan="3">
                         <Grid>
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
@@ -153,15 +121,60 @@
                                 <RowDefinition />
                                 <RowDefinition />
                             </Grid.RowDefinitions>
+                            <Label Content="Session" Grid.Row="0" Grid.Column="0" />
+                            <ComboBox Grid.Row="1" Grid.Column="0" />
+                            <Button Content="Edit" Grid.Row="1" Grid.Column="1" />
+                            <Button Content="Delete" Grid.Row="1" Grid.Column="2" />
+                        </Grid>
+                    </GroupBox>
 
-                            <Label Content="Member No" Grid.Row="0" Grid.Column="0" />
-                            <Grid Grid.Row="0" Grid.Column="1">
+                    <Grid Grid.Row="1" Grid.Column="2" HorizontalAlignment="Stretch">
+                        <GroupBox Header="Record Members Attendance">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
-                                <Label Content="Session Dates" Grid.Row="0" HorizontalAlignment="Center" />
-                                <ItemsControl Name="CISessions" Grid.Row="1">
+                                <Label Content="Member #" Grid.Column="0" Grid.Row="0" />
+                                <Label Content="Session" Grid.Column="1" Grid.Row="0" />
+                                <Label Content="Presence" Grid.Column="2" Grid.Row="0" />
+                                <TextBox Name="MemberId" Grid.Column="0" Grid.Row="1" />
+                                <ComboBox ItemsSource="{Binding Sessions}" SelectedItem="{Binding SessionOfAttendance, Mode=TwoWay}" DisplayMemberPath="Date" Grid.Column="1" Grid.Row="1" />
+                                <ComboBox ItemsSource="{Binding Presences}" SelectedItem="{Binding SelectedPresence, Mode=TwoWay}" Grid.Column="2" Grid.Row="1" />
+                                <Button Name="AddAttendance" Content="Add Attendance" Grid.Column="3" Grid.Row="1" />
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
+                    
+                    <Grid Grid.Row="2" Grid.ColumnSpan="3">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Label Content="Member No" Grid.Row="0" Grid.Column="0" />
+                            <Grid Grid.Row="0" Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="293*"/>
+                                    <ColumnDefinition Width="8*"/>
+                                    <ColumnDefinition Width="224*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Label Content="Session Dates" Grid.Row="0" HorizontalAlignment="Center" Grid.ColumnSpan="3" Margin="221,0" />
+                                <ItemsControl Name="Sessions" Grid.Row="1" Grid.ColumnSpan="3">
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
                                             <Grid>
@@ -170,13 +183,6 @@
                                                     <RowDefinition />
                                                 </Grid.RowDefinitions>
                                                 <Label Content="{Binding Date}" Grid.Row="0" />
-                                                <ItemsControl ItemsSource="{Binding Path=Attendances}" Grid.Row="1">
-                                                    <ItemsControl.ItemTemplate>
-                                                        <DataTemplate>
-                                                            <Label Content="{Binding Presence}" />
-                                                        </DataTemplate>
-                                                    </ItemsControl.ItemTemplate>
-                                                </ItemsControl>
                                             </Grid>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
@@ -187,6 +193,10 @@
                                     </ItemsControl.ItemsPanel>
                                 </ItemsControl>
                             </Grid>
+                            
+                            <DataGrid Grid.Row="1" Grid.ColumnSpan="2" HeadersVisibility="None">
+                                
+                            </DataGrid>
 
                         </Grid>
                         

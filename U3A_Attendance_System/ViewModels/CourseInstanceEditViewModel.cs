@@ -25,7 +25,6 @@ namespace U3A_Attendance_System.ViewModels
         #region Properties
         //Course Instance Specific Properties
 
-        public IEnumerable<Presence> Presences { get { return Enum.GetValues(typeof(Presence)).OfType<Presence>(); } set { } }
         public string CDTitle { get; set; }
         public string CourseCode { get; set; }
         public DateTime StartDate { get; set; }
@@ -154,8 +153,8 @@ namespace U3A_Attendance_System.ViewModels
                 return SessionStartDate.DayOfWeek.ToString();
             }
         }
-        
-        public IEnumerable<ISession> CISessions
+
+        public IEnumerable<ISession> Sessions
         {
             get
             {
@@ -179,9 +178,17 @@ namespace U3A_Attendance_System.ViewModels
                 //    var sessions = _facade.FetchSessions(_ci.Id, _ci.RegionId);
                 //    return (sessions == null) ? null : sessions;
                 //}
-                return null;
+                return sessions ?? null;
             }
             set {}
+        }
+
+        public IEnumerable<IMember> AttendanceMemberNos
+        {
+            get
+            {
+                return Sessions.SelectMany(s => s.Attendances).Select(a => a.Member).Distinct().ToList();
+            }
         }
         #endregion
 
@@ -192,6 +199,20 @@ namespace U3A_Attendance_System.ViewModels
             get;
             set;
         }
+        private ISession _sessionOfAttendance;
+        public ISession SessionOfAttendance
+        {
+            get
+            {
+                return _sessionOfAttendance;
+            }
+            set
+            {
+                _sessionOfAttendance = value;
+            }
+        }
+        public IEnumerable<Presence> Presences { get { return Enum.GetValues(typeof(Presence)).OfType<Presence>(); } set { } }
+        public Presence SelectedPresence { get; set; }
         
         #endregion
 
@@ -278,10 +299,12 @@ namespace U3A_Attendance_System.ViewModels
 
         public void AddAttendance()
         {
-            foreach (ISession sesh in CISessions)
+            _facade.CreateAttendance(_ci.RegionId, _ci.Id, SessionOfAttendance.Id, MemberId, SelectedPresence.ToString());
+
+            /*foreach (ISession sesh in Sessions)
             {
                 _facade.CreateAttendance(_ci.RegionId, _ci.Id, sesh.Id, MemberId, "");
-            }
+            }*/
             
         }
 
