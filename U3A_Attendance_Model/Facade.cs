@@ -163,45 +163,16 @@ namespace U3A_Attendance_Model
             _u3a.deleteCourseInstance(courseInstanceId, regionId, action); 
         }
 
-
-        public string GenerateCourseCode(DateTime startDate, Guid venueId, Guid regionId, Guid suburbId)
+        public string CheckCourseCode(string courseCode)
         {
-            var venue = FetchVenue(venueId, regionId, suburbId);
-            var region = FetchRegion(regionId);
-            string courseCode;
-            string semester;
-
             //Implement increment checker to see if course code number already exists - Current value is hardcoded
             //Exception handling on UI to make sure Date, Venue and Region fields have been filled
 
-            string tempYear = startDate.Year.ToString();
-            string year = tempYear.Substring(2);
-            int month = startDate.Month;
-            string regionL = region.CodeId.ToString();
-            string venueL = venue.CodeId.ToString();
 
-            if (month <= 6)
-            {
-                semester = "1";
-            }
-
-            else
-            {
-                semester = "2";
-            }
-
-            courseCode = string.Format("{0}{1}{2}{3}", year, semester, regionL, venueL);
-
-            //foreach (CourseInstance c in CourseInstances)
-            //{
-            //    if (c.CourseCode == courseCode)
-            //    {
-            //        //DO WORK HERE
-            //    }
-            //}
 
             return courseCode;
         }
+        
 
         #endregion
 
@@ -255,6 +226,11 @@ namespace U3A_Attendance_Model
         public IEnumerable<ISuburb> FetchSuburbs(Guid regionId)
         {
             return _u3a.fetchSuburbs(regionId);
+        }
+
+        public IEnumerable<ISuburb> FetchSuburbsWithVenues(Guid regionId)
+        {
+            return _u3a.fetchSuburbs(regionId).Where(v => v.HasVenues);
         }
 
         #endregion

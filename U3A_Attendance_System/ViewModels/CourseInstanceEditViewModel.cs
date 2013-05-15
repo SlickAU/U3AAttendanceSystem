@@ -158,9 +158,6 @@ namespace U3A_Attendance_System.ViewModels
         {
             get
             {
-
-
-
                 var sessions = _ci.Sessions;
                 _ci.Sessions.SelectMany(s => s.Attendances); 
                 var attendances = sessions.SelectMany(s => s.Attendances).ToList();
@@ -171,7 +168,6 @@ namespace U3A_Attendance_System.ViewModels
                 var m = _ci.Sessions.SelectMany(s => s.Attendances).Select(a => a.Member).Distinct().ToList();
 
                 var x = m.ToList();
-
 
                 //if (_ci != null)
                 //{
@@ -251,7 +247,7 @@ namespace U3A_Attendance_System.ViewModels
 
         public void UpdateSuburbs(Guid regionId)
         {
-            Suburbs = _facade.FetchSuburbs(regionId);
+            Suburbs = _facade.FetchSuburbsWithVenues(regionId);
             this.Refresh();
         }
 
@@ -269,6 +265,33 @@ namespace U3A_Attendance_System.ViewModels
         {
             //SelectedVenueId = venueId;
             Locations = _facade.FetchLocations(_selectedRegion.Id, _selectedSuburb.Id, venueId).ToList();
+            this.Refresh();
+        }
+
+        public void GenerateCourseCode()
+        {
+            string courseCode;
+            string semester;
+            string year = StartDate.Year.ToString().Substring(2);
+            int month = StartDate.Month;
+            string region = SelectedRegion.CodeId;
+            string venue = SelectedVenue.CodeId;
+
+            if (month <= 6)
+            {
+                semester = "1";
+            }
+
+            else
+            {
+                semester = "2";
+            }
+
+            courseCode = string.Format("{0}{1}{2}{3}", year, semester, region, venue);
+
+            _facade.CheckCourseCode(courseCode);
+
+            CourseCode = courseCode;
             this.Refresh();
         }
 

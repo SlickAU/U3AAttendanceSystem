@@ -22,7 +22,6 @@ namespace U3A_Attendance_System.ViewModels
 
         public CourseDescriptionEditViewModel(ICourseDescription cd)
         {
-
             Title = cd.Title;
             Description = cd.Description;
             _cd = cd;
@@ -30,7 +29,6 @@ namespace U3A_Attendance_System.ViewModels
 
         public CourseDescriptionEditViewModel()
         {
-
 
         }
 

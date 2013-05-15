@@ -12,12 +12,26 @@ namespace U3A_Attendance_System.ViewModels
 {
     public class CourseDescriptionListViewModel : BaseViewModel
     {
+        private IEnumerable<ICourseDescription> courseDescriptions;
+
+        private string titleSearch;
+        
         #region Properties
 
         public IEnumerable<ICourseDescription> CourseDescriptions
         {
-            get { return _facade.FetchCourseDescriptions(); }
+            get
+            {
+                if (courseDescriptions == null)
+                    return _facade.FetchCourseDescriptions();
+                else
+                    return courseDescriptions;
+            }
+
+            set { courseDescriptions = value; }
         }
+
+        public string TitleSearch { get { return titleSearch; } set { titleSearch = value; SearchTitles(); } }
 
         #endregion
 
@@ -28,16 +42,20 @@ namespace U3A_Attendance_System.ViewModels
             
         }
 
-        public void RollMe()
+        public void SearchTitles()
         {
-           //_facade.Wtf();
-            this.Refresh();
+            if (TitleSearch != null)
+            {
+                string search = TitleSearch.ToUpper();
+                CourseDescriptions = _facade.FetchCourseDescriptions().Where(cd => cd.Title.Contains(search));
+                this.Refresh();
+            }
         }
 
-        //bool CanDisplayCDManagerExecute()
-        //{
-        //    return true;
-        //}
+        public void RollMe()
+        {
+            this.Refresh();
+        }
 
         #endregion
     }
