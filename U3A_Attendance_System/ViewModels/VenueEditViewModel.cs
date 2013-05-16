@@ -23,7 +23,7 @@ namespace U3A_Attendance_System.ViewModels
         //--------------------------------------
         public string VenueName { get; set; }
         public string Address { get; set; }
-        public string CodeId { get; set; }     
+        public string CodeId { get; set; }
         public IEnumerable<ISuburb> Suburbs { get; set; }
         public Boolean IsSuburbsEnabled
         {
@@ -45,7 +45,7 @@ namespace U3A_Attendance_System.ViewModels
             }
         }
         public IEnumerable<IRegion> Regions
-        { 
+        {
             get { return _regions; }
             set
             {
@@ -81,8 +81,8 @@ namespace U3A_Attendance_System.ViewModels
             Address = existingVenue.Address;
             CodeId = existingVenue.CodeId;
             Regions = _facade.FetchRegions().ToList();
-
-            //SelectedRegion = Regions
+            ListOfLocations = existingVenue.Locations;
+            Rooms = ListOfLocations.Select(l => l.Room).ToList();
         }
         //--------------------------------------
         #endregion
@@ -91,7 +91,8 @@ namespace U3A_Attendance_System.ViewModels
 
         #region Location Manegement
         //--------------------------------------
-        public List<string> ListOfLocations { get; set; }
+        public IEnumerable<ILocation> ListOfLocations { get; set; }
+        public List<string> Rooms { get; set; }
         public string RoomName { get; set; }
         public Boolean IsLocationManagementEnabled
         {
@@ -99,15 +100,17 @@ namespace U3A_Attendance_System.ViewModels
         }
         public void UpdateLocations()
         {
-            List<string> list = new List<string>();
+            List<ILocation> list = new List<ILocation>();
 
             if (RoomName != null)
             {
-                list.Add(RoomName);
-                ListOfLocations = list;
+                //list.Add(RoomName);
+                //ListOfLocations = list;
+                list.Add(_facade.CreateLocation(_selectedRegion.Id, existingVenue.SuburbId, existingVenue.Id, RoomName));
             }
 
-            _facade.CreateLocation(_selectedRegion.Id, existingVenue.SuburbId, existingVenue.Id, RoomName);
+            ListOfLocations = list.AsEnumerable();
+
 
             this.Refresh();
         }

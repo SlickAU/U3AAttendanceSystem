@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="U3AAttendanceModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="U3AAttendanceModelStoreContainer">
+    <EntitySet Name="Attendance" EntityType="U3AAttendanceModel.Store.Attendance" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Coordinator" EntityType="U3AAttendanceModel.Store.Coordinator" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CourseDescription" EntityType="U3AAttendanceModel.Store.CourseDescription" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CourseInstance" EntityType="U3AAttendanceModel.Store.CourseInstance" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Location" EntityType="U3AAttendanceModel.Store.Location" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Member" EntityType="U3AAttendanceModel.Store.Member" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Region" EntityType="U3AAttendanceModel.Store.Region" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Session" EntityType="U3AAttendanceModel.Store.Session" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Suburb" EntityType="U3AAttendanceModel.Store.Suburb" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="U3A" EntityType="U3AAttendanceModel.Store.U3A" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Venue" EntityType="U3AAttendanceModel.Store.Venue" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Attendance_Member" Association="U3AAttendanceModel.Store.FK_Attendance_Member">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Attendance" EntitySet="Attendance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Attendance_Session1" Association="U3AAttendanceModel.Store.FK_Attendance_Session1">
+      <End Role="Session" EntitySet="Session" />
+      <End Role="Attendance" EntitySet="Attendance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Coordinator_U3A" Association="U3AAttendanceModel.Store.FK_Coordinator_U3A">
+      <End Role="U3A" EntitySet="U3A" />
+      <End Role="Coordinator" EntitySet="Coordinator" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Course_Instance_Coordinator1" Association="U3AAttendanceModel.Store.FK_Course_Instance_Coordinator1">
+      <End Role="Coordinator" EntitySet="Coordinator" />
+      <End Role="CourseInstance" EntitySet="CourseInstance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Course_Instance_Course1" Association="U3AAttendanceModel.Store.FK_Course_Instance_Course1">
+      <End Role="CourseDescription" EntitySet="CourseDescription" />
+      <End Role="CourseInstance" EntitySet="CourseInstance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Course_Instance_Location" Association="U3AAttendanceModel.Store.FK_Course_Instance_Location">
+      <End Role="Location" EntitySet="Location" />
+      <End Role="CourseInstance" EntitySet="CourseInstance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Course_Instance_Region" Association="U3AAttendanceModel.Store.FK_Course_Instance_Region">
+      <End Role="Region" EntitySet="Region" />
+      <End Role="CourseInstance" EntitySet="CourseInstance" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Course_U3A1" Association="U3AAttendanceModel.Store.FK_Course_U3A1">
+      <End Role="U3A" EntitySet="U3A" />
+      <End Role="CourseDescription" EntitySet="CourseDescription" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Location_Venue1" Association="U3AAttendanceModel.Store.FK_Location_Venue1">
+      <End Role="Venue" EntitySet="Venue" />
+      <End Role="Location" EntitySet="Location" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Member_U3A" Association="U3AAttendanceModel.Store.FK_Member_U3A">
+      <End Role="U3A" EntitySet="U3A" />
+      <End Role="Member" EntitySet="Member" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Region_U3A" Association="U3AAttendanceModel.Store.FK_Region_U3A">
+      <End Role="U3A" EntitySet="U3A" />
+      <End Role="Region" EntitySet="Region" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Session_Course_Instance1" Association="U3AAttendanceModel.Store.FK_Session_Course_Instance1">
+      <End Role="CourseInstance" EntitySet="CourseInstance" />
+      <End Role="Session" EntitySet="Session" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Session_Location" Association="U3AAttendanceModel.Store.FK_Session_Location">
+      <End Role="Location" EntitySet="Location" />
+      <End Role="Session" EntitySet="Session" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Suburb_Region" Association="U3AAttendanceModel.Store.FK_Suburb_Region">
+      <End Role="Region" EntitySet="Region" />
+      <End Role="Suburb" EntitySet="Suburb" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Venue_Suburb" Association="U3AAttendanceModel.Store.FK_Venue_Suburb">
+      <End Role="Suburb" EntitySet="Suburb" />
+      <End Role="Venue" EntitySet="Venue" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Attendance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MemberId" Type="int" Nullable="false" />
+    <Property Name="Presence" Type="varchar" MaxLength="2" />
+    <Property Name="SessionId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Coordinator">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Phone" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Email" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="U3AId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CourseDescription">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CourseNumber" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="varchar(max)" Nullable="false" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="U3AId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CourseInstance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="CourseId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="RegionId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CoordinatorId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="StateId" Type="int" Nullable="false" />
+    <Property Name="DefaultLocationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CourseCode" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Room" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="VenueId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="MemberId" />
+    </Key>
+    <Property Name="U3AId" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MemberId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Region">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CodeId" Type="varchar" MaxLength="1" />
+    <Property Name="Description" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="U3AId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Session">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="CourseInstanceId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="LocationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="VisitorCount" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Suburb">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="RegionId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="PostCode" Type="int" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="U3A">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Description" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Venue">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar(max)" Nullable="false" />
+    <Property Name="Address" Type="varchar(max)" />
+    <Property Name="CodeId" Type="varchar" MaxLength="1" />
+    <Property Name="SuburbId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Attendance_Member">
+    <End Role="Member" Type="U3AAttendanceModel.Store.Member" Multiplicity="1" />
+    <End Role="Attendance" Type="U3AAttendanceModel.Store.Attendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemberId" />
+      </Principal>
+      <Dependent Role="Attendance">
+        <PropertyRef Name="MemberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Attendance_Session1">
+    <End Role="Session" Type="U3AAttendanceModel.Store.Session" Multiplicity="1" />
+    <End Role="Attendance" Type="U3AAttendanceModel.Store.Attendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Session">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Attendance">
+        <PropertyRef Name="SessionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Coordinator_U3A">
+    <End Role="U3A" Type="U3AAttendanceModel.Store.U3A" Multiplicity="1" />
+    <End Role="Coordinator" Type="U3AAttendanceModel.Store.Coordinator" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="U3A">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Coordinator">
+        <PropertyRef Name="U3AId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Course_Instance_Coordinator1">
+    <End Role="Coordinator" Type="U3AAttendanceModel.Store.Coordinator" Multiplicity="1" />
+    <End Role="CourseInstance" Type="U3AAttendanceModel.Store.CourseInstance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Coordinator">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CourseInstance">
+        <PropertyRef Name="CoordinatorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Course_Instance_Course1">
+    <End Role="CourseDescription" Type="U3AAttendanceModel.Store.CourseDescription" Multiplicity="1" />
+    <End Role="CourseInstance" Type="U3AAttendanceModel.Store.CourseInstance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CourseDescription">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CourseInstance">
+        <PropertyRef Name="CourseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Course_Instance_Location">
+    <End Role="Location" Type="U3AAttendanceModel.Store.Location" Multiplicity="1" />
+    <End Role="CourseInstance" Type="U3AAttendanceModel.Store.CourseInstance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CourseInstance">
+        <PropertyRef Name="DefaultLocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Course_Instance_Region">
+    <End Role="Region" Type="U3AAttendanceModel.Store.Region" Multiplicity="1" />
+    <End Role="CourseInstance" Type="U3AAttendanceModel.Store.CourseInstance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Region">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CourseInstance">
+        <PropertyRef Name="RegionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Course_U3A1">
+    <End Role="U3A" Type="U3AAttendanceModel.Store.U3A" Multiplicity="1" />
+    <End Role="CourseDescription" Type="U3AAttendanceModel.Store.CourseDescription" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="U3A">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CourseDescription">
+        <PropertyRef Name="U3AId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Location_Venue1">
+    <End Role="Venue" Type="U3AAttendanceModel.Store.Venue" Multiplicity="1" />
+    <End Role="Location" Type="U3AAttendanceModel.Store.Location" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Venue">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Location">
+        <PropertyRef Name="VenueId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Member_U3A">
+    <End Role="U3A" Type="U3AAttendanceModel.Store.U3A" Multiplicity="1" />
+    <End Role="Member" Type="U3AAttendanceModel.Store.Member" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="U3A">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Member">
+        <PropertyRef Name="U3AId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Region_U3A">
+    <End Role="U3A" Type="U3AAttendanceModel.Store.U3A" Multiplicity="1" />
+    <End Role="Region" Type="U3AAttendanceModel.Store.Region" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="U3A">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Region">
+        <PropertyRef Name="U3AId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Session_Course_Instance1">
+    <End Role="CourseInstance" Type="U3AAttendanceModel.Store.CourseInstance" Multiplicity="1" />
+    <End Role="Session" Type="U3AAttendanceModel.Store.Session" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CourseInstance">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Session">
+        <PropertyRef Name="CourseInstanceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Session_Location">
+    <End Role="Location" Type="U3AAttendanceModel.Store.Location" Multiplicity="1" />
+    <End Role="Session" Type="U3AAttendanceModel.Store.Session" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Session">
+        <PropertyRef Name="LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Suburb_Region">
+    <End Role="Region" Type="U3AAttendanceModel.Store.Region" Multiplicity="1" />
+    <End Role="Suburb" Type="U3AAttendanceModel.Store.Suburb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Region">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Suburb">
+        <PropertyRef Name="RegionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Venue_Suburb">
+    <End Role="Suburb" Type="U3AAttendanceModel.Store.Suburb" Multiplicity="1" />
+    <End Role="Venue" Type="U3AAttendanceModel.Store.Venue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Suburb">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Venue">
+        <PropertyRef Name="SuburbId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -4,12 +4,14 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using U3A_Attendance_Model.Interfaces;
 
 namespace U3A_Attendance_Model
 {
     public class Facade : IDisposable
     {
         private U3AAttendanceEntities _context = new U3AAttendanceEntities();
+        private SearchEngine _searchEngine = new SearchEngine(); 
         private U3A _u3a;
 
         //Facade Constructor
@@ -21,6 +23,16 @@ namespace U3A_Attendance_Model
         public Facade(Guid u3aId)
         {
             _u3a = fetchU3a(u3aId);
+            
+
+        }
+
+
+        public void Examples()
+        {
+            //TODO: Implement somewhere (Example Only)
+            var result = _searchEngine.Search((FetchCourseDescriptions() as IEnumerable<ISearchable>), "a"); 
+     
         }
 
         #region U3A Management
@@ -163,45 +175,16 @@ namespace U3A_Attendance_Model
             _u3a.deleteCourseInstance(courseInstanceId, regionId, action); 
         }
 
-
-        public string GenerateCourseCode(DateTime startDate, Guid venueId, Guid regionId, Guid suburbId)
+        public string CheckCourseCode(string courseCode)
         {
-            var venue = FetchVenue(venueId, regionId, suburbId);
-            var region = FetchRegion(regionId);
-            string courseCode;
-            string semester;
-
             //Implement increment checker to see if course code number already exists - Current value is hardcoded
             //Exception handling on UI to make sure Date, Venue and Region fields have been filled
 
-            string tempYear = startDate.Year.ToString();
-            string year = tempYear.Substring(2);
-            int month = startDate.Month;
-            string regionL = region.CodeId.ToString();
-            string venueL = venue.CodeId.ToString();
 
-            if (month <= 6)
-            {
-                semester = "1";
-            }
-
-            else
-            {
-                semester = "2";
-            }
-
-            courseCode = string.Format("{0}{1}{2}{3}", year, semester, regionL, venueL);
-
-            //foreach (CourseInstance c in CourseInstances)
-            //{
-            //    if (c.CourseCode == courseCode)
-            //    {
-            //        //DO WORK HERE
-            //    }
-            //}
 
             return courseCode;
         }
+        
 
         #endregion
 
@@ -213,6 +196,11 @@ namespace U3A_Attendance_Model
             var session = _u3a.createSession(courseInstanceId, regionId, suburbId, venueId, locationId, date);
             _context.SaveChanges();
             return session;
+        }
+
+        public IEnumerable<ICourseInstance> AllInstances()
+        {
+            return _context.CourseInstances.ToList();
         }
 
         //Fetches a single session
@@ -248,13 +236,18 @@ namespace U3A_Attendance_Model
             _u3a.deleteSession(sessionId, courseInstanceId, regionId, action);
         }
 
-        #endregion
+        #endregion++++-
 
         #region Suburb Management
 
         public IEnumerable<ISuburb> FetchSuburbs(Guid regionId)
         {
             return _u3a.fetchSuburbs(regionId);
+        }
+
+        public IEnumerable<ISuburb> FetchSuburbsWithVenues(Guid regionId)
+        {
+            return _u3a.fetchSuburbs(regionId).Where(v => v.HasVenues);
         }
 
         #endregion

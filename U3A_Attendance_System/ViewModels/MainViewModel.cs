@@ -40,7 +40,7 @@ namespace U3A_Attendance_System.ViewModels
             settings.Title = "Edit course description";
             settings.SizeToContent = SizeToContent.Manual;
 
-            _wm.ShowWindow(new CourseDescriptionEditViewModel(cd), null, settings);
+            _wm.ShowDialog(new CourseDescriptionEditViewModel(cd), null, settings);
         }
 
 
@@ -59,7 +59,7 @@ namespace U3A_Attendance_System.ViewModels
             settings.SizeToContent = SizeToContent.Manual;
 
 
-            _wm.ShowWindow(new CourseDescriptionEditViewModel(), null, settings);
+            _wm.ShowDialog(new CourseDescriptionEditViewModel(), null, settings);
         }
 
         public void DeleteDescriptionConfirm(ICourseDescription cd)
@@ -78,8 +78,8 @@ namespace U3A_Attendance_System.ViewModels
         public void ShowVenueEdit(IVenue venue)
         {
             settings.Title = "Edit Venue";
-
-            _wm.ShowWindow(new VenueEditViewModel(venue), null, settings);
+            settings.SizeToContent = SizeToContent.Manual;
+            _wm.ShowDialog(new VenueEditViewModel(venue), null, settings);
         }
 
         public void ShowVenueCreate()

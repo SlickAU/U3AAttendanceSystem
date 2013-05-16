@@ -207,7 +207,7 @@ namespace U3A_Attendance_Model
 
         IEnumerable<ISession> ICourseInstance.Sessions
         {
-            get { return Sessions; }
+            get { return Sessions.OrderBy(d => d.Date); }
         }
     }
 }

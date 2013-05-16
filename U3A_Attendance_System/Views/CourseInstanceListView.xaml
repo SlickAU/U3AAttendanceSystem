@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="U3A_Attendance_System.Views.CourseInstanceListView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="1062">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DataGrid Name="InstancesList" HorizontalAlignment="Stretch" VerticalAlignment="Top" AutoGenerateColumns="False" Grid.Row="1" IsReadOnly="True">
+            <DataGrid.Resources>
+                <ResourceDictionary>
+                    <Style x:Key="NoFocusColumnStyle" TargetType="{x:Type DataGridCell}">
+                        <Setter Property="IsHitTestVisible" Value="False" />
+                    </Style>
+                </ResourceDictionary>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="2*" Header="Course Description Name" Binding="{Binding Path=CourseDescription.Title}" CellStyle="{StaticResource NoFocusColumnStyle}"></DataGridTextColumn>
+                <DataGridTextColumn Width="1*" Header="Region Name" Binding="{Binding Path=Region.Description}" CellStyle="{StaticResource NoFocusColumnStyle}"></DataGridTextColumn>
+                <DataGridTextColumn Width="1*" Header="Suburb Name" Binding="{Binding Path=Location.Venue.Suburb.Name}" CellStyle="{StaticResource NoFocusColumnStyle}"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Actions">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Edit" Width="80" cal:Message.Attach="ShowCIEdit($dataContext)"></Button>
+                                <Button Content="Delete" Width="80"></Button>
+                            </StackPanel>
+                        </DataTemplate>
+
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

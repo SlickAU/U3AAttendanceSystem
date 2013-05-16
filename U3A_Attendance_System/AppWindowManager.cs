@@ -20,8 +20,6 @@ namespace U3A_Attendance_System
         {
             isDialog = true;
             Window window = base.CreateWindow(rootModel, isDialog, context, settings);
-            window.Width = 300;
-            window.Height = 350;
 
             return window;
         }

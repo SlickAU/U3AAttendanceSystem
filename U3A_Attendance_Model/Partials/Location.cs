@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using U3A_Attendance_Model.Interfaces;
 
 namespace U3A_Attendance_Model
 {
-    internal partial class Location : ILocation
+    internal partial class Location : ILocation, ISearchable
     {
 
         internal Location(Guid venueId, string room)
@@ -27,5 +28,16 @@ namespace U3A_Attendance_Model
             action(this);
         }
 
+
+
+
+        public bool MeetsCritera(string keyword)
+        {
+            if (this.Room.ToLower().Trim().Contains(keyword))
+            {
+                return true; 
+            }
+            return false; 
+        }
     }
 }

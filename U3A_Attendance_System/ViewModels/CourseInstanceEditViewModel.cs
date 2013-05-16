@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,10 @@ namespace U3A_Attendance_System.ViewModels
         private IVenue _selectedVenue;
         private ILocation _selectedLocation;
         private ICoordinator _selectedCoordinator;
+
+        private string[] _members;
+        private Dictionary<Guid, string> _sessions = new Dictionary<Guid, string>();
+        private string[,] _attendance;
         #endregion
 
         #region Properties
@@ -158,11 +163,8 @@ namespace U3A_Attendance_System.ViewModels
         {
             get
             {
-
-
-
-                var sessions = _ci.Sessions;
-                _ci.Sessions.SelectMany(s => s.Attendances); 
+                //var sessions = _ci.Sessions ?? null;
+                /*_ci.Sessions.SelectMany(s => s.Attendances); 
                 var attendances = sessions.SelectMany(s => s.Attendances).ToList();
                 var members = attendances.Select(a => a.Member).Distinct().ToList();
                 int width = sessions.Count();
@@ -172,13 +174,16 @@ namespace U3A_Attendance_System.ViewModels
 
                 var x = m.ToList();
 
-
                 //if (_ci != null)
                 //{
                 //    var sessions = _facade.FetchSessions(_ci.Id, _ci.RegionId);
                 //    return (sessions == null) ? null : sessions;
-                //}
-                return sessions ?? null;
+                //}*/
+                //return sessions ?? null;
+                if (_ci != null)
+                    return _ci.Sessions;
+                else
+                    return null;
             }
             set {}
         }
@@ -187,7 +192,60 @@ namespace U3A_Attendance_System.ViewModels
         {
             get
             {
-                return Sessions.SelectMany(s => s.Attendances).Select(a => a.Member).Distinct().ToList();
+                return Sessions.SelectMany(s => s.Attendances).Select(a => a.Member).Distinct().OrderBy(m => m.MemberId).ToList();
+            }
+        }
+
+        public DataTable Attendances
+        {
+            get
+            {
+                constructMembersArray(AttendanceMemberNos);
+                constructSessionsArray(Sessions);
+
+                string[,] arr = constructAttendanceArray();
+
+                DataTable dt = new DataTable();
+
+                dt.Columns.Add("Member #", typeof(string));
+
+                int cols = arr.GetLength(0);
+
+                for (int i = 0; i < cols; i++)
+                {
+                    dt.Columns.Add(i.ToString(), typeof(string));
+                }
+
+                //Create Session Date columns (the first row)
+
+                var seshDates = _sessions.Values.ToArray();
+                string[] sessionDates = new string[seshDates.Length + 1];
+
+                sessionDates[0] = "Member No";
+
+                for (int j = 1; j < sessionDates.Length; j++)
+                {
+                    sessionDates[j] = seshDates[j - 1];
+                }
+
+                dt.Rows.Add(sessionDates);
+
+                //Create Member # and Presence Rows (Preceeding rows)
+                for (int i = 0; i < arr.GetLength(1); i++)
+                {
+                    string[] rowPresences = new string[arr.GetLength(0) + 1];
+                    rowPresences[0] = _members[i];
+                    //string[] test = { 1000, "Y", "N", "N" };
+
+                    for (int w = 1; w < rowPresences.Length; w++)
+                    {
+                        rowPresences[w] = arr[(w -1), i];
+                    }
+
+                    dt.Rows.Add(rowPresences);
+                }
+
+                return dt;
             }
         }
         #endregion
@@ -251,7 +309,7 @@ namespace U3A_Attendance_System.ViewModels
 
         public void UpdateSuburbs(Guid regionId)
         {
-            Suburbs = _facade.FetchSuburbs(regionId);
+            Suburbs = _facade.FetchSuburbsWithVenues(regionId);
             this.Refresh();
         }
 
@@ -269,6 +327,33 @@ namespace U3A_Attendance_System.ViewModels
         {
             //SelectedVenueId = venueId;
             Locations = _facade.FetchLocations(_selectedRegion.Id, _selectedSuburb.Id, venueId).ToList();
+            this.Refresh();
+        }
+
+        public void GenerateCourseCode()
+        {
+            string courseCode;
+            string semester;
+            string year = StartDate.Year.ToString().Substring(2);
+            int month = StartDate.Month;
+            string region = SelectedRegion.CodeId;
+            string venue = SelectedVenue.CodeId;
+
+            if (month <= 6)
+            {
+                semester = "1";
+            }
+
+            else
+            {
+                semester = "2";
+            }
+
+            courseCode = string.Format("{0}{1}{2}{3}", year, semester, region, venue);
+
+            _facade.CheckCourseCode(courseCode);
+
+            CourseCode = courseCode;
             this.Refresh();
         }
 
@@ -306,6 +391,47 @@ namespace U3A_Attendance_System.ViewModels
                 _facade.CreateAttendance(_ci.RegionId, _ci.Id, sesh.Id, MemberId, "");
             }*/
             
+        }
+
+
+        private void constructMembersArray(IEnumerable<IMember> members)
+        {
+            _members = new string[members.Count()];
+
+            for (int i = 0; i < _members.Length; i++)
+            {
+                _members[i] = members.ElementAt(i).MemberId.ToString();
+            }
+        }
+
+        private void constructSessionsArray(IEnumerable<ISession> sessions)
+        {
+            for (int i = 0; i < sessions.Count(); i++)
+            {
+                _sessions[sessions.ElementAt(i).Id] = sessions.ElementAt(i).Date.ToShortDateString();
+            }
+        }
+
+
+        private string[,] constructAttendanceArray()
+        {
+            _attendance = new string[_sessions.Count(), _members.Count()];
+
+            for (int i = 0; i < _sessions.Count(); i++)
+            {
+                for (int j = 0; j < _members.Length; j++)
+                {
+                    //_attendance[i, j] = Sessions.Where(s => s.Id.Equals(_sessions.ElementAt(i).Key)).SelectMany(a => a.Attendances).Where(m => m.MemberId.Equals(_members[j])).Select(m => m.Presence).SingleOrDefault().ToString();
+                    ISession session = Sessions.Where(s => s.Id.Equals(_sessions.ElementAt(i).Key)).FirstOrDefault();
+                    var attendance = session
+                        .Attendances
+                        .Where(m => m.MemberId.Equals(Convert.ToInt32 (_members[j]))).FirstOrDefault();
+                    _attendance[i, j] = (attendance != null) ? attendance.Presence : "N";
+                }
+            }
+
+            return _attendance;
+
         }
 
         

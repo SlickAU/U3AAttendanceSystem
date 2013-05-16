@@ -15,6 +15,9 @@
             <TabItem Header="Venues" HorizontalAlignment="Right">
                 <ContentControl Name="View2" />
             </TabItem>
+            <TabItem Header="Instances" HorizontalAlignment="Right">
+                <ContentControl Name="View3" />
+            </TabItem>
         </TabControl>
     </Grid>
 </UserControl>

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using U3A_Attendance_Model.Interfaces;
 
 namespace U3A_Attendance_Model
 {
-    internal partial class Member : IMember
+    internal partial class Member : IMember, ISearchable 
     {
         public Member(int memberId, Guid u3aId)
         {
@@ -36,5 +37,15 @@ namespace U3A_Attendance_Model
         } 
 
         #endregion
+
+        public bool MeetsCritera(string keyword)
+        {
+            if (this._memberid.ToString().ToLower().Trim().Contains(keyword))
+            {
+                return true; 
+            }
+
+            return false;
+        }
     }
 }

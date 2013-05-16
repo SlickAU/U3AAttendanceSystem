@@ -91,6 +91,7 @@
     <Compile Include="Interfaces\IMember.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interfaces\ISearchable.cs" />
     <Compile Include="Interfaces\ISession.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -171,6 +172,7 @@
     <Compile Include="Region.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="SearchEngine.cs" />
     <Compile Include="Session.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
