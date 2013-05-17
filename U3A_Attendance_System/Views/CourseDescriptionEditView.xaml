@@ -7,11 +7,7 @@
       WindowStartupLocation="CenterScreen" 
       SizeToContent="WidthAndHeight" 
       mc:Ignorable="d" 
-<<<<<<< HEAD
       d:DesignHeight="400" d:DesignWidth="450" Width="450" Height="400">
-=======
-      d:DesignHeight="400" d:DesignWidth="400">
->>>>>>> 616e9b6c5e5dfb122caf9a0c907610f3facb7d40
 
     <Grid>
         <Grid.ColumnDefinitions>

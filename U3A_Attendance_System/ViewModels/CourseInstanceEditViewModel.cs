@@ -163,13 +163,8 @@ namespace U3A_Attendance_System.ViewModels
         {
             get
             {
-<<<<<<< HEAD
                 //var sessions = _ci.Sessions ?? null;
                 /*_ci.Sessions.SelectMany(s => s.Attendances); 
-=======
-                var sessions = _ci.Sessions;
-                _ci.Sessions.SelectMany(s => s.Attendances); 
->>>>>>> 616e9b6c5e5dfb122caf9a0c907610f3facb7d40
                 var attendances = sessions.SelectMany(s => s.Attendances).ToList();
                 var members = attendances.Select(a => a.Member).Distinct().ToList();
                 int width = sessions.Count();
