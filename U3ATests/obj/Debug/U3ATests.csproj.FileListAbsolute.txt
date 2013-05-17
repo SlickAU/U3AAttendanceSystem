@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-C:\Users\Kevin\Documents\GitHub\U3AAttendanceSystem\U3ATests\obj\Debug\U3ATests.csprojResolveAssemblyReference.cache
-=======
-C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\U3ATests\obj\Debug\U3ATests.csprojResolveAssemblyReference.cache
->>>>>>> 76c1a4f794054e581fb68e86977e33c5974e1252

@@ -1,8 +1,0 @@
-C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3A_Attendance_Model\bin\Debug\U3A_Attendance_Model.dll.config
-C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3A_Attendance_Model\bin\Debug\U3A_Attendance_Model.dll
-C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3A_Attendance_Model\bin\Debug\U3A_Attendance_Model.pdb
-C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3A_Attendance_Model\bin\Debug\EntityFramework.dll
-C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3A_Attendance_Model\bin\Debug\EntityFramework.xml
-C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3A_Attendance_Model\obj\Debug\U3A_Attendance_Model.dll
-C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3A_Attendance_Model\obj\Debug\U3A_Attendance_Model.pdb
-C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3A_Attendance_Model\obj\Debug\U3A_Attendance_Model.csprojResolveAssemblyReference.cache
