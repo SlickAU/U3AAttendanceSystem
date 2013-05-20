@@ -1,43 +1,49 @@
-﻿<UserControl x:Class="U3A_Attendance_System.Views.VenueEditView"
+﻿<Window x:Class="U3A_Attendance_System.Views.VenueEditView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:cal="http://www.caliburnproject.org"
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-            Height="350" Width="550">
+            Height="370" Width="550">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="250" />
         </Grid.ColumnDefinitions>
-        <GroupBox  Grid.Column="0" Header="Venue Management">
+        <GroupBox  Grid.Column="0" Height="370" Header="Venue Management">
          
             <Grid>
 
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
                     <RowDefinition Height="50" />
-                    <RowDefinition Height="30" />
-                    <RowDefinition  Height="30"/>
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="30" />
+                    <RowDefinition  Height="50"/>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
                     <RowDefinition Height="50" />
                 </Grid.RowDefinitions>
-
-                <TextBox Name="VenueName" HorizontalAlignment="Left"  Text="Name" TextWrapping="Wrap" VerticalAlignment="Top" Width="198" Grid.Row="1" />
-                <TextBox Name="Address" HorizontalAlignment="Left" Text="Address" TextWrapping="Wrap" VerticalAlignment="Top" Width="198" Grid.Row="2" />
-                <TextBox Name="CodeId" HorizontalAlignment="Left" Text="Code" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"  Grid.Row="3" />
+                <Label Content="Venue Name" Margin="0,19,151,32" Grid.RowSpan="2"></Label>
+                <TextBox Name="VenueName" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="198" Grid.Row="1" />
+                <Label Content="Address" Margin="0,26,177,1" Grid.Row="1"/>
+                <TextBox Name="Address" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="198" Grid.Row="2" />
+                <Label Content="Code" Margin="0,26,177,1" Grid.Row="2"/>
+                <TextBox Name="CodeId" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="198"  Grid.Row="3" />
+                <Label Content="Region" Margin="0,27,177,0" Grid.Row="3"/>
                 <ComboBox Name="Regions" DisplayMemberPath="Description" SelectedValuePath="Id" cal:Message.Attach="UpdateSuburbs(Regions.SelectedValue)" Width="198" Grid.Row="4" VerticalAlignment="Top" HorizontalAlignment="Left"   />
+                <Label Content="Suburb" Margin="0,27,177,0" Grid.Row="4"/>
                 <ComboBox Name="Suburbs" DisplayMemberPath="Name" SelectedValuePath="Id" IsEnabled="{Binding Path=IsSuburbsEnabled}" Grid.Row="5"  Width="198" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                 <Button  Name="Update" Content="Save" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="75" Margin="0,51,0,-21"  Grid.Column="0" Grid.Row="5"/>
 
 
             </Grid>
         </GroupBox>
-        <GroupBox Header="Location Management" Grid.Column="1" Margin="38,0,-38,0" IsEnabled="{Binding Path=IsLocationManagementEnabled}">
+        <GroupBox Height="370" Header="Location Management" Grid.Column="1" Margin="38,0,-38,0" IsEnabled="{Binding Path=IsLocationManagementEnabled}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50" />
                     <RowDefinition Height="30" />
+                    <RowDefinition Height="40"/>
+                    <RowDefinition />
                     <RowDefinition />
 
                 </Grid.RowDefinitions>
@@ -47,10 +53,14 @@
                     <ColumnDefinition Width="25"/>
                 </Grid.ColumnDefinitions>
                 
-                <TextBox Name="RoomName" Text="Room" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top"  Width="200" HorizontalAlignment="Left"></TextBox>
+                <Label Content="Room Name" Margin="0,29,131,20" Grid.RowSpan="2"></Label>
+                <TextBox Name="RoomName" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top"  Width="200" HorizontalAlignment="Left"></TextBox>
                 <Button Content="+" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" cal:Message.Attach="UpdateLocations"></Button>
-                <ListBox Name="ListOfLocations" Grid.Row="2" Grid.Column="0" Margin="0,0,14,178" />
+                <Label Content="Rooms"  Grid.Row="2" Margin="0,15,149,109" Grid.RowSpan="2"/>
+                <ListBox Name="ListOfLocations"  DisplayMemberPath="Room" SelectedValuePath="Id" Grid.Row="3" Grid.Column="0" Height="80" VerticalAlignment="Top" />
+                <Button Content="Delete" Grid.Row="5" Height="25" Width="75" HorizontalAlignment="Left" VerticalAlignment="Top" cal:Message.Attach="DeleteLocation(ListOfLocations.SelectedValue)"></Button>
+                <Button Name="ClearListOfLocations" Content="Clear List" Grid.Row="5" Height="25" Width="75" VerticalAlignment="Top" HorizontalAlignment="Right"> </Button>
             </Grid>
         </GroupBox>
     </Grid>
-</UserControl>
+</Window>

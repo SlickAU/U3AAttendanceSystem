@@ -83,6 +83,9 @@ namespace U3A_Attendance_System.ViewModels
             Regions = _facade.FetchRegions().ToList();
             ListOfLocations = existingVenue.Locations;
             Rooms = ListOfLocations.Select(l => l.Room).ToList();
+            SelectedRegion = Regions.Where(r => r.Id.Equals(existingVenue.RegionId)).FirstOrDefault();
+            Suburbs = _facade.FetchSuburbs(SelectedRegion.Id);
+            SelectedSuburb = Suburbs.Where(s => s.RegionId.Equals(SelectedRegion.Id)).FirstOrDefault();
         }
         //--------------------------------------
         #endregion
@@ -98,6 +101,21 @@ namespace U3A_Attendance_System.ViewModels
         {
             get { return !(existingVenue == null); }
         }
+
+        public void DeleteLocation(Guid locationId)
+        {
+            _facade.DeleteLocation(SelectedRegion.Id, SelectedSuburb.Id, existingVenue.Id, locationId);
+            this.Refresh();
+        }
+
+        public void ClearListOfLocations()
+        {
+            foreach (var l in ListOfLocations)
+            {
+                _facade.DeleteLocation(SelectedRegion.Id, SelectedSuburb.Id, existingVenue.Id, l.Id);
+            }
+        }
+
         public void UpdateLocations()
         {
             List<ILocation> list = new List<ILocation>();

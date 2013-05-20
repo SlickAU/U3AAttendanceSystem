@@ -18,7 +18,7 @@ namespace U3A_Attendance_System.Views
     /// <summary>
     /// Interaction logic for VenueEditView.xaml
     /// </summary>
-    public partial class VenueEditView : UserControl
+    public partial class VenueEditView : Window
     {
         public VenueEditView()
         {
