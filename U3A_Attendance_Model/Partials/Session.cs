@@ -13,15 +13,27 @@ namespace U3A_Attendance_Model
         {
             Date = date;
             CourseInstanceId = courseInstanceId;
-            LocationId = locationId;    
+            LocationId = locationId;
+            Attendances = new List<Attendance>();
         }
 
         #region Attendance Management
 
         internal Attendance createAttendance(Member member, string presence)
         {
-            var attendance = new Attendance(member, presence, this);
-            this.Attendances.Add(attendance);
+            //Check for existing attendance record,
+            //If exists, update
+            var attendance = this.Attendances.Where(m => m.MemberId.Equals(member.MemberId)).FirstOrDefault();
+
+            if (attendance != null)
+            {
+                attendance.update(member, presence, this);
+            }
+            else
+            {
+                attendance = new Attendance(member, presence, this);
+                this.Attendances.Add(attendance);
+            }
             return attendance;
         }
 

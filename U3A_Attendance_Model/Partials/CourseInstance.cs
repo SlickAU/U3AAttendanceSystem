@@ -36,6 +36,7 @@ namespace U3A_Attendance_Model
             CoordinatorId = coordinator.Id;
             DefaultLocationId = location.Id;
             CourseCode = courseCode;
+            Sessions = new List<Session>();
 
             if (startDate > DateTime.Today)
             {
@@ -208,6 +209,12 @@ namespace U3A_Attendance_Model
         IEnumerable<ISession> ICourseInstance.Sessions
         {
             get { return Sessions.OrderBy(d => d.Date); }
+        }
+
+
+        ICourseDescription ICourseInstance.CourseDescription
+        {
+            get { return CourseDescription; }
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
 using U3A_Attendance_Model;
+using U3A_Attendance_System.Views;
 
 namespace U3A_Attendance_System.ViewModels
 {
@@ -30,7 +31,14 @@ namespace U3A_Attendance_System.ViewModels
         #region Properties
         //Course Instance Specific Properties
 
-        public string CDTitle { get; set; }
+        public string CDTitle
+        {
+            get
+            {
+                return _cd.Title;
+            }
+            set {}
+        }
         public string CourseCode { get; set; }
         public DateTime StartDate { get; set; }
         public IEnumerable<IRegion> Regions
@@ -188,11 +196,28 @@ namespace U3A_Attendance_System.ViewModels
             set {}
         }
 
-        public IEnumerable<IMember> AttendanceMemberNos
+        public bool IsAttendanceEnabled
         {
             get
             {
-                return Sessions.SelectMany(s => s.Attendances).Select(a => a.Member).Distinct().OrderBy(m => m.MemberId).ToList();
+                return (_ci != null && _ci.Sessions.Count() > 0);
+            }
+            set { }
+        }
+
+        public IEnumerable<IMember> AttendanceMembers
+        {
+            get
+            {
+                try
+                {
+                    return Sessions.SelectMany(s => s.Attendances).Select(a => a.Member).Distinct().OrderBy(m => m.MemberId).ToList();
+                }
+                catch (Exception e)
+                {
+
+                }
+                return null;
             }
         }
 
@@ -200,52 +225,59 @@ namespace U3A_Attendance_System.ViewModels
         {
             get
             {
-                constructMembersArray(AttendanceMemberNos);
-                constructSessionsArray(Sessions);
-
-                string[,] arr = constructAttendanceArray();
-
-                DataTable dt = new DataTable();
-
-                dt.Columns.Add("Member #", typeof(string));
-
-                int cols = arr.GetLength(0);
-
-                for (int i = 0; i < cols; i++)
+                if (AttendanceMembers != null && AttendanceMembers.Count() > 0)
                 {
-                    dt.Columns.Add(i.ToString(), typeof(string));
-                }
+                    constructMembersArray(AttendanceMembers);
+                    constructSessionsArray(Sessions);
 
-                //Create Session Date columns (the first row)
+                    string[,] arr = constructAttendanceArray();
 
-                var seshDates = _sessions.Values.ToArray();
-                string[] sessionDates = new string[seshDates.Length + 1];
+                    DataTable dt = new DataTable();
 
-                sessionDates[0] = "Member No";
+                    dt.Columns.Add("Member #", typeof(string));
 
-                for (int j = 1; j < sessionDates.Length; j++)
-                {
-                    sessionDates[j] = seshDates[j - 1];
-                }
+                    int cols = arr.GetLength(0);
 
-                dt.Rows.Add(sessionDates);
-
-                //Create Member # and Presence Rows (Preceeding rows)
-                for (int i = 0; i < arr.GetLength(1); i++)
-                {
-                    string[] rowPresences = new string[arr.GetLength(0) + 1];
-                    rowPresences[0] = _members[i];
-                    //string[] test = { 1000, "Y", "N", "N" };
-
-                    for (int w = 1; w < rowPresences.Length; w++)
+                    for (int i = 0; i < cols; i++)
                     {
-                        rowPresences[w] = arr[(w -1), i];
+                        dt.Columns.Add(i.ToString(), typeof(string));
                     }
 
-                    dt.Rows.Add(rowPresences);
-                }
+                    //Create Session Date columns (the first row)
 
-                return dt;
+                    var seshDates = _sessions.Values.ToArray();
+                    string[] sessionDates = new string[seshDates.Length + 1];
+
+                    sessionDates[0] = "Member No";
+
+                    for (int j = 1; j < sessionDates.Length; j++)
+                    {
+                        sessionDates[j] = seshDates[j - 1];
+                    }
+
+                    dt.Rows.Add(sessionDates);
+
+                    //Create Member # and Presence Rows (Preceeding rows)
+                    for (int i = 0; i < arr.GetLength(1); i++)
+                    {
+                        string[] rowPresences = new string[arr.GetLength(0) + 1];
+                        rowPresences[0] = _members[i];
+                        //List<Object> rowPresences = new List<Object>();
+                        //rowPresences.Add(_members[i]);
+                        //string[] test = { 1000, "Y", "N", "N" };
+
+                        for (int w = 1; w < sessionDates.Length; w++)
+                        {
+                            rowPresences[w] = arr[(w - 1), i];
+                            //rowPresences.Add(new EditPresence(arr[(w - 1), i]));
+                        }
+
+                        dt.Rows.Add(rowPresences.ToArray());
+                    }
+
+                    return dt;
+                }
+                return null;
             }
         }
         #endregion
@@ -284,7 +316,6 @@ namespace U3A_Attendance_System.ViewModels
             SessionStartDate = DateTime.Now;
 
             _cd = cd;
-            CDTitle = cd.Title;
         }
 
         public CourseInstanceEditViewModel(ICourseInstance ci)
@@ -297,7 +328,7 @@ namespace U3A_Attendance_System.ViewModels
             SessionStartDate = DateTime.Now;
 
             _ci = ci;
-            //CISessions = ci.CourseSessions;
+            _cd = ci.CourseDescription;
             CourseCode = ci.CourseCode;
             StartDate = ci.StartDate;
             SelectedRegion = Regions.Where(reg => reg.Id.Equals(ci.RegionId)).FirstOrDefault();
@@ -385,6 +416,7 @@ namespace U3A_Attendance_System.ViewModels
         public void AddAttendance()
         {
             _facade.CreateAttendance(_ci.RegionId, _ci.Id, SessionOfAttendance.Id, MemberId, SelectedPresence.ToString());
+            this.Refresh();
 
             /*foreach (ISession sesh in Sessions)
             {

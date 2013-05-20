@@ -19,5 +19,6 @@ namespace U3A_Attendance_Model
         Guid SuburbId { get; }
         Guid VenueId { get; }
         IEnumerable<ISession> Sessions { get; }
+        ICourseDescription CourseDescription { get; }
     }
 }

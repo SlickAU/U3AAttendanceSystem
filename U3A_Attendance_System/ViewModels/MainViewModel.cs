@@ -21,7 +21,6 @@ namespace U3A_Attendance_System.ViewModels
 
         public MainViewModel()
         {
-            //ShowCDList();
             ShowTabbedView();
         }
         
@@ -88,7 +87,7 @@ namespace U3A_Attendance_System.ViewModels
            // settings.SizeToContent = SizeToContent.Manual;
 
 
-            _wm.ShowWindow(new VenueEditViewModel(), null, settings);
+            _wm.ShowDialog(new VenueEditViewModel(), null, settings);
         }
 
     }
