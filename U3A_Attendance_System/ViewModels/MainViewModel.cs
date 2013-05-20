@@ -77,7 +77,7 @@ namespace U3A_Attendance_System.ViewModels
         public void ShowVenueEdit(IVenue venue)
         {
             settings.Title = "Edit Venue";
-            settings.SizeToContent = SizeToContent.Manual;
+            //settings.SizeToContent = SizeToContent.Manual;
             _wm.ShowDialog(new VenueEditViewModel(venue), null, settings);
         }
 

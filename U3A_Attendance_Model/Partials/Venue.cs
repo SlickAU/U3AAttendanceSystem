@@ -80,5 +80,11 @@ namespace U3A_Attendance_Model
         {
             get { return Locations; }
         }
+
+
+        public Guid RegionId
+        {
+            get { return Suburb.RegionId; }
+        }
     }
 }
