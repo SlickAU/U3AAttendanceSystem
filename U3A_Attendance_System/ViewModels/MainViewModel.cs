@@ -19,6 +19,7 @@ namespace U3A_Attendance_System.ViewModels
         private AppWindowManager _wm = new AppWindowManager();
         dynamic settings = new ExpandoObject();
 
+
         public MainViewModel()
         {
             ShowTabbedView();

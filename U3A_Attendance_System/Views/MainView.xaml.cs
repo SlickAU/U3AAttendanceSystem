@@ -24,6 +24,7 @@ namespace U3A_Attendance_System.Views
         {
             InitializeComponent();
             this.WindowState = System.Windows.WindowState.Maximized;
+            this.Title = "U3A Attendance";
         }
     }
 }

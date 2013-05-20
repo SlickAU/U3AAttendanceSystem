@@ -4,28 +4,20 @@
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-<<<<<<< HEAD
              WindowStyle="None"
              WindowStartupLocation="CenterScreen" 
              SizeToContent="WidthAndHeight" 
-             Height="350" Width="550">
-=======
-            Height="370" Width="550">
->>>>>>> aca2e1cee63edf76c6d136e9dea67f916aca56b2
+             Height="370" Width="550">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="250" />
         </Grid.ColumnDefinitions>
-<<<<<<< HEAD
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
-        <GroupBox  Grid.Column="0" Header="Venue Management">
-=======
         <GroupBox  Grid.Column="0" Height="370" Header="Venue Management">
->>>>>>> aca2e1cee63edf76c6d136e9dea67f916aca56b2
          
             <Grid>
 
