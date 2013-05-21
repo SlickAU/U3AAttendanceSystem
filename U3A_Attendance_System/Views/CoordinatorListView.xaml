@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="U3A_Attendance_System.Views.CoordinatorListView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="1062">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button Content="Create Coordinator" Width="200" VerticalAlignment="Center" HorizontalAlignment="Left" cal:Message.Attach="ShowCoordinatorCreate()"/>
+        <DataGrid Name="Coordinators" HorizontalAlignment="Stretch" VerticalAlignment="Top" AutoGenerateColumns="False" Grid.Row="1" IsReadOnly="True">
+            <DataGrid.Resources>
+                <ResourceDictionary>
+                    <Style x:Key="NoFocusColumnStyle" TargetType="{x:Type DataGridCell}">
+                        <Setter Property="IsHitTestVisible" Value="False" />
+                    </Style>
+                </ResourceDictionary>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="1*" Header="Coordinator Name" Binding="{Binding Name}" CellStyle="{StaticResource NoFocusColumnStyle}"></DataGridTextColumn>
+                <DataGridTextColumn Width="1*" Header="Phone Number" Binding="{Binding Phone}" CellStyle="{StaticResource NoFocusColumnStyle}"></DataGridTextColumn>
+                <DataGridTextColumn Width="1*" Header="Email" Binding="{Binding Email}" CellStyle="{StaticResource NoFocusColumnStyle}"></DataGridTextColumn>
+                <DataGridTemplateColumn Header="Actions">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Edit" Width="80" cal:Message.Attach="ShowCoordinatorEdit($dataContext)"></Button>
+                                <Button Content="Delete" Width="80" cal:Message.Attach="ShowCoordinatorDelete($dataContext)"></Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
