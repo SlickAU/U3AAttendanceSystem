@@ -14,5 +14,6 @@ namespace U3A_Attendance_Model
         int PostCode { get; }
         string Description { get; }
         bool HasVenues { get; }
+        IEnumerable<IVenue> Venues { get; }
     }
 }

@@ -8,6 +8,15 @@ namespace U3A_Attendance_Model
 {
     internal partial class Suburb : ISuburb
     {
+        public Suburb(Guid regionId, string name, int postcode, string description)
+        {
+            RegionId = regionId;
+            Name = name;
+            PostCode = postcode;
+            Description = description;
+            Venues = new List<Venue>();
+        }
+
         public bool HasVenues
         {
             get
@@ -98,5 +107,14 @@ namespace U3A_Attendance_Model
 
         #endregion
 
+
+
+
+
+
+        IEnumerable<IVenue> ISuburb.Venues
+        {
+            get { return Venues; }
+        }
     }
 }

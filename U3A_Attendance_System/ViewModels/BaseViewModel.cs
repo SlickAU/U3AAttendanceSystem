@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 using U3A_Attendance_Model;
 using Caliburn.Micro;
 using System.ComponentModel.Composition;
+using U3A_Attendance_System.Validation;
 
 namespace U3A_Attendance_System.ViewModels
 {
- 
-    public abstract class BaseViewModel : PropertyChangedBase
+
+    public abstract class BaseViewModel : ValidatingScreen<BaseViewModel>
     {
         #region Members
 
@@ -22,8 +23,6 @@ namespace U3A_Attendance_System.ViewModels
         #region Properties
    
         #endregion
-
-
 
     }
 }

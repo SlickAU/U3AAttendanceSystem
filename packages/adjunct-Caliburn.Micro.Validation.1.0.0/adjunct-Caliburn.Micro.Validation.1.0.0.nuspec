@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>adjunct-Caliburn.Micro.Validation</id>
+    <version>1.0.0</version>
+    <title>Caliburn.Micro.Validation</title>
+    <authors>Eddie Garmon,  Bill Seddon</authors>
+    <owners>Eddie Garmon,  Bill Seddon</owners>
+    <licenseUrl>http://adjunct.codeplex.com/license</licenseUrl>
+    <projectUrl>http://adjunct.codeplex.com/</projectUrl>
+    <iconUrl>http://download.codeplex.com/Download?ProjectName=adjunct&amp;DownloadId=301256&amp;Build=18301</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>ValidatingScreen for CaliburnMicro</description>
+    <summary>ValidatingScreen for CaliburnMicro</summary>
+    <releaseNotes />
+    <copyright />
+    <language />
+    <tags>Adjunct Validation Caliburn Micro</tags>
+    <dependencies>
+      <dependency id="Caliburn.Micro" version="1.2.0" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.ComponentModel.DataAnnotations" targetFramework="" />
+    </frameworkAssemblies>
+    <references />
+  </metadata>
+</package>
