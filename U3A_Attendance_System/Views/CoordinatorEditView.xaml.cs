@@ -10,26 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace U3A_Attendance_System.Views
 {
     /// <summary>
-    /// Interaction logic for VenueEditView.xaml
+    /// Interaction logic for CoordinatorEditView.xaml
     /// </summary>
-    public partial class VenueEditView : Window
+    public partial class CoordinatorEditView : Window
     {
-        public VenueEditView()
+        public CoordinatorEditView()
         {
             InitializeComponent();
         }
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
+        private void Update_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
-
     }
 }

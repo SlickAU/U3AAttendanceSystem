@@ -99,5 +99,11 @@ namespace U3A_Attendance_Model
         {
             get { return Attendances; }
         }
+
+
+        ILocation ISession.Location
+        {
+            get { return Location; }
+        }
     }
 }

@@ -1,9 +1,13 @@
-﻿using System;
+﻿using Caliburn.Micro;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using U3A_Attendance_Model;
+using U3A_Attendance_System.Validation;
 
 namespace U3A_Attendance_System.ViewModels
 {
@@ -18,10 +22,11 @@ namespace U3A_Attendance_System.ViewModels
         private IVenue existingVenue;
         //--------------------------------------
         #endregion
-
+        private string name;
         #region Properties
         //--------------------------------------
-        public string VenueName { get; set; }
+       [Required(ErrorMessage="Name Required")]
+        public string VenueName { get { return name; } set { name = value; NotifyOfPropertyChange(() => VenueName); } }
         public string Address { get; set; }
         public string CodeId { get; set; }
         public IEnumerable<ISuburb> Suburbs { get; set; }
@@ -85,7 +90,7 @@ namespace U3A_Attendance_System.ViewModels
             Rooms = ListOfLocations.Select(l => l.Room).ToList();
             SelectedRegion = Regions.Where(r => r.Id.Equals(existingVenue.RegionId)).FirstOrDefault();
             Suburbs = _facade.FetchSuburbs(SelectedRegion.Id);
-            SelectedSuburb = Suburbs.Where(s => s.RegionId.Equals(SelectedRegion.Id)).FirstOrDefault();
+            SelectedSuburb = Suburbs.Where(s => s.Id.Equals(existingVenue.SuburbId)).FirstOrDefault();
         }
         //--------------------------------------
         #endregion
@@ -94,7 +99,13 @@ namespace U3A_Attendance_System.ViewModels
 
         #region Location Manegement
         //--------------------------------------
-        public IEnumerable<ILocation> ListOfLocations { get; set; }
+   
+        private IEnumerable<ILocation> _listOfLocations { get; set; }
+        public IEnumerable<ILocation> ListOfLocations
+        {
+            get { return _listOfLocations; }
+            set { _listOfLocations = value; NotifyOfPropertyChange("ListOfLocations"); }
+        }
         public List<string> Rooms { get; set; }
         public string RoomName { get; set; }
         public Boolean IsLocationManagementEnabled
@@ -105,29 +116,40 @@ namespace U3A_Attendance_System.ViewModels
         public void DeleteLocation(Guid locationId)
         {
             _facade.DeleteLocation(SelectedRegion.Id, SelectedSuburb.Id, existingVenue.Id, locationId);
+         //  ListOfLocations.ToList().Remove(ListOfLocations.Where(l => l.Id.Equals(locationId)).FirstOrDefault());
             this.Refresh();
         }
 
         public void ClearListOfLocations()
         {
-            foreach (var l in ListOfLocations)
-            {
-                _facade.DeleteLocation(SelectedRegion.Id, SelectedSuburb.Id, existingVenue.Id, l.Id);
+            //Not working properly e.g. leaves some of the locations undeleted from first try
+           for (int i = 0; i < ListOfLocations.Count(); i++)
+           {
+              _facade.DeleteLocation(SelectedRegion.Id, SelectedSuburb.Id, existingVenue.Id, ListOfLocations.ToArray()[i].Id);
+              ListOfLocations.ToList().RemoveAt(i);
             }
+           this.Refresh();
         }
 
         public void UpdateLocations()
         {
             List<ILocation> list = new List<ILocation>();
-
-            if (RoomName != null)
+            
+            if (existingVenue.Locations.Count() == 0)
             {
-                //list.Add(RoomName);
-                //ListOfLocations = list;
                 list.Add(_facade.CreateLocation(_selectedRegion.Id, existingVenue.SuburbId, existingVenue.Id, RoomName));
             }
-
+            else
+            {
+                if (RoomName != null)
+                {
+                    list = ListOfLocations.ToList();
+                    list.Add(_facade.CreateLocation(_selectedRegion.Id, existingVenue.SuburbId, existingVenue.Id, RoomName));
+                }
+            }
+          
             ListOfLocations = list.AsEnumerable();
+
 
 
             this.Refresh();
@@ -144,9 +166,17 @@ namespace U3A_Attendance_System.ViewModels
         }
         public void Update()
         {
-            existingVenue = _facade.CreateVenue(_selectedRegion.Id, _selectedSuburb.Id, VenueName, Address, CodeId);
-            this.Refresh();
+            try
+            {
+                existingVenue = _facade.CreateVenue(_selectedRegion.Id, _selectedSuburb.Id, VenueName.Trim(), Address.Trim(), CodeId.Trim());
+                this.Refresh();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message.ToString());
+            }
         }
+
         //--------------------------------------
         #endregion
 

@@ -43,7 +43,6 @@ namespace U3A_Attendance_System.ViewModels
             _wm.ShowDialog(new CourseDescriptionEditViewModel(cd), null, settings);
         }
 
-
         //TODO: For some reason it can distinquish between paramater types...
         public void ShowCIEdit(Object obj)
         {
@@ -64,10 +63,8 @@ namespace U3A_Attendance_System.ViewModels
 
         public void DeleteDescriptionConfirm(ICourseDescription cd)
         {
-            if (MessageBox.Show("Really delete?", "Confirm delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (MessageBox.Show("Are you sure you want to delete this Course?", "Confirm delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 _facade.DeleteCourseDescription(cd.Id);
-
-
         }
 
         public void ShowTabbedView()
@@ -78,18 +75,37 @@ namespace U3A_Attendance_System.ViewModels
         public void ShowVenueEdit(IVenue venue)
         {
             settings.Title = "Edit Venue";
-            //settings.SizeToContent = SizeToContent.Manual;
             _wm.ShowDialog(new VenueEditViewModel(venue), null, settings);
         }
 
         public void ShowVenueCreate()
         {
             settings.Title = "Create Venue";
-           // settings.SizeToContent = SizeToContent.Manual;
-
-
             _wm.ShowDialog(new VenueEditViewModel(), null, settings);
         }
 
+        public void ShowCoordinatorEdit(ICoordinator coordinator)
+        {
+            settings.Title = "Edit Coordinator";
+            _wm.ShowDialog(new CoordinatorEditViewModel(coordinator), null, settings);
+        }
+
+        public void ShowCoordinatorCreate()
+        {
+            settings.Title = "Create Coordinator";
+            _wm.ShowDialog(new CoordinatorEditViewModel(), null, settings);
+        }
+
+        public void ShowCoordinatorDelete(ICoordinator coordinator)
+        {
+            if (MessageBox.Show("Are you sure you want to delete this Coordinator?", "Confirm delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                _facade.DeleteCoordinator(coordinator.Id);
+        }
+
+        public void ShowCISessionEdit(ISession session)
+        {
+            settings.Title = "Edit Session";
+            _wm.ShowDialog(new CourseInstanceSessionEditViewModel(session), null, settings);
+        }
     }
 }

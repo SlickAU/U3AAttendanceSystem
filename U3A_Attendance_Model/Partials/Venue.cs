@@ -15,6 +15,7 @@ namespace U3A_Attendance_Model
             Address = address;
             CodeId = codeId;
             SuburbId = suburbId;
+            Locations = new List<Location>();
         }
 
         internal Venue update(string name, string address, string codeId)

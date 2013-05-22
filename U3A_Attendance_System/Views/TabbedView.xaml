@@ -9,14 +9,17 @@
         xmlns:userControls="a">
     <Grid>
         <TabControl>
-            <TabItem Header="Course Descriptions" HorizontalAlignment="Right" >
+            <TabItem Header="Courses" HorizontalAlignment="Right" >
                 <ContentControl Name="View1"/>
-                    </TabItem>
+                    </TabItem>            
+            <TabItem Header="Active Courses" HorizontalAlignment="Right">
+                <ContentControl Name="View3" />
+            </TabItem>
             <TabItem Header="Venues" HorizontalAlignment="Right">
                 <ContentControl Name="View2" />
             </TabItem>
-            <TabItem Header="Instances" HorizontalAlignment="Right">
-                <ContentControl Name="View3" />
+            <TabItem Header="Coordinators" HorizontalAlignment="Right">
+                <ContentControl Name="View4" />
             </TabItem>
         </TabControl>
     </Grid>
