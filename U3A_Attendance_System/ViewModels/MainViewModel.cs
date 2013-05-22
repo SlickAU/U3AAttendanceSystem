@@ -102,5 +102,10 @@ namespace U3A_Attendance_System.ViewModels
                 _facade.DeleteCoordinator(coordinator.Id);
         }
 
+        public void ShowCISessionEdit(ISession session)
+        {
+            settings.Title = "Edit Session";
+            _wm.ShowDialog(new CourseInstanceSessionEditViewModel(session), null, settings);
+        }
     }
 }
