@@ -105,5 +105,11 @@ namespace U3A_Attendance_Model
         {
             get { return CourseInstance; }
         }
+
+
+        ILocation ISession.Location
+        {
+            get { return Location; }
+        }
     }
 }

@@ -11,7 +11,6 @@ namespace U3A_Attendance_System.ViewModels
 
     public class CourseInstanceSessionEditViewModel : BaseViewModel
     {
-        public string SessionDate { get; set; }
         public IEnumerable<IVenue> Venues { get; set; }
         public IVenue Venue { get; set; }
         public IEnumerable<ILocation> Locations { get; set; }
@@ -21,19 +20,26 @@ namespace U3A_Attendance_System.ViewModels
         public DateTime SelectedDate { get; set; }
         public IVenue SelectedVenue { get; set; }
         public ILocation SelectedLocation { get; set; }
+        public ISession CurrentSession { get; set; }
 
+        //Constructor
         public CourseInstanceSessionEditViewModel(ISession session)
         {
-            SelectedDate = Convert.ToDateTime(session.Date.ToShortDateString());
+            SelectedDate = session.Date.Date;
             Venues = _facade.FetchAllVenues().Where(v => v.RegionId.Equals(session.Location.Venue.RegionId));
             Venue = session.Location.Venue;
             Locations = Venue.Locations;
             Location = session.Location;
+            CurrentSession = session;
+
+
+            settings.Title = "Edit Session";
+            _wm.ShowDialog(this, null, settings);
         }
 
         public void Save()
         {
-            _facade.UpdateSession(currentSession.Id, SelectedLocation.Id, SelectedDate, currentSession.VisitorCount, currentSession.CourseInstanceId, SelectedVenue.RegionId);
+            _facade.UpdateSession(CurrentSession.Id, SelectedLocation.Id, SelectedDate, CurrentSession.VisitorCount, CurrentSession.CourseInstanceId, SelectedVenue.RegionId);
         }
     }
 }

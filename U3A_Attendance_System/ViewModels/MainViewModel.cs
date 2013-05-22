@@ -36,6 +36,11 @@ namespace U3A_Attendance_System.ViewModels
             ActivateItem(new CourseDescriptionInstancesViewModel(cd));
         }
 
+        public void ShowCISessionEdit(ISession session)
+        {
+            new CourseInstanceSessionEditViewModel(session);
+        }
+
         public void DeleteDescriptionConfirm(ICourseDescription cd)
         {
             if (MessageBox.Show("Really delete?", "Confirm delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)

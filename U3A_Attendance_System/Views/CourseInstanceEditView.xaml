@@ -126,7 +126,7 @@
                             </Grid.RowDefinitions>
                             <Label Content="Session" Grid.Row="0" Grid.Column="0" />
                             <ComboBox Name="EditSession" ItemsSource="{Binding Sessions}" ItemStringFormat="{}{0:dd/MM}" DisplayMemberPath="Date" Grid.Row="1" Grid.Column="0" />
-                            <Button Content="Edit" Grid.Row="1" Grid.Column="1" />
+                            <Button Content="Edit" cal:Message.Attach="ShowCISessionEdit(EditSession.SelectedValue)" Grid.Row="1" Grid.Column="1" />
                             <Button cal:Message.Attach="DeleteSession(EditSession.SelectedValue)" Content="Delete" Grid.Row="1" Grid.Column="2" />
                         </Grid>
                     </GroupBox>

@@ -77,6 +77,7 @@
     <Compile Include="ViewModels\CourseDescriptionInstancesViewModel.cs" />
     <Compile Include="ViewModels\CourseInstanceEditViewModel.cs" />
     <Compile Include="ViewModels\CourseInstanceListViewModel.cs" />
+    <Compile Include="ViewModels\CourseInstanceSessionEditViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\TabbedViewModel.cs" />
     <Compile Include="ViewModels\VenueEditViewModel.cs" />
@@ -96,6 +97,9 @@
     </Compile>
     <Compile Include="Views\CourseInstanceListView.xaml.cs">
       <DependentUpon>CourseInstanceListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CourseInstanceSessionEditView.xaml.cs">
+      <DependentUpon>CourseInstanceSessionEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EditPresence.xaml.cs">
       <DependentUpon>EditPresence.xaml</DependentUpon>
@@ -168,6 +172,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\CourseInstanceListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CourseInstanceSessionEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
