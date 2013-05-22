@@ -11,6 +11,5 @@ namespace U3A_Attendance_Model
         Guid Id { get; }
         string Room { get; }
         Guid VenueId { get; }
-        IVenue Venue { get; }
     }
 }

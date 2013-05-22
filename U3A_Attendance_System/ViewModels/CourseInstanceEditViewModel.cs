@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Documents;
 using U3A_Attendance_Model;
 using U3A_Attendance_System.Views;
@@ -166,6 +167,21 @@ namespace U3A_Attendance_System.ViewModels
                 return SessionStartDate.DayOfWeek.ToString();
             }
         }
+
+        public Dictionary<string, int> SessionFrequency
+        {
+            get
+            {
+                var freqs = new Dictionary<string, int>();
+                freqs.Add("", 0);
+                freqs.Add("Weekly", 1);
+                freqs.Add("Fortnightly", 2);
+                freqs.Add("Monthly", 3);
+
+                return freqs;
+            }
+        }
+        public int SessionOccurances { get; set; }
 
         public IEnumerable<ISession> Sessions
         {
@@ -404,11 +420,74 @@ namespace U3A_Attendance_System.ViewModels
 
         //Session Management
 
-        public void CreateSession()
+        public void CreateSession(int frequency)
         {
-            _facade.CreateSession(_ci.Id, _ci.RegionId, SelectedSuburb.Id, SelectedVenue.Id, _ci.DefaultLocationId, SessionStartDate);
-            _ci = _facade.FetchCourseInstance(_ci.Id, _ci.RegionId);
+
+            if (frequency != 0 && SessionOccurances != 0)
+            {
+                DateTime newSession = SessionStartDate;
+
+                for (int i = 0; i < SessionOccurances; i++)
+                {
+                    if (i == 0)
+                        _facade.CreateSession(_ci.Id, _ci.RegionId, SelectedSuburb.Id, SelectedVenue.Id, _ci.DefaultLocationId, SessionStartDate);
+                    else
+                    {
+                        switch (frequency)
+                        {
+                            case 1:
+                                //Week
+                                newSession = newSession.AddDays(7);
+                                break;
+                            
+                            case 2:
+                                //Fortnightly
+                                newSession = newSession.AddDays(14);
+                                break;
+                            case 3:
+                                //Monthly
+                                newSession = newSession.AddMonths(1);
+                                break;
+                        }
+
+                        _facade.CreateSession(_ci.Id, _ci.RegionId, SelectedSuburb.Id, SelectedVenue.Id, _ci.DefaultLocationId, newSession);
+                    }
+                }
+            }
+            else
+            {
+                _facade.CreateSession(_ci.Id, _ci.RegionId, SelectedSuburb.Id, SelectedVenue.Id, _ci.DefaultLocationId, SessionStartDate);
+            }
+
             this.Refresh();
+        }
+
+        public void DeleteSession(ISession s)
+        {
+            if (MessageBox.Show("Are you sure you want to delete this session?", "Confirm delete", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    _facade.DeleteSession(s.Id, s.CourseInstanceId, s.CourseInstance.RegionId);
+                }
+                catch (AssociationDependencyException e)
+                {
+                    if (MessageBox.Show("Warning! This session has corresponding attendance records, deleting this session will also delete attendance, continue?", "Confirm delete", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    {
+                        //Delete corresponding attendances related to the session
+                        int attCount = s.Attendances.Count();
+
+                        for (int i = 0; i < attCount; i++)
+                        {
+                            _facade.DeleteAttendance(s.CourseInstance.RegionId, s.CourseInstanceId, s.Id, s.Attendances.ElementAt(0).Id);
+                        }
+
+                        _facade.DeleteSession(s.Id, s.CourseInstanceId, s.CourseInstance.RegionId);
+                    }
+                }
+
+                this.Refresh();
+            }
         }
 
         //Attendance Management

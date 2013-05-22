@@ -42,7 +42,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -66,12 +65,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Validation\DirectoryExistsAttribute.cs" />
-    <Compile Include="Validation\EmailAttribute.cs" />
-    <Compile Include="Validation\FileExistsAttribute.cs" />
-    <Compile Include="Validation\MultipleEmailAttribute.cs" />
-    <Compile Include="Validation\ValidatingScreen.cs" />
-    <Compile Include="Validation\ValidationGroupAttribute.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -80,23 +73,14 @@
     <Compile Include="FacadeFactory.cs" />
     <Compile Include="U3ABootStrapper.cs" />
     <Compile Include="ViewModels\AttendanceViewModel.cs" />
-    <Compile Include="ViewModels\CoordinatorEditViewModel.cs" />
-    <Compile Include="ViewModels\CoordinatorListViewModel.cs" />
     <Compile Include="ViewModels\CourseDescriptionEditViewModel.cs" />
     <Compile Include="ViewModels\CourseDescriptionInstancesViewModel.cs" />
     <Compile Include="ViewModels\CourseInstanceEditViewModel.cs" />
     <Compile Include="ViewModels\CourseInstanceListViewModel.cs" />
-    <Compile Include="ViewModels\CourseInstanceSessionEditViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\TabbedViewModel.cs" />
     <Compile Include="ViewModels\VenueEditViewModel.cs" />
     <Compile Include="ViewModels\VenueListViewModel.cs" />
-    <Compile Include="Views\CoordinatorEditView.xaml.cs">
-      <DependentUpon>CoordinatorEditView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\CoordinatorListView.xaml.cs">
-      <DependentUpon>CoordinatorListView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\CourseDescriptionEditView.xaml.cs">
       <DependentUpon>CourseDescriptionEditView.xaml</DependentUpon>
     </Compile>
@@ -112,9 +96,6 @@
     </Compile>
     <Compile Include="Views\CourseInstanceListView.xaml.cs">
       <DependentUpon>CourseInstanceListView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\CourseInstanceSessionEditView.xaml.cs">
-      <DependentUpon>CourseInstanceSessionEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EditPresence.xaml.cs">
       <DependentUpon>EditPresence.xaml</DependentUpon>
@@ -170,14 +151,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\CoordinatorEditView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\CoordinatorListView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\CourseDescriptionEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -195,10 +168,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\CourseInstanceListView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\CourseInstanceSessionEditView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

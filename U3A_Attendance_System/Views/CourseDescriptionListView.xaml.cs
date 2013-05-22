@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using U3A_Attendance_System.ViewModels;
 using Caliburn.Micro;
+using U3A_Attendance_Model;
 
 namespace U3A_Attendance_System.Views
 {
@@ -32,7 +33,9 @@ namespace U3A_Attendance_System.Views
         private void Edit_btn(object sender, RoutedEventArgs e)
         {
 
-            //var courseDesc = ((Button)e.OriginalSource).DataContext as ICourseDescription;
+            var courseDesc = ((Button)e.OriginalSource).DataContext as ICourseDescription;
+
+            (DataContext as CourseDescriptionListViewModel).ShowCDEdit(courseDesc);
             //var view = new CourseDescriptionEdit(courseDesc);
             //DuhPump.MainFrame.Navigate(view.Content);
            

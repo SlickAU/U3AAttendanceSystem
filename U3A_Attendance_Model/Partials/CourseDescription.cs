@@ -22,6 +22,7 @@ namespace U3A_Attendance_Model
             Title = title;
             Description = description;
             U3AId = u3aId;
+            CourseInstances = new List<CourseInstance>();
         }
 
         #region CourseDescription Management

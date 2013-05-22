@@ -86,7 +86,7 @@ namespace U3A_Attendance_Model
         {
             if (Attendances.Count > 0)
             {
-                throw new Exception("This session cannot be deleted as it has associated Attendance records");
+                throw new AssociationDependencyException("This session cannot be deleted as it has associated Attendance records");
             }
 
             action(this);
@@ -101,9 +101,9 @@ namespace U3A_Attendance_Model
         }
 
 
-        ILocation ISession.Location
+        ICourseInstance ISession.CourseInstance
         {
-            get { return Location; }
+            get { return CourseInstance; }
         }
     }
 }

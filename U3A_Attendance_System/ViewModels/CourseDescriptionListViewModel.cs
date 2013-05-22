@@ -23,12 +23,12 @@ namespace U3A_Attendance_System.ViewModels
             get
             {
                 if (courseDescriptions == null)
-                    return _facade.FetchCourseDescriptions();
-                else
-                    return courseDescriptions;
+                    courseDescriptions = _facade.FetchCourseDescriptions();
+                
+                return courseDescriptions;
             }
 
-            set { courseDescriptions = value; }
+            set { courseDescriptions = value; NotifyOfPropertyChange("CourseDescriptions"); }
         }
 
         public string TitleSearch { get { return titleSearch; } set { titleSearch = value; SearchTitles(); } }
@@ -37,9 +37,25 @@ namespace U3A_Attendance_System.ViewModels
 
         #region Commands/Behaviours
 
-        public void DisplayCDManager(ICourseDescription cd)
+        public void ShowCDEdit(Object cd)
         {
-            
+            if (cd is ICourseDescription)
+            {
+                settings.Title = "Edit course description";
+                //settings.SizeToContent = SizeToContent.Manual;
+
+                _wm.ShowDialog(new CourseDescriptionEditViewModel((ICourseDescription)cd), null, settings);
+                NotifyOfPropertyChange("CourseDescriptions");
+                this.Refresh();
+            }
+            else
+            {
+                settings.Title = "Create course description";
+                //settings.SizeToContent = SizeToContent.Manual;
+
+
+                _wm.ShowDialog(new CourseDescriptionEditViewModel(), null, settings);
+            }
         }
 
         public void SearchTitles()

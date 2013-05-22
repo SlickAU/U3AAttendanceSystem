@@ -1,13 +1,9 @@
-﻿using Caliburn.Micro;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using U3A_Attendance_Model;
-using U3A_Attendance_System.Validation;
 
 namespace U3A_Attendance_System.ViewModels
 {
@@ -22,11 +18,10 @@ namespace U3A_Attendance_System.ViewModels
         private IVenue existingVenue;
         //--------------------------------------
         #endregion
-        private string name;
+
         #region Properties
         //--------------------------------------
-       [Required(ErrorMessage="Name Required")]
-        public string VenueName { get { return name; } set { name = value; NotifyOfPropertyChange(() => VenueName); } }
+        public string VenueName { get; set; }
         public string Address { get; set; }
         public string CodeId { get; set; }
         public IEnumerable<ISuburb> Suburbs { get; set; }
@@ -99,12 +94,11 @@ namespace U3A_Attendance_System.ViewModels
 
         #region Location Manegement
         //--------------------------------------
-   
-        private IEnumerable<ILocation> _listOfLocations { get; set; }
+        private IEnumerable<ILocation> _listOfLocations;
         public IEnumerable<ILocation> ListOfLocations
         {
             get { return _listOfLocations; }
-            set { _listOfLocations = value; NotifyOfPropertyChange("ListOfLocations"); }
+            set { _listOfLocations = value; this.Refresh(); }
         }
         public List<string> Rooms { get; set; }
         public string RoomName { get; set; }
@@ -125,31 +119,27 @@ namespace U3A_Attendance_System.ViewModels
             //Not working properly e.g. leaves some of the locations undeleted from first try
            for (int i = 0; i < ListOfLocations.Count(); i++)
            {
-              _facade.DeleteLocation(SelectedRegion.Id, SelectedSuburb.Id, existingVenue.Id, ListOfLocations.ToArray()[i].Id);
-              ListOfLocations.ToList().RemoveAt(i);
+                _facade.DeleteLocation(SelectedRegion.Id, SelectedSuburb.Id, existingVenue.Id, ListOfLocations.ToArray()[i].Id);
+                this.Refresh();
             }
-           this.Refresh();
+           
         }
 
         public void UpdateLocations()
         {
-            List<ILocation> list = new List<ILocation>();
-            
-            if (existingVenue.Locations.Count() == 0)
-            {
-                list.Add(_facade.CreateLocation(_selectedRegion.Id, existingVenue.SuburbId, existingVenue.Id, RoomName));
-            }
-            else
-            {
-                if (RoomName != null)
-                {
-                    list = ListOfLocations.ToList();
-                    list.Add(_facade.CreateLocation(_selectedRegion.Id, existingVenue.SuburbId, existingVenue.Id, RoomName));
-                }
-            }
-          
-            ListOfLocations = list.AsEnumerable();
+            //List<ILocation> list = new List<ILocation>();
 
+            //if (RoomName != null)
+            //{
+            //    //list.Add(RoomName);
+            //    //ListOfLocations = list;
+            //    list.Add(_facade.CreateLocation(_selectedRegion.Id, existingVenue.SuburbId, existingVenue.Id, RoomName));
+            //}
+
+            //ListOfLocations = list.AsEnumerable();
+
+            _listOfLocations.ToList().Add(_facade.CreateLocation(_selectedRegion.Id, existingVenue.SuburbId, existingVenue.Id, RoomName));
+            Rooms = _listOfLocations.Select(l => l.Room).ToList();
 
 
             this.Refresh();
@@ -166,15 +156,8 @@ namespace U3A_Attendance_System.ViewModels
         }
         public void Update()
         {
-            try
-            {
-                existingVenue = _facade.CreateVenue(_selectedRegion.Id, _selectedSuburb.Id, VenueName.Trim(), Address.Trim(), CodeId.Trim());
-                this.Refresh();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message.ToString());
-            }
+            existingVenue = _facade.CreateVenue(_selectedRegion.Id, _selectedSuburb.Id, VenueName, Address, CodeId);
+            this.Refresh();
         }
 
         //--------------------------------------

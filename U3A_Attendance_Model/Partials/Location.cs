@@ -39,11 +39,5 @@ namespace U3A_Attendance_Model
             }
             return false; 
         }
-
-
-        IVenue ILocation.Venue
-        {
-            get { return Venue; }
-        }
     }
 }

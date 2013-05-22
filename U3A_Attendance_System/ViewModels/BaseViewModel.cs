@@ -7,22 +7,26 @@ using System.Threading.Tasks;
 using U3A_Attendance_Model;
 using Caliburn.Micro;
 using System.ComponentModel.Composition;
-using U3A_Attendance_System.Validation;
+using System.Dynamic;
 
 namespace U3A_Attendance_System.ViewModels
 {
-
-    public abstract class BaseViewModel : ValidatingScreen<BaseViewModel>
+ 
+    public abstract class BaseViewModel : PropertyChangedBase
     {
         #region Members
 
         protected Facade _facade = FacadeFactory.Instance();
+        protected AppWindowManager _wm = new AppWindowManager();
+        protected dynamic settings = new ExpandoObject();
 
         #endregion
 
         #region Properties
    
         #endregion
+
+
 
     }
 }

@@ -14,6 +14,6 @@ namespace U3A_Attendance_Model
         Guid LocationId { get; }
         int VisitorCount { get; }
         IEnumerable<IAttendance> Attendances { get; }
-        ILocation Location { get; }
+        ICourseInstance CourseInstance { get; }
     }
 }
