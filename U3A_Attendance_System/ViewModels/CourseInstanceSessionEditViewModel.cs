@@ -34,6 +34,10 @@ namespace U3A_Attendance_System.ViewModels
 
             Venues = _facade.FetchAllVenues().Where(v => v.RegionId.Equals(session.Location.Venue.RegionId));
             Locations = session.Location.Venue.Locations;
+<<<<<<< HEAD
+=======
+            _wm.ShowDialog(this, null, settings);
+>>>>>>> 4412a1ecca7cd983a43a6a7115b6ed0339a3b199
         }
 
         public void UpdateLocations()
