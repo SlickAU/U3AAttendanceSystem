@@ -14,5 +14,6 @@ namespace U3A_Attendance_Model
         string Description { get; }
         Guid U3AId { get; }
         bool HasInstances { get; }
+        IEnumerable<ICourseInstance> CourseInstances { get; }
     }
 }

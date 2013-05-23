@@ -8,15 +8,18 @@
         mc:Ignorable="d"
         xmlns:userControls="a">
     <Grid>
-        <TabControl>
-            <TabItem Header="Course Descriptions" HorizontalAlignment="Right" >
+        <TabControl SelectedIndex="{Binding SelectedTab}">
+            <TabItem Header="Course Descriptions">
                 <ContentControl Name="View1"/>
-                    </TabItem>
-            <TabItem Header="Venues" HorizontalAlignment="Right">
+            </TabItem>
+            <TabItem Header="Venues">
                 <ContentControl Name="View2" />
             </TabItem>
-            <TabItem Header="Instances" HorizontalAlignment="Right">
+            <TabItem Header="Instances">
                 <ContentControl Name="View3" />
+            </TabItem>
+            <TabItem Header="Coordinators">
+                <ContentControl Name="View4" />
             </TabItem>
         </TabControl>
     </Grid>

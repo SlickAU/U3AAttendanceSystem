@@ -40,7 +40,6 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <Button Content="Refresh" Name="RollMe" Width="200" VerticalAlignment="Center" HorizontalAlignment="Right" />
         <DataGrid Name="CourseDescriptions" HorizontalAlignment="Stretch" VerticalAlignment="Top" AutoGenerateColumns="False" Grid.Row="1">
             <DataGrid.Resources>
                 <ResourceDictionary>
@@ -76,7 +75,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Button Content="Edit" Width="80" Click="Edit_btn"></Button>
+                                <Button Content="Edit" Width="80" cal:Message.Attach="ShowCDEdit($dataContext)"></Button>
                                 <Button Name="Delete"  Content="Delete"  cal:Message.Attach="DeleteDescriptionConfirm($dataContext)" Width="80"></Button>
                                 <Button Name="View_btn"  Content="View Courses"  IsEnabled="{Binding HasInstances}" cal:Message.Attach="ShowCIList($dataContext)"></Button>
                                 <Button Name="Create_btn"  Content="Create Course"  Width="80" cal:Message.Attach="ShowCIEdit($dataContext)"></Button>

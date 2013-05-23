@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using U3A_Attendance_Model;
+using System.Windows;
 
 namespace U3A_Attendance_System.ViewModels
 {
@@ -12,11 +13,11 @@ namespace U3A_Attendance_System.ViewModels
     {
         private IEnumerable<ICoordinator> coordinators;
 
-        public IEnumerable<ICoordinator> Coordinators
+        public BindingList<ICoordinator> Coordinators
         {
             get
             {
-                if (coordinators == null)
+                /*if (coordinators == null)
                 {
                     return _facade.FetchCoordinators();
                 }
@@ -24,12 +25,38 @@ namespace U3A_Attendance_System.ViewModels
                 else
                 {
                     return coordinators;
-                }
+                }*/
+                return new BindingList<ICoordinator>(new List<ICoordinator>(_facade.FetchCoordinators()));
             }
-            set
-            {
-                coordinators = value; 
-            }
+            set { }
         }
+
+        #region Methods
+
+        public void ShowCoordinatorEdit(ICoordinator coordinator)
+        {
+            settings.Title = "Edit Coordinator";
+            _wm.ShowDialog(new CoordinatorEditViewModel(coordinator), null, settings);
+            
+            NotifyOfPropertyChange("Coordinators");
+        }
+ 
+        public void ShowCoordinatorCreate()
+        {
+            settings.Title = "Create Coordinator";
+            _wm.ShowDialog(new CoordinatorEditViewModel(), null, settings);
+
+            NotifyOfPropertyChange("Coordinators");
+        }
+ 
+        public void ShowCoordinatorDelete(ICoordinator coordinator)
+        {
+            if (MessageBox.Show("Are you sure you want to delete this Coordinator?", "Confirm delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                _facade.DeleteCoordinator(coordinator.Id);
+
+            NotifyOfPropertyChange("Coordinators");
+         }
+
+        #endregion
     }
 }

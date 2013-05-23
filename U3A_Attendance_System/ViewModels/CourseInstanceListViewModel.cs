@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,29 @@ namespace U3A_Attendance_System.ViewModels
 {
     public class CourseInstanceListViewModel : BaseViewModel
     {
-        public IEnumerable<ICourseInstance> InstancesList
-        { get { return _facade.AllInstances(); } }
+        private List<ICourseInstance> ciList = new List<ICourseInstance>();
+
+        public BindingList<ICourseInstance> InstancesList
+        {
+            get
+            {
+                return new BindingList<ICourseInstance>(ciList);
+            }
+            set
+            {
+                ciList = value.ToList();
+            }
+        }
+
+        public CourseInstanceListViewModel()
+        {
+            InstancesList = new BindingList<ICourseInstance>(_facade.AllInstances().ToList());
+        }
+
+        public CourseInstanceListViewModel(ICourseDescription cd)
+        {
+            InstancesList = new BindingList<ICourseInstance>(cd.CourseInstances.ToList());
+        }
+
     }
 }

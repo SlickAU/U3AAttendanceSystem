@@ -11,29 +11,41 @@ namespace U3A_Attendance_System.ViewModels
 
     public class CourseInstanceSessionEditViewModel : BaseViewModel
     {
-        public string SessionDate { get; set; }
-        public IEnumerable<IVenue> Venues { get; set; }
-        public IVenue Venue { get; set; }
-        public IEnumerable<ILocation> Locations { get; set; }
-        public ILocation Location { get; set; }
-        public ISession currentSession { get; set; }
+        #region Fields
 
-        public DateTime SelectedDate { get; set; }
+        public IEnumerable<IVenue> Venues { get; set; }
+        public IEnumerable<ILocation> Locations { get; set; }
+
         public IVenue SelectedVenue { get; set; }
         public ILocation SelectedLocation { get; set; }
+        public DateTime SelectedDate { get; set; }
 
+        public ISession CurrentSession { get; set; } 
+
+        #endregion
+
+        //Constructor
         public CourseInstanceSessionEditViewModel(ISession session)
         {
-            SelectedDate = Convert.ToDateTime(session.Date.ToShortDateString());
+            SelectedDate = session.Date.Date;
+            SelectedVenue = session.Location.Venue;
+            SelectedLocation = session.Location;
+            CurrentSession = session;
+
             Venues = _facade.FetchAllVenues().Where(v => v.RegionId.Equals(session.Location.Venue.RegionId));
-            Venue = session.Location.Venue;
-            Locations = Venue.Locations;
-            Location = session.Location;
+            Locations = session.Location.Venue.Locations;
+        }
+
+        public void UpdateLocations()
+        {
+            Locations = SelectedVenue.Locations;
+            this.Refresh();
         }
 
         public void Save()
         {
-            _facade.UpdateSession(currentSession.Id, SelectedLocation.Id, SelectedDate, currentSession.VisitorCount, currentSession.CourseInstanceId, SelectedVenue.RegionId);
+            var a = _facade.UpdateSession(CurrentSession.Id, SelectedLocation.Id, SelectedDate, CurrentSession.VisitorCount, CurrentSession.CourseInstanceId, SelectedVenue.RegionId);
+            this.Refresh();
         }
     }
 }

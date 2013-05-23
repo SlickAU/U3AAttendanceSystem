@@ -23,5 +23,15 @@ namespace U3A_Attendance_System.Views
         {
             InitializeComponent();
         }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

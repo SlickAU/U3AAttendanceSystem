@@ -357,6 +357,8 @@ namespace U3A_Attendance_System.ViewModels
         public void UpdateSuburbs(Guid regionId)
         {
             Suburbs = _facade.FetchSuburbsWithVenues(regionId);
+            Venues = Enumerable.Empty<IVenue>();
+            Locations = Enumerable.Empty<ILocation>();
             this.Refresh();
         }
 
@@ -373,35 +375,39 @@ namespace U3A_Attendance_System.ViewModels
         public void UpdateLocations(Guid venueId)
         {
             //SelectedVenueId = venueId;
+            if (venueId != Guid.Empty)
             Locations = _facade.FetchLocations(_selectedRegion.Id, _selectedSuburb.Id, venueId).ToList();
             this.Refresh();
         }
 
         public void GenerateCourseCode()
         {
-            string courseCode;
-            string semester;
-            string year = StartDate.Year.ToString().Substring(2);
-            int month = StartDate.Month;
-            string region = SelectedRegion.CodeId;
-            string venue = SelectedVenue.CodeId;
-
-            if (month <= 6)
+            if (SelectedVenue != null && SelectedRegion != null)
             {
-                semester = "1";
+                string courseCode;
+                string semester;
+                string year = StartDate.Year.ToString().Substring(2);
+                int month = StartDate.Month;
+                string region = SelectedRegion.CodeId;
+                string venue = SelectedVenue.CodeId;
+
+                if (month <= 6)
+                {
+                    semester = "1";
+                }
+
+                else
+                {
+                    semester = "2";
+                }
+
+                courseCode = string.Format("{0}{1}{2}{3}", year, semester, region, venue);
+
+                string result = _facade.CheckCourseCode(courseCode, SelectedRegion.Id, SelectedVenue.Id);
+
+                CourseCode = result;
+                this.Refresh();
             }
-
-            else
-            {
-                semester = "2";
-            }
-
-            courseCode = string.Format("{0}{1}{2}{3}", year, semester, region, venue);
-
-            _facade.CheckCourseCode(courseCode);
-
-            CourseCode = courseCode;
-            this.Refresh();
         }
 
         public void Save()
@@ -545,7 +551,12 @@ namespace U3A_Attendance_System.ViewModels
 
         }
 
-        
+        public void ShowCISessionEdit(ISession session)
+        {
+            _wm.ShowDialog(new CourseInstanceSessionEditViewModel(session), null, settings);
+            this.Refresh();
+            
+        }
 
         #endregion
 

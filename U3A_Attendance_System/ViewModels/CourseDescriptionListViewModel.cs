@@ -18,17 +18,14 @@ namespace U3A_Attendance_System.ViewModels
         
         #region Properties
 
-        public IEnumerable<ICourseDescription> CourseDescriptions
+        public BindingList<ICourseDescription> CourseDescriptions
         {
             get
             {
-                if (courseDescriptions == null)
-                    courseDescriptions = _facade.FetchCourseDescriptions();
-                
-                return courseDescriptions;
+                return new BindingList<ICourseDescription>(new List<ICourseDescription>(_facade.FetchCourseDescriptions()));
             }
 
-            set { courseDescriptions = value; NotifyOfPropertyChange("CourseDescriptions"); }
+            set {  }
         }
 
         public string TitleSearch { get { return titleSearch; } set { titleSearch = value; SearchTitles(); } }
@@ -45,7 +42,6 @@ namespace U3A_Attendance_System.ViewModels
                 //settings.SizeToContent = SizeToContent.Manual;
 
                 _wm.ShowDialog(new CourseDescriptionEditViewModel((ICourseDescription)cd), null, settings);
-                NotifyOfPropertyChange("CourseDescriptions");
                 this.Refresh();
             }
             else
@@ -53,8 +49,9 @@ namespace U3A_Attendance_System.ViewModels
                 settings.Title = "Create course description";
                 //settings.SizeToContent = SizeToContent.Manual;
 
-
                 _wm.ShowDialog(new CourseDescriptionEditViewModel(), null, settings);
+
+                this.Refresh();
             }
         }
 
@@ -63,14 +60,9 @@ namespace U3A_Attendance_System.ViewModels
             if (TitleSearch != null)
             {
                 string search = TitleSearch.ToUpper();
-                CourseDescriptions = _facade.FetchCourseDescriptions().Where(cd => cd.Title.Contains(search));
+                //CourseDescriptions = _facade.FetchCourseDescriptions().Where(cd => cd.Title.Contains(search));
                 this.Refresh();
             }
-        }
-
-        public void RollMe()
-        {
-            this.Refresh();
         }
 
         #endregion

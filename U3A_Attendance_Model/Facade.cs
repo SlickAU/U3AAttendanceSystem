@@ -175,14 +175,53 @@ namespace U3A_Attendance_Model
             _u3a.deleteCourseInstance(courseInstanceId, regionId, action); 
         }
 
-        public string CheckCourseCode(string courseCode)
+        public string CheckCourseCode(string courseCode, Guid regionId, Guid venueId)
         {
             //Implement increment checker to see if course code number already exists - Current value is hardcoded
             //Exception handling on UI to make sure Date, Venue and Region fields have been filled
 
+            var courses = FetchCourseInstances(regionId);
+            List<string> coursecodes = new List<string>();
+            List<string> courseNums = new List<string>();
+            string cnum;
+            int num;
 
+            foreach (var c in courses.Where(v => v.VenueId.Equals(venueId)))
+            {
+                string cc = c.CourseCode;
+                coursecodes.Add(cc);
+            }
 
-            return courseCode;
+            foreach (var c in coursecodes)
+            {
+                var courseNum = c.Substring(5, 2);
+                courseNums.Add(courseNum);
+            }
+
+            if (courseNums.Count != 0)
+            {
+                var ordered = courseNums.OrderByDescending(c => c.FirstOrDefault());
+
+                var value = ordered.First();
+                num = Int32.Parse(value);
+
+                num++;
+
+                cnum = num.ToString();
+
+                if (cnum.Length == 1)
+                {
+                    string result = "0" + cnum;
+                    return courseCode + result;
+                }
+
+                else
+                {
+                    return courseCode + cnum;
+                }
+            }
+
+            else return courseCode + "01";
         }
         
 

@@ -16,6 +16,7 @@ namespace U3A_Attendance_System.ViewModels
     {
         //private WindowManager _wm = new WindowManager();
         protected Facade _facade = FacadeFactory.Instance();
+        private TabbedViewModel tabbedView = new TabbedViewModel();
 
         public MainViewModel()
         {
@@ -34,6 +35,7 @@ namespace U3A_Attendance_System.ViewModels
         public void ShowCIList(ICourseDescription cd)
         {
             ActivateItem(new CourseDescriptionInstancesViewModel(cd));
+            //tabbedView.SelectedTab = 2;
         }
 
         public void DeleteDescriptionConfirm(ICourseDescription cd)
@@ -45,7 +47,7 @@ namespace U3A_Attendance_System.ViewModels
 
         public void ShowTabbedView()
         {
-            ActivateItem(new TabbedViewModel());
+            ActivateItem(tabbedView);
         }
 
     }
