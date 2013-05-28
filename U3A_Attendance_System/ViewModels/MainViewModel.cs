@@ -45,7 +45,7 @@ namespace U3A_Attendance_System.ViewModels
 
         public void DeleteDescriptionConfirm(ICourseDescription cd)
         {
-            if (MessageBox.Show("Really delete?", "Confirm delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (MessageBox.Show("Are you sure you want to delete the Course Descripton: '" + cd.Title + "' ?", "Confirm Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 _facade.DeleteCourseDescription(cd.Id);
 
         }

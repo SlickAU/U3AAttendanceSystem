@@ -36,12 +36,26 @@ namespace U3A_Attendance_System.ViewModels
 
         public void Update()
         {
-            if (_cd != null)
-                _facade.UpdateCourseDescription(CourseDescriptionProperties.Id, Title, Description);
-            else
-                _facade.CreateCourseDescription(Title, Description);
+            if(ValuesNotNull())
+            {
+		        if (_cd != null)
+                     _facade.UpdateCourseDescription(CourseDescriptionProperties.Id, Title.Trim(), Description.Trim());
+                  else
+                     _facade.CreateCourseDescription(Title.Trim(), Description.Trim());  
+            }
         }
 
+        public bool ValuesNotNull()
+        {
+
+            if(Title != null & Description != null)
+            {
+                return true;
+            }
+
+            throw new BusinessRuleException("Title and/or Description cannot be empty.");
+
+        }
 
     }
 }

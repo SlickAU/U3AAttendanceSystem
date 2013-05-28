@@ -15,9 +15,17 @@ namespace U3A_Attendance_Model
         //Creates CourseDescription
         internal CourseDescription createCourseDescription(string title, string description)
         {
-            var courseDescription = new CourseDescription(title, description, this.Id);
-            this.CourseDescriptions.Add(courseDescription);
-            return courseDescription;
+            var value = CourseDescriptions.Where(c => c.Title.ToLower().Equals(title.ToLower())).FirstOrDefault();
+
+            if (value == null)
+            {
+                var courseDescription = new CourseDescription(title, description, this.Id);
+                this.CourseDescriptions.Add(courseDescription);
+                return courseDescription;
+            }
+
+            throw new BusinessRuleException("Course Description with Title: '" + title.ToLower() + "', already exists.");
+            
         } 
 
         //Updates a CourseDescription
