@@ -7,26 +7,27 @@
       WindowStartupLocation="CenterScreen" 
       SizeToContent="WidthAndHeight" 
       mc:Ignorable="d" 
-      d:DesignHeight="400" d:DesignWidth="450" Width="450" Height="400">
-
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="40"/>
-            <ColumnDefinition Width="360"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Label Content="Course Name" Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" />
-        <TextBox x:Name="Title" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Grid.Column="1" Grid.Row="2"/>
-        <Label Content="Course Description" Grid.Column="1" Grid.Row="3" VerticalAlignment="Bottom"/>
-        <TextBox x:Name="Description" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1" Grid.Row="4" Height="80" />
-        <Button  x:Name="Update" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="2" Click="Update_Click" Grid.Row="5" />
-        <Button Content="Cancel" HorizontalAlignment="Right" VerticalAlignment="Center"  Click="Update_Click"  Grid.Column="2" Grid.Row="5" />
-    </Grid>
+      d:DesignHeight="400" d:DesignWidth="450" MaxHeight="400" MinHeight="400" MaxWidth="450" MinWidth="450">
+    <GroupBox  Grid.Column="0" Header="Create Course Description" Margin="10,10,10,10" Grid.RowSpan="2" ClipToBounds="True">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="360"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label Content="Course Name" Grid.Row="1" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Margin="10,0,31,26" />
+            <TextBox x:Name="Title" TextWrapping="Wrap" VerticalAlignment="Top" Height="25" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,41,31,0"/>
+            <Label Content="Course Description" Grid.Row="2" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Margin="10,0,31,0"/>
+            <TextBox x:Name="Description" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="3" Height="80" Grid.ColumnSpan="2" Margin="10,10,31,0" />
+            <Button  x:Name="Update" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Click="Update_Click" Grid.Row="5" Margin="121,21,0,21" />
+            <Button Content="Cancel" HorizontalAlignment="Right" VerticalAlignment="Center"  Click="Update_Click"  Grid.Column="1" Grid.Row="5" Margin="0,21,167,21" RenderTransformOrigin="-0.68,0.289" />
+        </Grid>
+    </GroupBox>
 </Window>
