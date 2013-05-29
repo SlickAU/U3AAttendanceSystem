@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Caliburn.Micro;
 
 namespace U3A_Attendance_System.Views
 {
@@ -23,6 +24,7 @@ namespace U3A_Attendance_System.Views
         public VenueEditView()
         {
             InitializeComponent();
+            ConventionManager.ApplyValidation = (binding, viewModelType, property) => binding.ValidatesOnExceptions = true;
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

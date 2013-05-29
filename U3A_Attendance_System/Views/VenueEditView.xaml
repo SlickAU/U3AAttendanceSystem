@@ -8,6 +8,86 @@
              WindowStartupLocation="CenterScreen" 
              SizeToContent="WidthAndHeight" 
              Height="370" Width="550">
+
+    <Window.Resources>
+
+        <ResourceDictionary>
+
+
+            <!-- This template is from Beth Massi's article -->
+            <Style x:Key="myErrorTemplate" TargetType="Control">
+                <Setter Property="Validation.ErrorTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <DockPanel LastChildFill="True">
+                                <Ellipse DockPanel.Dock="Right" 
+										ToolTip="{Binding ElementName=myTextbox, 
+										Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"
+										Width="15"
+										Height="15" 
+										Margin="-25,0,0,0"
+										StrokeThickness="1" 
+										Fill="Red" 
+								>
+                                    <Ellipse.Stroke>
+                                        <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                                            <GradientStop Color="#FFFA0404" Offset="0"/>
+                                            <GradientStop Color="#FFC9C7C7" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Ellipse.Stroke>
+                                    <!--<Ellipse.Triggers>
+										<EventTrigger RoutedEvent="FrameworkElement.Loaded">
+											<BeginStoryboard Storyboard="{StaticResource FlashErrorIcon}"/>
+										</EventTrigger>
+									</Ellipse.Triggers>-->
+
+                                </Ellipse>
+                                <TextBlock DockPanel.Dock="Right" 
+								ToolTip="{Binding ElementName=myControl, 
+									 Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"
+								Foreground="White"
+								FontSize="11pt" 
+								Margin="-15,5,0,0" FontWeight="Bold">!
+							<!--<TextBlock.Triggers>
+								<EventTrigger RoutedEvent="FrameworkElement.Loaded">
+									<BeginStoryboard Storyboard="{StaticResource FlashErrorIcon}"/>
+								</EventTrigger>
+							</TextBlock.Triggers>-->
+                                </TextBlock>
+                                <Border BorderBrush="Red" BorderThickness="1">
+                                    <AdornedElementPlaceholder Name="myControl"/>
+                                </Border>
+                            </DockPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <!--<Style.Triggers>
+					<Trigger Property="Validation.HasError" Value="true">
+						<Setter Property="ToolTip"
+						Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+						Path=(Validation.Errors)[0].ErrorContent}"/>
+					</Trigger>
+				</Style.Triggers>-->
+            </Style>
+
+            <!-- Force the TextBox to use the error template -->
+            <Style TargetType="TextBox" BasedOn="{StaticResource myErrorTemplate}" >
+                <Setter Property="Margin" Value="2"/>
+                <Setter Property="SnapsToDevicePixels" Value="True"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            </Style>
+
+
+            <Style TargetType="TextBlock" >
+                <Setter Property="Margin" Value="2"/>
+                <Setter Property="SnapsToDevicePixels" Value="True"/>
+                <Setter Property="Foreground" Value="Green"/>
+            </Style>
+
+
+        </ResourceDictionary>
+
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
@@ -65,7 +145,7 @@
                 <TextBox Name="RoomName" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top"  Width="200" HorizontalAlignment="Left"></TextBox>
                 <Button Content="+" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" cal:Message.Attach="UpdateLocations" HorizontalAlignment="Right" Width="25"/>
                 <Label Content="Rooms"  Grid.Row="2" Margin="0,15,149,109" Grid.RowSpan="2"/>
-                <ComboBox Name="ListOfLocations"  DisplayMemberPath="Room" SelectedValuePath="Id" Grid.Row="3" Grid.Column="0" VerticalAlignment="Top" />
+                <ListBox Name="ListOfLocations"  DisplayMemberPath="Room" SelectedValuePath="Id" Height="80" Grid.Row="3" Grid.Column="0" VerticalAlignment="Top" />
                 <Button Content="Delete" Grid.Row="5" Height="25" Width="75" HorizontalAlignment="Left" VerticalAlignment="Top" cal:Message.Attach="DeleteLocation(ListOfLocations.SelectedValue)"></Button>
                 <Button Name="ClearListOfLocations" Content="Clear List" Grid.Row="5" Height="25" Width="75" VerticalAlignment="Top" HorizontalAlignment="Right"> </Button>
             </Grid>

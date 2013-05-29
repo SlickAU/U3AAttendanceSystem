@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +23,21 @@ namespace U3A_Attendance_System.ViewModels
 
         #region Properties
         //--------------------------------------
-        public string VenueName { get; set; }
+        private string _venueName;
+        [Required(ErrorMessage = "Required")]
+        public string VenueName
+        {
+            get { return _venueName; }
+
+            [DebuggerNonUserCode]
+            set
+            {
+
+                Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "VenueName" });
+                _venueName = value;
+                NotifyOfPropertyChange("VenueName");
+            }
+        }
         public string Address { get; set; }
         public string CodeId { get; set; }
         public IEnumerable<ISuburb> Suburbs { get; set; }
@@ -127,19 +143,23 @@ namespace U3A_Attendance_System.ViewModels
 
         public void UpdateLocations()
         {
-            //List<ILocation> list = new List<ILocation>();
+            List<ILocation> list = new List<ILocation>();
 
-            //if (RoomName != null)
-            //{
-            //    //list.Add(RoomName);
-            //    //ListOfLocations = list;
-            //    list.Add(_facade.CreateLocation(_selectedRegion.Id, existingVenue.SuburbId, existingVenue.Id, RoomName));
-            //}
+            if (existingVenue.Locations.Count() == 0)
+            {
+                list.Add(_facade.CreateLocation(_selectedRegion.Id, existingVenue.SuburbId, existingVenue.Id, RoomName));
+            }
+            else
+            {
+                if (RoomName != null)
+                {
+                    list = ListOfLocations.ToList();
+                    list.Add(_facade.CreateLocation(_selectedRegion.Id, existingVenue.SuburbId, existingVenue.Id, RoomName));
+                }
+            }
 
-            //ListOfLocations = list.AsEnumerable();
+            ListOfLocations = list.AsEnumerable();
 
-            _listOfLocations.ToList().Add(_facade.CreateLocation(_selectedRegion.Id, existingVenue.SuburbId, existingVenue.Id, RoomName));
-            Rooms = _listOfLocations.Select(l => l.Room).ToList();
 
 
             this.Refresh();

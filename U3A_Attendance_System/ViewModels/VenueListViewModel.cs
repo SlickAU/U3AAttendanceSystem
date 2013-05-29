@@ -35,6 +35,35 @@ namespace U3A_Attendance_System.ViewModels
             _wm.ShowDialog(new VenueEditViewModel(), null, settings);
         }
 
+        public void Delete(IVenue venue)
+        {
+            if (MessageBox.Show("Are you sure you want to delete this venue?", "Confirm delete", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    _facade.DeleteVenue(venue.Id, venue.RegionId, venue.SuburbId);
+                }
+                catch (InvalidOperationException e)
+                {
+                    if (MessageBox.Show("Warning! This venue has corresponding locations, deleting this venue will also delete application, continue?", "Confirm delete", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    {
+            
+                        var locations = venue.Locations;
+                        
+                       
+
+                        for (int i = 0; i < locations.Count(); i++)
+                        {
+                            _facade.DeleteLocation(venue.RegionId, venue.SuburbId, venue.Id, locations.ElementAt(i).Id);
+                        }
+
+                        _facade.DeleteVenue(venue.Id, venue.RegionId, venue.SuburbId);
+                    }
+                }
+
+                this.Refresh();
+            }
+        }
         #endregion
     }
 }
