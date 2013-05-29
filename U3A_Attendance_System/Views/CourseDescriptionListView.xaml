@@ -69,16 +69,16 @@
                 </ResourceDictionary>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Width="2*" Header="Course Number" Binding="{Binding CourseNumber}" CellStyle="{StaticResource NoFocusColumnStyle}"></DataGridTextColumn>
+                <DataGridTextColumn Width="200" Header="Course Number" Binding="{Binding CourseNumber}" CellStyle="{StaticResource NoFocusColumnStyle}"></DataGridTextColumn>
                 <DataGridTextColumn Width="2*" Header="Course Name" Binding="{Binding Title}" CellStyle="{StaticResource NoFocusColumnStyle}"></DataGridTextColumn>
                 <DataGridTemplateColumn Header="Actions">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Button Content="Edit" Width="80" cal:Message.Attach="ShowCDEdit($dataContext)"></Button>
-                                <Button Name="Delete"  Content="Delete"  cal:Message.Attach="DeleteDescriptionConfirm($dataContext)" Width="80"></Button>
-                                <Button Name="View_btn"  Content="View Courses"  IsEnabled="{Binding HasInstances}" cal:Message.Attach="ShowCIList($dataContext)"></Button>
-                                <Button Name="Create_btn"  Content="Create Course"  Width="80" cal:Message.Attach="ShowCIEdit($dataContext)"></Button>
+                                <Button Content="Edit" cal:Message.Attach="ShowCDEdit($dataContext)" Style="{DynamicResource SquareButtonStyle}"></Button>
+                                <Button Name="Delete"  Content="Delete" cal:Message.Attach="DeleteDescriptionConfirm($dataContext)" Style="{DynamicResource SquareButtonStyle}"></Button>
+                                <Button Name="View_btn"  Content="View Courses" IsEnabled="{Binding HasInstances}" cal:Message.Attach="ShowCIList($dataContext)" Style="{DynamicResource SquareButtonStyle}"></Button>
+                                <Button Name="Create_btn"  Content="Create Course" cal:Message.Attach="ShowCIEdit($dataContext)" Style="{DynamicResource SquareButtonStyle}"></Button>
                             </StackPanel>
 
 

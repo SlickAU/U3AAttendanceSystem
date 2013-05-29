@@ -26,24 +26,24 @@ namespace U3A_Attendance_System.ViewModels
             }
         }
         public CourseDescriptionListViewModel View1 { get; set; }
-        public VenueListViewModel View2 { get; set; }
-        public CourseInstanceListViewModel View3 { get; set; }
+        public CourseInstanceListViewModel View2 { get; set; }
+        public VenueListViewModel View3 { get; set; }
         public CoordinatorListViewModel View4 { get; set; }
         public TabbedViewModel()
         {
             View1 = new CourseDescriptionListViewModel();
-            View2 = new VenueListViewModel();
-            View3 = new CourseInstanceListViewModel();
+            View2 = new CourseInstanceListViewModel();
+            View3 = new VenueListViewModel();
             View4 = new CoordinatorListViewModel();
         }
 
-        public void ShowCIList(ICourseDescription cd)
+        /*public void ShowCIList(ICourseDescription cd)
         {
-            View3 = new CourseInstanceListViewModel(cd);
+            View2 = new CourseInstanceListViewModel(cd);
             this.Refresh();
             //View3.PopulateInstancesList(cd.CourseInstances);
             SelectedTab = 2;
-        }
+        }*/
 
 
     }

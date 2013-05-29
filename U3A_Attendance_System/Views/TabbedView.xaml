@@ -12,10 +12,10 @@
             <TabItem Header="Course Descriptions">
                 <ContentControl Name="View1"/>
             </TabItem>
-            <TabItem Header="Venues">
+            <TabItem Header="Instances">
                 <ContentControl Name="View2" />
             </TabItem>
-            <TabItem Header="Instances">
+            <TabItem Header="Venues">
                 <ContentControl Name="View3" />
             </TabItem>
             <TabItem Header="Coordinators">

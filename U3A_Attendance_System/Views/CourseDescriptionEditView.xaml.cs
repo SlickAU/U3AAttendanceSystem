@@ -15,13 +15,14 @@ using System.Windows.Shapes;
 using U3A_Attendance_System.ViewModels;
 using Caliburn.Micro;
 using System.Windows.Interactivity;
+using MahApps.Metro.Controls;
 
 namespace U3A_Attendance_System.Views
 {
     /// <summary>
     /// Interaction logic for CourseDescriptionEditView.xaml
     /// </summary>
-    public partial class CourseDescriptionEditView : Window
+    public partial class CourseDescriptionEditView : MetroWindow
     {
         public CourseDescriptionEditView()
         {

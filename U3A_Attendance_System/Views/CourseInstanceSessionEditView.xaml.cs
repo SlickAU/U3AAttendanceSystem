@@ -11,13 +11,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MahApps.Metro.Controls;
 
 namespace U3A_Attendance_System.Views
 {
     /// <summary>
     /// Interaction logic for CourseInstanceSessionEditView.xaml
     /// </summary>
-    public partial class CourseInstanceSessionEditView : Window
+    public partial class CourseInstanceSessionEditView : MetroWindow
     {
         public CourseInstanceSessionEditView()
         {

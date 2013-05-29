@@ -5,21 +5,30 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:cal="http://www.caliburnproject.org"
       mc:Ignorable="d" 
-      d:DesignHeight="500" d:DesignWidth="1062">
+      d:DesignHeight="500" d:DesignWidth="1062" Background="White">
 
-
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="140" />
-            <RowDefinition Height="110" />
+            <RowDefinition Height="180" />
+            <RowDefinition Height="150" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <!--Course Instance Management-->
-        <Grid Grid.Row="0" VerticalAlignment="Top">
+        <Grid Grid.Row="0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
                 <RowDefinition />
-                <RowDefinition />
-                <RowDefinition Height="2" />
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Orientation="Vertical">
                 <Label Content="Course Management" />
@@ -27,7 +36,7 @@
             </StackPanel>
             <GroupBox Header="Course Information" Grid.Row="1">
 
-                <Grid Margin="0,0,0,-30">
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
@@ -39,15 +48,13 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="25" />
-                        <RowDefinition Height="25" />
-                        <RowDefinition Height="25" />
+                        <RowDefinition Height="27" />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
-
-
 
                     <Label Content="Coordinator" Grid.Column="0" Grid.Row="0" />
                     <Label Content="Start Date" Grid.Column="1" Grid.Row="0" />
-                    <Label Content="Region" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="2" Margin="56,10,94,-11" />
+                    <Label Content="Region" Grid.Column="2" Grid.Row="0" />
                     <Label Content="Suburb" Grid.Column="3" Grid.Row="0" />
                     <Label Content="Venue" Grid.Column="4" Grid.Row="0" />
                     <Label Content="Location" Grid.Column="5" Grid.Row="0" />
@@ -64,7 +71,7 @@
 
                     <Button Name="GenerateCourseCode" Content="Generate Course Code" Grid.Row="2" Grid.Column="6" />
 
-                    <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Bottom">
                         <Button Content="Cancel" />
                         <Button Name="Save" Content="Save" />
                     </StackPanel>
@@ -79,7 +86,7 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
-                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="10" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -137,11 +144,11 @@
             <!--Attendance Related-->
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="80" />
+                    <RowDefinition Height="100" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Grid>
-                    <GroupBox Header="Record Members Attendance" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Grid Grid.Row="0">
+                    <GroupBox Header="Record Members Attendance">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
@@ -164,8 +171,8 @@
                     </GroupBox>
                 </Grid>
 
-                <Grid Grid.Row="2" Grid.ColumnSpan="3">
-                    <DataGrid Name="Attendances" Grid.Row="1" Grid.ColumnSpan="2" HeadersVisibility="None">
+                <Grid Grid.Row="1" Margin="0, 20, 0, 0">
+                    <DataGrid Name="Attendances" HeadersVisibility="None" Background="White">
                     </DataGrid>
                 </Grid>
             </Grid>

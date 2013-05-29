@@ -21,6 +21,7 @@ namespace U3A_Attendance_System.ViewModels
         public MainViewModel()
         {
             ShowTabbedView();
+            this.DisplayName = "U3A Attendance";
         }
 
         //TODO: For some reason it cant distinquish between paramater types...
@@ -34,7 +35,7 @@ namespace U3A_Attendance_System.ViewModels
 
         public void ShowCIList(ICourseDescription cd)
         {
-            ActivateItem(new CourseDescriptionInstancesViewModel(cd));
+            ActivateItem(new CourseInstanceListViewModel(cd));
             //tabbedView.SelectedTab = 2;
         }
 
@@ -53,6 +54,11 @@ namespace U3A_Attendance_System.ViewModels
         public void ShowTabbedView()
         {
             ActivateItem(tabbedView);
+        }
+
+        public void ShowHome()
+        {
+            ShowTabbedView();
         }
 
     }

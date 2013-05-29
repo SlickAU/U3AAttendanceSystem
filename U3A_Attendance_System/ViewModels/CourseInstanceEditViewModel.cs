@@ -553,6 +553,7 @@ namespace U3A_Attendance_System.ViewModels
 
         public void ShowCISessionEdit(ISession session)
         {
+            settings.Title = "Edit Session";
             _wm.ShowDialog(new CourseInstanceSessionEditViewModel(session), null, settings);
             this.Refresh();
             

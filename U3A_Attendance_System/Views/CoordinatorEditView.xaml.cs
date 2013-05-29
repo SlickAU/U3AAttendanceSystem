@@ -11,13 +11,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MahApps.Metro.Controls;
 
 namespace U3A_Attendance_System.Views
 {
     /// <summary>
     /// Interaction logic for CoordinatorEditView.xaml
     /// </summary>
-    public partial class CoordinatorEditView : Window
+    public partial class CoordinatorEditView : MetroWindow
     {
         public CoordinatorEditView()
         {

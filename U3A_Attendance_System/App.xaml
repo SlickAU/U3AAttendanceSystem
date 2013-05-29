@@ -4,6 +4,13 @@
              xmlns:local="clr-namespace:U3A_Attendance_System">
     <Application.Resources>
         <ResourceDictionary>
+            <Style TargetType="{x:Type DataGridRow}">
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="AliceBlue" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
                     <local:U3ABootStrapper x:Key="bootstrapper" />
