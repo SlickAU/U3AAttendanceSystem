@@ -7,6 +7,8 @@ using Caliburn.Micro;
 using U3A_Attendance_System.ViewModels;
 using System.Windows.Threading;
 using log4net;
+using U3A_Attendance_Model;
+using System.Windows;
 
 namespace U3A_Attendance_System
 {
@@ -21,10 +23,26 @@ namespace U3A_Attendance_System
 
         protected override void OnUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
-            logger.Error(DateTime.Now + " - " + e.Exception.InnerException.Message);
 
-            //Handle Exceptions to allow for resume on non-critical failure of program
-            e.Handled = true;
+            if (e.Exception.InnerException != null)
+            {
+                logger.Error(DateTime.Now + " - " + e.Exception.InnerException.Message);
+            }
+            else
+            {
+                logger.Error(DateTime.Now + " - " + e.Exception.Message);
+            }
+
+            if (e.Exception.InnerException is BusinessRuleException)
+            {
+                MessageBox.Show(e.Exception.InnerException.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                e.Handled = true;
+            }
+            else
+            {
+                MessageBox.Show("Whoops! Something went wrong.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                e.Handled = true;
+            }
         }
     }
 }

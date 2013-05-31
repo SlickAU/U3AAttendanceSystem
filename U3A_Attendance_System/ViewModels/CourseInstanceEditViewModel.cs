@@ -414,6 +414,8 @@ namespace U3A_Attendance_System.ViewModels
         {
             ICourseInstance ci;
 
+            CheckForNullValues();
+
             if(_ci == null)
                  ci = _facade.CreateCourseInstance(_cd.Id, _selectedCoordinator.Id, _selectedRegion.Id, _selectedSuburb.Id, _selectedVenue.Id, _selectedLocation.Id, StartDate, CourseCode);
             else
@@ -421,6 +423,44 @@ namespace U3A_Attendance_System.ViewModels
 
             _ci = ci;
             this.Refresh();
+        }
+
+        public void CheckForNullValues()
+        {
+            if (SelectedCoordinator == null)
+            {
+                throw new BusinessRuleException("Coordinator cannot be Empty");
+            }
+
+            if (SelectedRegion == null)
+            {
+                throw new BusinessRuleException("Region cannot be Empty");
+            }
+
+            if (SelectedSuburb == null)
+            {
+                throw new BusinessRuleException("Suburb cannot be Empty");
+            }
+
+            if (SelectedVenue == null)
+            {
+                throw new BusinessRuleException("Venue cannot be Empty");
+            }
+
+            if (SelectedLocation == null)
+            {
+                throw new BusinessRuleException("Location cannot be Empty");
+            }
+
+            if (StartDate == null)
+            {
+                throw new BusinessRuleException("StartDate cannot be Empty");
+            }
+
+            if (CourseCode == null)
+            {
+                throw new BusinessRuleException("CourseCode cannot be Empty");
+            }
         }
 
 

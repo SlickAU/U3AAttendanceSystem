@@ -15,14 +15,33 @@ namespace U3A_Attendance_System.ViewModels
     public class MainViewModel : Conductor<object>
     {
         //private WindowManager _wm = new WindowManager();
-        protected Facade _facade = FacadeFactory.Instance();
-        private TabbedViewModel tabbedView = new TabbedViewModel();
+        protected Facade _facade;
+        private TabbedViewModel tabbedView;
+        private readonly BackgroundWorker worker = new BackgroundWorker();
+        private SplashView s = new SplashView();
+
 
         public MainViewModel()
         {
-            ShowTabbedView();
+            worker.DoWork += worker_DoWork;
+            worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+            worker.RunWorkerAsync();
             this.DisplayName = "U3A Attendance";
+            s.Show();
         }
+
+        private void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            _facade = FacadeFactory.Instance();
+            tabbedView = new TabbedViewModel();
+            ShowTabbedView();
+        }
+
+        private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            s.Close();
+        }
+
 
         //TODO: For some reason it cant distinquish between paramater types...
         public void ShowCIEdit(Object obj)
