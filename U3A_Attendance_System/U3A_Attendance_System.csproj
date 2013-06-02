@@ -42,7 +42,7 @@
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\log4net-1.2.11\bin\net-cp\4.0\release\log4net.dll</HintPath>
+      <HintPath>..\packages\log4net-1.2.11\bin\net\4.0\release\log4net.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro">
       <HintPath>..\packages\MahApps.Metro.0.10.1.1\lib\net45\MahApps.Metro.dll</HintPath>

@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
         <Button Content="Create Course Template" Width="200" VerticalAlignment="Center" HorizontalAlignment="Left" cal:Message.Attach="ShowCDEdit($dataContext)" Background="{DynamicResource DarkBlueButtonBrush}" Foreground="{DynamicResource ButtonWhiteFont}"/>
         <!--<Label Content="Search Course Descriptions" VerticalAlignment="Top" HorizontalAlignment="Center"/>-->
-        <TextBox Text="{Binding TitleSearch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" >
+        <TextBox Text="{Binding TitleSearch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" IsEnabled="False" Visibility="Hidden">
             <TextBox.Style>
                 <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
                     <Style.Resources>
