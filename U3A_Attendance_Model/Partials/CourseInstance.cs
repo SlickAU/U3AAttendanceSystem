@@ -10,7 +10,19 @@ namespace U3A_Attendance_Model
 {
     internal partial class CourseInstance : ICourseInstance
     {
+
+        internal enum State {Scheduled ,Active, Complete,Cancelled }
+
         private CourseInstanceState _state;
+
+        public CourseInstance.State Status
+        {
+            get
+            {
+                return _state.State; 
+            }
+        }
+
 
         public Guid SuburbId
         {

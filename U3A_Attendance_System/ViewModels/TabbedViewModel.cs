@@ -37,14 +37,23 @@ namespace U3A_Attendance_System.ViewModels
             View4 = new CoordinatorListViewModel();
         }
 
-        /*public void ShowCIList(ICourseDescription cd)
+        public void ResetView()
+        {
+
+        }
+
+        public void ShowCIList()
+        {
+            View2 = new CourseInstanceListViewModel();
+            this.Refresh();
+        }
+
+        public void ShowCIList(ICourseDescription cd)
         {
             View2 = new CourseInstanceListViewModel(cd);
             this.Refresh();
             //View3.PopulateInstancesList(cd.CourseInstances);
-            SelectedTab = 2;
-        }*/
-
+        }
 
     }
 }

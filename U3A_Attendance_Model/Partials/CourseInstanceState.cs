@@ -8,6 +8,11 @@ namespace U3A_Attendance_Model
 {
     internal abstract class CourseInstanceState
     {
+
+
+        internal abstract CourseInstance.State State {get;}
+
+
         internal virtual void delete(Action action)
         {
             //NO-OP by default

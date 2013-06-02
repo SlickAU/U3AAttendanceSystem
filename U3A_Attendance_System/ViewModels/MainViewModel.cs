@@ -33,22 +33,17 @@ namespace U3A_Attendance_System.ViewModels
                 ActivateItem(new CourseInstanceEditViewModel((ICourseInstance)obj));
         }
 
-        public void ShowCIList(ICourseDescription cd)
+        public void ShowCIList(Object obj)
         {
-            ActivateItem(new CourseInstanceListViewModel(cd));
-            //tabbedView.SelectedTab = 2;
+            if (obj is ICourseDescription)
+                ActivateItem(new CourseInstanceListViewModel((ICourseDescription)obj));
+            else
+                ActivateItem(new CourseInstanceListViewModel());
         }
 
         public void ShowCISessionEdit(ISession session)
         {
             new CourseInstanceSessionEditViewModel(session);
-        }
-
-        public void DeleteDescriptionConfirm(ICourseDescription cd)
-        {
-            if (MessageBox.Show("Are you sure you want to delete the Course Descripton: '" + cd.Title + "' ?", "Confirm Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                _facade.DeleteCourseDescription(cd.Id);
-
         }
 
         public void ShowTabbedView()

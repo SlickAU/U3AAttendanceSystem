@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using U3A_Attendance_Model;
 using U3A_Attendance_System.Views;
@@ -18,14 +18,12 @@ namespace U3A_Attendance_System.ViewModels
         
         #region Properties
 
-        public BindingList<ICourseDescription> CourseDescriptions
+        public IEnumerable<ICourseDescription> CourseDescriptions
         {
             get
             {
-                return new BindingList<ICourseDescription>(new List<ICourseDescription>(_facade.FetchCourseDescriptions()));
+                return _facade.FetchCourseDescriptions();
             }
-
-            set {  }
         }
 
         public string TitleSearch { get { return titleSearch; } set { titleSearch = value; SearchTitles(); } }
@@ -42,7 +40,7 @@ namespace U3A_Attendance_System.ViewModels
                 //settings.SizeToContent = SizeToContent.Manual;
 
                 _wm.ShowDialog(new CourseDescriptionEditViewModel((ICourseDescription)cd), null, settings);
-                this.Refresh();
+                NotifyOfPropertyChange("CourseDescriptions");
             }
             else
             {
@@ -50,9 +48,17 @@ namespace U3A_Attendance_System.ViewModels
                 //settings.SizeToContent = SizeToContent.Manual;
 
                 _wm.ShowDialog(new CourseDescriptionEditViewModel(), null, settings);
-
-                this.Refresh();
+                NotifyOfPropertyChange("CourseDescriptions");
             }
+        }
+
+        public void DeleteDescriptionConfirm(ICourseDescription cd)
+        {
+            if (MessageBox.Show("Are you sure you want to delete the Course Descripton: '" + cd.Title + "' ?", "Confirm Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                _facade.DeleteCourseDescription(cd.Id);
+
+            NotifyOfPropertyChange("CourseDescriptions");
+
         }
 
         public void SearchTitles()

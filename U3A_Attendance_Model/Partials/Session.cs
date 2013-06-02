@@ -9,6 +9,8 @@ namespace U3A_Attendance_Model
     internal partial class Session : ISession
     {
 
+
+
         public Session(Guid courseInstanceId, Guid locationId, DateTime date)
         {
             Date = date;

@@ -8,5 +8,9 @@ namespace U3A_Attendance_Model.Partials.CourseState
 {
     internal class Active : CourseInstanceState
     {
+        internal override CourseInstance.State State
+        {
+            get { return CourseInstance.State.Active; }
+        }
     }
 }

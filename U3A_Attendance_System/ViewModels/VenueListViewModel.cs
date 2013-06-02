@@ -25,6 +25,7 @@ namespace U3A_Attendance_System.ViewModels
             settings.Title = "Edit Venue";
             settings.SizeToContent = SizeToContent.Manual;
             _wm.ShowDialog(new VenueEditViewModel(venue), null, settings);
+            NotifyOfPropertyChange("VenueList");
         }
 
         public void ShowVenueCreate()
@@ -33,6 +34,7 @@ namespace U3A_Attendance_System.ViewModels
             settings.SizeToContent = SizeToContent.Manual;
 
             _wm.ShowDialog(new VenueEditViewModel(), null, settings);
+            NotifyOfPropertyChange("VenueList");
         }
 
         public void Delete(IVenue venue)
@@ -43,26 +45,25 @@ namespace U3A_Attendance_System.ViewModels
                 {
                     _facade.DeleteVenue(venue.Id, venue.RegionId, venue.SuburbId);
                 }
-                catch (InvalidOperationException e)
+                catch (AssociationDependencyException e)
                 {
-                    if (MessageBox.Show("Warning! This venue has corresponding locations, deleting this venue will also delete application, continue?", "Confirm delete", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    if (MessageBox.Show("Warning! This venue has corresponding locations, deleting this venue will also delete all corresponding locations, continue?", "Confirm delete", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                     {
             
-                        var locations = venue.Locations;
-                        
-                       
+                        var locations = venue.Locations.AsEnumerable();
+                        int count = locations.Count();
 
-                        for (int i = 0; i < locations.Count(); i++)
+                        for (int i = 0; i < count; i++)
                         {
-                            _facade.DeleteLocation(venue.RegionId, venue.SuburbId, venue.Id, locations.ElementAt(i).Id);
+                            _facade.DeleteLocation(venue.RegionId, venue.SuburbId, venue.Id, locations.ElementAt(0).Id);
                         }
 
                         _facade.DeleteVenue(venue.Id, venue.RegionId, venue.SuburbId);
                     }
                 }
 
-                this.Refresh();
             }
+            NotifyOfPropertyChange("VenueList");
         }
         #endregion
     }

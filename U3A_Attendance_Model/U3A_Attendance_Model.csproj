@@ -173,7 +173,6 @@
     <Compile Include="Region.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="SearchEngine.cs" />
     <Compile Include="Session.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

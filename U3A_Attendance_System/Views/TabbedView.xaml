@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         xmlns:userControls="a">
     <Grid>
-        <TabControl SelectedIndex="{Binding SelectedTab}">
+        <TabControl SelectedIndex="{Binding SelectedTab}" cal:Message.Attach="ResetView">
             <TabItem Header="Course Descriptions">
                 <ContentControl Name="View1"/>
             </TabItem>

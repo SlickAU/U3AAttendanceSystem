@@ -11,6 +11,7 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
+            
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
                     <local:U3ABootStrapper x:Key="bootstrapper" />

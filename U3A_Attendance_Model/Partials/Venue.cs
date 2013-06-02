@@ -28,6 +28,10 @@ namespace U3A_Attendance_Model
 
         internal void delete(Action<Venue> action)
         {
+            if (Locations.Count > 0)
+            {
+                throw new AssociationDependencyException("This venue cannot be deleted as it has associated locations");
+            }
             action(this);
         }
 

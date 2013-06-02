@@ -14,7 +14,7 @@
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Button Content="Create Course Template" Width="200" VerticalAlignment="Center" HorizontalAlignment="Left" cal:Message.Attach="ShowCDEdit($dataContext)"/>
+        <Button Content="Create Course Template" Width="200" VerticalAlignment="Center" HorizontalAlignment="Left" cal:Message.Attach="ShowCDEdit($dataContext)" Background="{DynamicResource DarkBlueButtonBrush}" Foreground="{DynamicResource ButtonWhiteFont}"/>
         <!--<Label Content="Search Course Descriptions" VerticalAlignment="Top" HorizontalAlignment="Center"/>-->
         <TextBox Text="{Binding TitleSearch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" VerticalAlignment="Center" HorizontalAlignment="Center" >
             <TextBox.Style>
@@ -40,7 +40,7 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <DataGrid Name="CourseDescriptions" HorizontalAlignment="Stretch" VerticalAlignment="Top" AutoGenerateColumns="False" Grid.Row="1">
+        <DataGrid Name="CourseDescriptions" HorizontalAlignment="Stretch" VerticalAlignment="Top" AutoGenerateColumns="False" Grid.Row="1" IsReadOnly="True">
             <DataGrid.Resources>
                 <ResourceDictionary>
                     <Style x:Key="NoFocusColumnStyle" TargetType="{x:Type DataGridCell}">
@@ -75,10 +75,10 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Button Content="Edit" cal:Message.Attach="ShowCDEdit($dataContext)" Style="{DynamicResource SquareButtonStyle}"></Button>
-                                <Button Name="Delete"  Content="Delete" cal:Message.Attach="DeleteDescriptionConfirm($dataContext)" Style="{DynamicResource SquareButtonStyle}"></Button>
-                                <Button Name="View_btn"  Content="View Courses" IsEnabled="{Binding HasInstances}" cal:Message.Attach="ShowCIList($dataContext)" Style="{DynamicResource SquareButtonStyle}"></Button>
-                                <Button Name="Create_btn"  Content="Create Course" cal:Message.Attach="ShowCIEdit($dataContext)" Style="{DynamicResource SquareButtonStyle}"></Button>
+                                <Button Content="Edit" cal:Message.Attach="ShowCDEdit($dataContext)" Width="140"></Button>
+                                <Button Name="Delete"  Content="Delete" cal:Message.Attach="DeleteDescriptionConfirm($dataContext)" Width="140"></Button>
+                                <Button Name="View_btn"  Content="View Courses" IsEnabled="{Binding HasInstances}" cal:Message.Attach="ShowCIList($dataContext)" Width="140"></Button>
+                                <Button Name="Create_btn"  Content="Create Course" cal:Message.Attach="ShowCIEdit($dataContext)" Width="140"></Button>
                             </StackPanel>
 
 

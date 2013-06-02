@@ -13,13 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Caliburn.Micro;
+using MahApps.Metro.Controls;
 
 namespace U3A_Attendance_System.Views
 {
     /// <summary>
     /// Interaction logic for VenueEditView.xaml
     /// </summary>
-    public partial class VenueEditView : Window
+    public partial class VenueEditView : MetroWindow
     {
         public VenueEditView()
         {

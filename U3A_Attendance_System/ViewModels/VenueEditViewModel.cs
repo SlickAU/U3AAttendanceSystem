@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
@@ -97,7 +98,7 @@ namespace U3A_Attendance_System.ViewModels
             Address = existingVenue.Address;
             CodeId = existingVenue.CodeId;
             Regions = _facade.FetchRegions().ToList();
-            ListOfLocations = existingVenue.Locations;
+            ListOfLocations = new BindingList<ILocation>(existingVenue.Locations.ToList());
             Rooms = ListOfLocations.Select(l => l.Room).ToList();
             SelectedRegion = Regions.Where(r => r.Id.Equals(existingVenue.RegionId)).FirstOrDefault();
             Suburbs = _facade.FetchSuburbs(SelectedRegion.Id);
@@ -111,10 +112,15 @@ namespace U3A_Attendance_System.ViewModels
         #region Location Manegement
         //--------------------------------------
         private IEnumerable<ILocation> _listOfLocations;
-        public IEnumerable<ILocation> ListOfLocations
+        public BindingList<ILocation> ListOfLocations
         {
-            get { return _listOfLocations; }
-            set { _listOfLocations = value; this.Refresh(); }
+            get {
+                if (existingVenue != null)
+                    return new BindingList<ILocation>(_facade.FetchLocations(existingVenue.RegionId, existingVenue.SuburbId, existingVenue.Id).ToList());
+                else
+                    return null;
+            }
+            set { }
         }
         public List<string> Rooms { get; set; }
         public string RoomName { get; set; }
@@ -127,23 +133,25 @@ namespace U3A_Attendance_System.ViewModels
         {
             _facade.DeleteLocation(SelectedRegion.Id, SelectedSuburb.Id, existingVenue.Id, locationId);
          //  ListOfLocations.ToList().Remove(ListOfLocations.Where(l => l.Id.Equals(locationId)).FirstOrDefault());
-            this.Refresh();
+            NotifyOfPropertyChange("ListOfLocations");
         }
 
         public void ClearListOfLocations()
         {
+           int count = ListOfLocations.Count();
+           var locations = ListOfLocations;
             //Not working properly e.g. leaves some of the locations undeleted from first try
-           for (int i = 0; i < ListOfLocations.Count(); i++)
+           for (int i = 0; i < count; i++)
            {
-                _facade.DeleteLocation(SelectedRegion.Id, SelectedSuburb.Id, existingVenue.Id, ListOfLocations.ToArray()[i].Id);
-                this.Refresh();
-            }
-           
+                _facade.DeleteLocation(SelectedRegion.Id, SelectedSuburb.Id, existingVenue.Id, locations[i].Id);
+           }
+
+           NotifyOfPropertyChange("ListOfLocations");
         }
 
         public void UpdateLocations()
         {
-            List<ILocation> list = new List<ILocation>();
+            /*List<ILocation> list = new List<ILocation>();
 
             if (existingVenue.Locations.Count() == 0)
             {
@@ -162,7 +170,12 @@ namespace U3A_Attendance_System.ViewModels
 
 
 
-            this.Refresh();
+            this.Refresh();*/
+
+            if (RoomName != null)
+                _facade.CreateLocation(_selectedRegion.Id, existingVenue.SuburbId, existingVenue.Id, RoomName);
+
+            NotifyOfPropertyChange("ListOfLocations");
         }
         //--------------------------------------
         #endregion
@@ -176,7 +189,11 @@ namespace U3A_Attendance_System.ViewModels
         }
         public void Update()
         {
-            existingVenue = _facade.CreateVenue(_selectedRegion.Id, _selectedSuburb.Id, VenueName, Address, CodeId);
+            if (existingVenue != null)
+                existingVenue = _facade.UpdateVenue(existingVenue.Id, _selectedRegion.Id, _selectedSuburb.Id, VenueName, Address, CodeId);
+            else
+                existingVenue = _facade.CreateVenue(_selectedRegion.Id, _selectedSuburb.Id, VenueName, Address, CodeId);
+
             this.Refresh();
         }
 

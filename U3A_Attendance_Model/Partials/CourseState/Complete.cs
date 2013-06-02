@@ -8,5 +8,11 @@ namespace U3A_Attendance_Model.Partials.CourseState
 {
     internal class Complete : CourseInstanceState
     {
+
+        internal override CourseInstance.State State
+        {
+            get { return CourseInstance.State.Complete; }
+        }
+
     }
 }

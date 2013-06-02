@@ -1,1 +1,0 @@
-C:\Users\p403\Desktop\TEMP\log4net-1.2.11\examples\net\2.0\Tutorials\ConsoleApp\cs\build\debug\ConsoleApp.exe.config

@@ -11,7 +11,7 @@ namespace U3A_Attendance_Model
     public class Facade : IDisposable
     {
         private U3AAttendanceEntities _context = new U3AAttendanceEntities();
-        private SearchEngine _searchEngine = new SearchEngine(); 
+        private U3A.SearchEngine _searchEngine = new U3A.SearchEngine(); 
         private U3A _u3a;
 
         //Facade Constructor
