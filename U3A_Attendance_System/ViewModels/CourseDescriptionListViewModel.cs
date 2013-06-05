@@ -1,5 +1,9 @@
-﻿using System;
+﻿using Caliburn.Micro;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,18 +16,23 @@ namespace U3A_Attendance_System.ViewModels
 {
     public class CourseDescriptionListViewModel : BaseViewModel
     {
-        private IEnumerable<ICourseDescription> courseDescriptions;
+        private ObservableCollection<ICourseDescription> courseDescriptions;
 
         private string titleSearch;
         
         #region Properties
 
-        public IEnumerable<ICourseDescription> CourseDescriptions
+
+        public ObservableCollection<ICourseDescription> CourseDescriptions
         {
             get
             {
-                return _facade.FetchCourseDescriptions();
-            }
+                courseDescriptions = new ObservableCollection<ICourseDescription>
+                    (
+                        _facade.FetchCourseDescriptions().OrderBy(cd => cd.CourseNumber)
+                    );
+                return courseDescriptions;
+            } 
         }
 
         public string TitleSearch { get { return titleSearch; } set { titleSearch = value; SearchTitles(); } }
@@ -37,18 +46,15 @@ namespace U3A_Attendance_System.ViewModels
             if (cd is ICourseDescription)
             {
                 settings.Title = "Edit course description";
-                //settings.SizeToContent = SizeToContent.Manual;
-
                 _wm.ShowDialog(new CourseDescriptionEditViewModel((ICourseDescription)cd), null, settings);
-                NotifyOfPropertyChange("CourseDescriptions");
+                NotifyOfPropertyChange(() => CourseDescriptions);
             }
             else
             {
                 settings.Title = "Create course description";
-                //settings.SizeToContent = SizeToContent.Manual;
-
                 _wm.ShowDialog(new CourseDescriptionEditViewModel(), null, settings);
                 NotifyOfPropertyChange("CourseDescriptions");
+                this.Refresh();
             }
         }
 
@@ -72,5 +78,7 @@ namespace U3A_Attendance_System.ViewModels
         }
 
         #endregion
+
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
     }
 }

@@ -40,7 +40,7 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
-        <DataGrid Name="CourseDescriptions" HorizontalAlignment="Stretch" VerticalAlignment="Top" AutoGenerateColumns="False" Grid.Row="1" IsReadOnly="True">
+        <DataGrid x:Name="CourseDescriptions" HorizontalAlignment="Stretch"    VerticalAlignment="Top" AutoGenerateColumns="False" Grid.Row="1" IsReadOnly="True" >
             <DataGrid.Resources>
                 <ResourceDictionary>
                     <Style x:Key="NoFocusColumnStyle" TargetType="{x:Type DataGridCell}">

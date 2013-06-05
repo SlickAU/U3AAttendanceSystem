@@ -8,11 +8,12 @@ using U3A_Attendance_Model;
 using Caliburn.Micro;
 using System.ComponentModel.Composition;
 using System.Dynamic;
+using System.Collections.Specialized;
 
 namespace U3A_Attendance_System.ViewModels
 {
- 
-    public abstract class BaseViewModel : PropertyChangedBase
+
+    public abstract class BaseViewModel : PropertyChangedBase, INotifyCollectionChanged
     {
         #region Members
 
@@ -28,5 +29,7 @@ namespace U3A_Attendance_System.ViewModels
 
 
 
+
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
     }
 }
