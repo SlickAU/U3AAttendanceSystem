@@ -13,83 +13,10 @@ namespace U3A_Attendance_Model
     using System.Collections.Generic;
     
     using System.ComponentModel;
-    internal partial class Coordinator
+    internal partial class Coordinator : Teacher
     {
     	
     	partial void ObjectPropertyChanged(string propertyName);
     
-        public Coordinator()
-        {
-            this.CourseInstances = new HashSet<CourseInstance>();
-        }
-    
-    	private System.Guid _id;
-        public  System.Guid Id 
-		{ 
-			get
-			{ 
-				return _id; 
-			} 
-			set
-			{
-				_id = value;
-				ObjectPropertyChanged("Id");
-			}
-		}
-    	private string _name;
-        public  string Name 
-		{ 
-			get
-			{ 
-				return _name; 
-			} 
-			set
-			{
-				_name = value;
-				ObjectPropertyChanged("Name");
-			}
-		}
-    	private string _phone;
-        public  string Phone 
-		{ 
-			get
-			{ 
-				return _phone; 
-			} 
-			set
-			{
-				_phone = value;
-				ObjectPropertyChanged("Phone");
-			}
-		}
-    	private string _email;
-        public  string Email 
-		{ 
-			get
-			{ 
-				return _email; 
-			} 
-			set
-			{
-				_email = value;
-				ObjectPropertyChanged("Email");
-			}
-		}
-    	private System.Guid _u3aid;
-        public  System.Guid U3AId 
-		{ 
-			get
-			{ 
-				return _u3aid; 
-			} 
-			set
-			{
-				_u3aid = value;
-				ObjectPropertyChanged("U3AId");
-			}
-		}
-    
-        public virtual U3A U3A { get; set; }
-        public virtual ICollection<CourseInstance> CourseInstances { get; set; }
     }
 }

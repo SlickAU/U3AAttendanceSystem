@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +28,8 @@ namespace U3A_Attendance_System.ViewModels
         private IVenue _selectedVenue;
         private ILocation _selectedLocation;
         private ICoordinator _selectedCoordinator;
+        private string _courseCode;
+        private int _sessionOccurances;
 
         private string[] _members;
         private Dictionary<Guid, string> _sessions = new Dictionary<Guid, string>();
@@ -40,7 +47,22 @@ namespace U3A_Attendance_System.ViewModels
             }
             set {}
         }
-        public string CourseCode { get; set; }
+
+        [Required(ErrorMessage="Required")]
+        [RegularExpression(@"^(([1-9]{3})([A-Z]{2})([0-9]{2}))$", ErrorMessage="The Course Code must be in '138TB01' format")]
+        public string CourseCode
+        {
+            get { return _courseCode; }
+
+            [DebuggerNonUserCode]
+            set
+            {
+                Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "CourseCode" });
+                _courseCode = value;
+                NotifyOfPropertyChange("CourseCode");
+            }
+        }
+
         public DateTime StartDate { get; set; }
         public IEnumerable<IRegion> Regions
         { 
@@ -181,7 +203,20 @@ namespace U3A_Attendance_System.ViewModels
                 return freqs;
             }
         }
-        public int SessionOccurances { get; set; }
+
+        [Required(ErrorMessage = "Minimum number of occurances required is 1")]
+        public int SessionOccurances
+        {
+            get { return _sessionOccurances; }
+
+            [DebuggerNonUserCode]
+            set
+            {
+                Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "SessionOccurances" });
+                _sessionOccurances = value;
+                NotifyOfPropertyChange("SessionOccurances");
+            }
+        }
 
         public IEnumerable<ISession> Sessions
         {
@@ -351,7 +386,7 @@ namespace U3A_Attendance_System.ViewModels
             SelectedSuburb = Suburbs.Where(sub => sub.Id.Equals(ci.SuburbId)).FirstOrDefault();
             SelectedVenue = Venues.Where(ven => ven.Id.Equals(ci.VenueId)).FirstOrDefault();
             SelectedLocation = Locations.Where(loc => loc.Id.Equals(ci.DefaultLocationId)).FirstOrDefault();
-            SelectedCoordinator = Coordinators.Where(co => co.Id.Equals(ci.CoordinatorId)).FirstOrDefault();
+            SelectedCoordinator = Coordinators.Where(co => co.Id.Equals(ci.TeacherId)).FirstOrDefault();
         }
 
         public void UpdateSuburbs(Guid regionId)
@@ -422,11 +457,15 @@ namespace U3A_Attendance_System.ViewModels
                  ci = _facade.UpdateCourseInstance(_ci.Id, _selectedCoordinator.Id, _selectedRegion.Id, _selectedSuburb.Id, _selectedVenue.Id, _selectedLocation.Id, StartDate, _ci.StateId, CourseCode);
 
             _ci = ci;
+
+            _facade.SerializeObject(ci);
+
             this.Refresh();
         }
 
         public void CheckForNullValues()
         {
+
             if (SelectedCoordinator == null)
             {
                 throw new BusinessRuleException("Coordinator cannot be Empty");
@@ -590,6 +629,7 @@ namespace U3A_Attendance_System.ViewModels
             return _attendance;
 
         }
+
 
         public void ShowCISessionEdit(ISession session)
         {

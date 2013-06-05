@@ -25,6 +25,11 @@ namespace U3A_Attendance_System.ViewModels
         #region Properties
         //--------------------------------------
         private string _venueName;
+        private string _address;
+        private string _codeId;
+        private string _roomName;
+
+
         [Required(ErrorMessage = "Required")]
         public string VenueName
         {
@@ -39,9 +44,38 @@ namespace U3A_Attendance_System.ViewModels
                 NotifyOfPropertyChange("VenueName");
             }
         }
-        public string Address { get; set; }
-        public string CodeId { get; set; }
+
+        [Required(ErrorMessage = "Required")]
+        public string Address
+        {
+            get { return _address; }
+
+            [DebuggerNonUserCode]
+            set
+            {
+                Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "Address" });
+                _address = value;
+                NotifyOfPropertyChange("Address");
+            }
+        }
+
+        [Required(ErrorMessage = "Required")]
+        public string CodeId
+        {
+            get { return _codeId; }
+
+            [DebuggerNonUserCode]
+            set
+            {
+                Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "CodeId" });
+                _codeId = value;
+                NotifyOfPropertyChange("CodeId");
+            }
+        }
+
+
         public IEnumerable<ISuburb> Suburbs { get; set; }
+
         public Boolean IsSuburbsEnabled
         {
             get
@@ -123,7 +157,22 @@ namespace U3A_Attendance_System.ViewModels
             set { }
         }
         public List<string> Rooms { get; set; }
-        public string RoomName { get; set; }
+
+        [Required(ErrorMessage="Required")]
+        public string RoomName
+        {
+            get { return _roomName; }
+
+            [DebuggerNonUserCode]
+            set
+            {
+
+                Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "RoomName" });
+                _roomName = value;
+                NotifyOfPropertyChange("RoomName");
+            }
+        }
+
         public Boolean IsLocationManagementEnabled
         {
             get { return !(existingVenue == null); }

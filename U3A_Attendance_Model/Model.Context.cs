@@ -19,9 +19,7 @@ namespace U3A_Attendance_Model
             : base("name=U3AAttendanceEntities")
         {
     		Attendances = Set<Attendance>();	
-    		Coordinators = Set<Coordinator>();	
     		CourseDescriptions = Set<CourseDescription>();	
-    		CourseInstances = Set<CourseInstance>();	
     		Locations = Set<Location>();	
     		Members = Set<Member>();	
     		Regions = Set<Region>();	
@@ -29,6 +27,8 @@ namespace U3A_Attendance_Model
     		Suburbs = Set<Suburb>();	
     		U3A = Set<U3A>();	
     		Venues = Set<Venue>();	
+    		CourseInstances = Set<CourseInstance>();	
+    		Teachers = Set<Teacher>();	
     
         }
     
@@ -38,9 +38,7 @@ namespace U3A_Attendance_Model
         }
     
         internal DbSet<Attendance> Attendances { get; set; }
-        internal DbSet<Coordinator> Coordinators { get; set; }
         internal DbSet<CourseDescription> CourseDescriptions { get; set; }
-        internal DbSet<CourseInstance> CourseInstances { get; set; }
         internal DbSet<Location> Locations { get; set; }
         internal DbSet<Member> Members { get; set; }
         internal DbSet<Region> Regions { get; set; }
@@ -48,5 +46,7 @@ namespace U3A_Attendance_Model
         internal DbSet<Suburb> Suburbs { get; set; }
         internal DbSet<U3A> U3A { get; set; }
         internal DbSet<Venue> Venues { get; set; }
+        internal DbSet<CourseInstance> CourseInstances { get; set; }
+        internal DbSet<Teacher> Teachers { get; set; }
     }
 }

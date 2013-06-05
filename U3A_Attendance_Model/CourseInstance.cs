@@ -20,7 +20,6 @@ namespace U3A_Attendance_Model
     
         public CourseInstance()
         {
-            this.StateId = 1;
             this.Sessions = new HashSet<Session>();
         }
     
@@ -76,17 +75,17 @@ namespace U3A_Attendance_Model
 				ObjectPropertyChanged("RegionId");
 			}
 		}
-    	private System.Guid _coordinatorid;
-        public  System.Guid CoordinatorId 
+    	private System.Guid _teacherid;
+        public  System.Guid TeacherId 
 		{ 
 			get
 			{ 
-				return _coordinatorid; 
+				return _teacherid; 
 			} 
 			set
 			{
-				_coordinatorid = value;
-				ObjectPropertyChanged("CoordinatorId");
+				_teacherid = value;
+				ObjectPropertyChanged("TeacherId");
 			}
 		}
     	private int _stateid;
@@ -129,8 +128,8 @@ namespace U3A_Attendance_Model
 			}
 		}
     
-        public virtual Coordinator Coordinator { get; set; }
         public virtual CourseDescription CourseDescription { get; set; }
+        public virtual Teacher Teacher { get; set; }
         public virtual Location Location { get; set; }
         public virtual Region Region { get; set; }
         public virtual ICollection<Session> Sessions { get; set; }

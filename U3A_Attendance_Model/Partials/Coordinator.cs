@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace U3A_Attendance_Model
 {
-    internal partial class Coordinator : ICoordinator
+    [Serializable]
+    internal partial class Coordinator : Teacher, ICoordinator
     {
+        Coordinator() { }
 
         public Coordinator(string name, string email, string phoneNumber, Guid u3aId)
         {

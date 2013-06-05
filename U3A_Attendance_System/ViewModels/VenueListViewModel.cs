@@ -11,7 +11,7 @@ namespace U3A_Attendance_System.ViewModels
     public class VenueListViewModel : BaseViewModel
     {
         #region Properties
-        public IEnumerable<IVenue> VenueList
+        public DoubleLinkedList<IVenue> VenueList
         {
             get { return _facade.FetchAllVenues(); }
         }

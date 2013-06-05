@@ -6,9 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="c0a460d3eb604e498ed1a91ca796b281" Name="Diagram1" ZoomLevel="77">
         <EntityTypeShape EntityType="U3AAttendanceModel.Attendance" Width="1.5" PointX="11.875" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="U3AAttendanceModel.Coordinator" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="U3AAttendanceModel.CourseDescription" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="U3AAttendanceModel.CourseInstance" Width="1.5" PointX="11.5" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="U3AAttendanceModel.Location" Width="1.5" PointX="9.75" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="U3AAttendanceModel.Member" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="U3AAttendanceModel.Region" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
@@ -18,19 +16,23 @@
         <EntityTypeShape EntityType="U3AAttendanceModel.Venue" Width="1.5" PointX="7.5" PointY="9.875" IsExpanded="true" />
         <AssociationConnector Association="U3AAttendanceModel.FK_Attendance_Member" ManuallyRouted="false" />
         <AssociationConnector Association="U3AAttendanceModel.FK_Attendance_Session1" ManuallyRouted="false" />
-        <AssociationConnector Association="U3AAttendanceModel.FK_Coordinator_U3A" ManuallyRouted="false" />
-        <AssociationConnector Association="U3AAttendanceModel.FK_Course_Instance_Coordinator1" ManuallyRouted="false" />
-        <AssociationConnector Association="U3AAttendanceModel.FK_Course_Instance_Course1" ManuallyRouted="false" />
         <AssociationConnector Association="U3AAttendanceModel.FK_Course_U3A1" ManuallyRouted="false" />
-        <AssociationConnector Association="U3AAttendanceModel.FK_Course_Instance_Location" ManuallyRouted="false" />
-        <AssociationConnector Association="U3AAttendanceModel.FK_Course_Instance_Region" ManuallyRouted="false" />
-        <AssociationConnector Association="U3AAttendanceModel.FK_Session_Course_Instance1" ManuallyRouted="false" />
         <AssociationConnector Association="U3AAttendanceModel.FK_Location_Venue1" ManuallyRouted="false" />
         <AssociationConnector Association="U3AAttendanceModel.FK_Session_Location" ManuallyRouted="false" />
         <AssociationConnector Association="U3AAttendanceModel.FK_Member_U3A" ManuallyRouted="false" />
         <AssociationConnector Association="U3AAttendanceModel.FK_Region_U3A" ManuallyRouted="false" />
         <AssociationConnector Association="U3AAttendanceModel.FK_Suburb_Region" ManuallyRouted="false" />
         <AssociationConnector Association="U3AAttendanceModel.FK_Venue_Suburb" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="U3AAttendanceModel.Coordinator" Width="1.5" PointX="13.375" PointY="15.375" />
+        <EntityTypeShape EntityType="U3AAttendanceModel.CourseInstance" Width="1.5" PointX="9" PointY="18.5" />
+        <EntityTypeShape EntityType="U3AAttendanceModel.Teacher" Width="1.5" PointX="16" PointY="17.375" />
+        <AssociationConnector Association="U3AAttendanceModel.FK_Course_Instance_Course1" />
+        <AssociationConnector Association="U3AAttendanceModel.FK_Course_Instance_Coordinator1" />
+        <AssociationConnector Association="U3AAttendanceModel.FK_Course_Instance_Location" />
+        <AssociationConnector Association="U3AAttendanceModel.FK_Course_Instance_Region" />
+        <AssociationConnector Association="U3AAttendanceModel.FK_Session_Course_Instance1" />
+        <AssociationConnector Association="U3AAttendanceModel.FK_Coordinator_U3A" />
+        <InheritanceConnector EntityType="U3AAttendanceModel.Coordinator" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

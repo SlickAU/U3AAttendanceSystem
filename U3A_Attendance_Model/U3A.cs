@@ -20,10 +20,10 @@ namespace U3A_Attendance_Model
     
         public U3A()
         {
-            this.Coordinators = new HashSet<Coordinator>();
             this.CourseDescriptions = new HashSet<CourseDescription>();
             this.Members = new HashSet<Member>();
             this.Regions = new HashSet<Region>();
+            this.Teachers = new HashSet<Teacher>();
         }
     
     	private System.Guid _id;
@@ -53,9 +53,9 @@ namespace U3A_Attendance_Model
 			}
 		}
     
-        public virtual ICollection<Coordinator> Coordinators { get; set; }
         public virtual ICollection<CourseDescription> CourseDescriptions { get; set; }
         public virtual ICollection<Member> Members { get; set; }
         public virtual ICollection<Region> Regions { get; set; }
+        public virtual ICollection<Teacher> Teachers { get; set; }
     }
 }

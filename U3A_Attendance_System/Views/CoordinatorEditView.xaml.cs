@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Caliburn.Micro;
 using MahApps.Metro.Controls;
 
 namespace U3A_Attendance_System.Views
@@ -23,6 +24,7 @@ namespace U3A_Attendance_System.Views
         public CoordinatorEditView()
         {
             InitializeComponent();
+            ConventionManager.ApplyValidation = (binding, viewModelType, property) => binding.ValidatesOnExceptions = true;
         }
 
         private void Update_Click(object sender, RoutedEventArgs e)
