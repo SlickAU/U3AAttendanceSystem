@@ -27,6 +27,12 @@ namespace U3A_Attendance_Model
             this.count = 0;
         }
 
+        public DoubleLinkedList(List<T> list)
+        {
+            foreach (var i in list)
+                Add(i);
+        }
+
         public int Count
         {
             get { return this.count; }
@@ -261,6 +267,7 @@ namespace U3A_Attendance_Model
         {
            return GetEnumerator();
         }
+
     }
 }
         

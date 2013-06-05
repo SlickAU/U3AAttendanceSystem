@@ -257,7 +257,7 @@ namespace U3A_Attendance_Model
 
         internal DoubleLinkedList<IVenue> fetchAllVenues()
         {
-            DoubleLinkedList<IVenue> venueList = new DoubleLinkedList<IVenue>();
+            List<IVenue> venueList = new List<IVenue>();
 
             foreach (var r in Regions)
             {
@@ -272,7 +272,7 @@ namespace U3A_Attendance_Model
                 }
             }
 
-            return venueList;
+            return BubbleSort(venueList);
 
         }
 
@@ -450,6 +450,28 @@ namespace U3A_Attendance_Model
                 return result.AsEnumerable();
             }
 
+        }
+
+        public DoubleLinkedList<IVenue> BubbleSort(List<IVenue> listToSort)
+        {
+            IVenue venue;
+            int x = 0;
+            for (int i = 0; i < listToSort.Count(); i++)
+            {
+                x = 0;
+                for (int a = x + 1; a < listToSort.Count() - i; a++)
+                {
+                    if (listToSort[x].Locations.Count() < listToSort[a].Locations.Count())
+                    {
+                        venue = listToSort[x];
+                        listToSort[x] = listToSort[a];
+                        listToSort[a] = venue;
+                    }
+                    x++;
+                }
+            }
+
+            return new DoubleLinkedList<IVenue>(listToSort);
         }
     }
 }
