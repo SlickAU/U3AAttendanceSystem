@@ -60,11 +60,11 @@ namespace U3A_Attendance_System.ViewModels
 
         public void DeleteDescriptionConfirm(ICourseDescription cd)
         {
-            if (MessageBox.Show("Are you sure you want to delete the Course Descripton: '" + cd.Title + "' ?", "Confirm Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                _facade.DeleteCourseDescription(cd.Id);
-
+            settings.Title = "Delete Course Description";
+            _wm.ShowDialog(new DeleteViewModel((ICourseDescription)cd), null, settings);
+            //if (MessageBox.Show("Are you sure you want to delete the Course Descripton: '" + cd.Title + "' ?", "Confirm Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            //    _facade.DeleteCourseDescription(cd.Id);
             NotifyOfPropertyChange("CourseDescriptions");
-
         }
 
         public void SearchTitles()

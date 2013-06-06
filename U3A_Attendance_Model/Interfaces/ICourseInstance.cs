@@ -16,6 +16,7 @@ namespace U3A_Attendance_Model
         Guid DefaultLocationId { get; }
         string CourseCode { get; }
         int StateId { get; }
+        string StatusString { get; }
         Guid SuburbId { get; }
         Guid VenueId { get; }
         IEnumerable<ISession> Sessions { get; }

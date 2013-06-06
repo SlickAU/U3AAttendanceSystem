@@ -222,23 +222,6 @@ namespace U3A_Attendance_System.ViewModels
         {
             get
             {
-                //var sessions = _ci.Sessions ?? null;
-                /*_ci.Sessions.SelectMany(s => s.Attendances); 
-                var attendances = sessions.SelectMany(s => s.Attendances).ToList();
-                var members = attendances.Select(a => a.Member).Distinct().ToList();
-                int width = sessions.Count();
-                int height = members.Count();
-
-                var m = _ci.Sessions.SelectMany(s => s.Attendances).Select(a => a.Member).Distinct().ToList();
-
-                var x = m.ToList();
-
-                //if (_ci != null)
-                //{
-                //    var sessions = _facade.FetchSessions(_ci.Id, _ci.RegionId);
-                //    return (sessions == null) ? null : sessions;
-                //}*/
-                //return sessions ?? null;
                 if (_ci != null)
                     return _ci.Sessions;
                 else
@@ -547,32 +530,11 @@ namespace U3A_Attendance_System.ViewModels
             this.Refresh();
         }
 
-        public void DeleteSession(ISession s)
+        public void DeleteSession(ISession session)
         {
-            if (MessageBox.Show("Are you sure you want to delete this session?", "Confirm delete", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
-            {
-                try
-                {
-                    _facade.DeleteSession(s.Id, s.CourseInstanceId, s.CourseInstance.RegionId);
-                }
-                catch (AssociationDependencyException e)
-                {
-                    if (MessageBox.Show("Warning! This session has corresponding attendance records, deleting this session will also delete attendance, continue?", "Confirm delete", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
-                    {
-                        //Delete corresponding attendances related to the session
-                        int attCount = s.Attendances.Count();
-
-                        for (int i = 0; i < attCount; i++)
-                        {
-                            _facade.DeleteAttendance(s.CourseInstance.RegionId, s.CourseInstanceId, s.Id, s.Attendances.ElementAt(0).Id);
-                        }
-
-                        _facade.DeleteSession(s.Id, s.CourseInstanceId, s.CourseInstance.RegionId);
-                    }
-                }
-
-                this.Refresh();
-            }
+            settings.Title = "Delete Session";
+            _wm.ShowDialog(new DeleteViewModel((ISession)session), null, settings);
+            this.Refresh();
         }
 
         //Attendance Management

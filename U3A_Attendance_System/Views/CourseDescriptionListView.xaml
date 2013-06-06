@@ -66,6 +66,7 @@
                             </Trigger>
                         </Style.Triggers>
                     </Style>-->
+                    
                 </ResourceDictionary>
             </DataGrid.Resources>
             <DataGrid.Columns>
@@ -80,10 +81,7 @@
                                 <Button Name="View_btn"  Content="View Courses" IsEnabled="{Binding HasInstances}" cal:Message.Attach="ShowCIList($dataContext)" Width="140"></Button>
                                 <Button Name="Create_btn"  Content="Create Course" cal:Message.Attach="ShowCIEdit($dataContext)" Width="140"></Button>
                             </StackPanel>
-
-
                         </DataTemplate>
-
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>

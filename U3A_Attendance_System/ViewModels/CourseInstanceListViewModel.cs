@@ -34,5 +34,14 @@ namespace U3A_Attendance_System.ViewModels
             InstancesList = new BindingList<ICourseInstance>(cd.CourseInstances.ToList());
         }
 
+        public void ShowCIDelete(ICourseInstance ci)
+        {
+            settings.Title = "Delete Course Instance";
+            _wm.ShowDialog(new DeleteViewModel((ICourseInstance)ci), null, settings);
+            //if (MessageBox.Show("Are you sure you want to delete the Course Descripton: '" + cd.Title + "' ?", "Confirm Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            //    _facade.DeleteCourseDescription(cd.Id);
+            NotifyOfPropertyChange("InstancesList");
+        }
+
     }
 }

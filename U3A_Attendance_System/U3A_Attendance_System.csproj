@@ -91,10 +91,12 @@
     <Compile Include="ViewModels\CourseInstanceEditViewModel.cs" />
     <Compile Include="ViewModels\CourseInstanceListViewModel.cs" />
     <Compile Include="ViewModels\CourseInstanceSessionEditViewModel.cs" />
+    <Compile Include="ViewModels\DeleteViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\TabbedViewModel.cs" />
     <Compile Include="ViewModels\VenueEditViewModel.cs" />
     <Compile Include="ViewModels\VenueListViewModel.cs" />
+    <Compile Include="ViewModels\WarningViewModel.cs" />
     <Compile Include="Views\CoordinatorEditView.xaml.cs">
       <DependentUpon>CoordinatorEditView.xaml</DependentUpon>
     </Compile>
@@ -120,6 +122,9 @@
     <Compile Include="Views\CourseInstanceSessionEditView.xaml.cs">
       <DependentUpon>CourseInstanceSessionEditView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DeleteView.xaml.cs">
+      <DependentUpon>DeleteView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EditPresence.xaml.cs">
       <DependentUpon>EditPresence.xaml</DependentUpon>
     </Compile>
@@ -138,6 +143,9 @@
     </Compile>
     <Compile Include="Views\VenueListView.xaml.cs">
       <DependentUpon>VenueListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WarningView.xaml.cs">
+      <DependentUpon>WarningView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -215,6 +223,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\DeleteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\EditPresence.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -239,6 +251,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\WarningView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="u3a-logo.ico" />
@@ -251,6 +267,15 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\deleteImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\warningImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\home.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

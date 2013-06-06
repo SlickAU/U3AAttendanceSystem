@@ -10,7 +10,6 @@ namespace U3A_Attendance_Model
 {
     internal partial class CourseInstance : ICourseInstance
     {
-
         internal enum State {Scheduled ,Active, Complete,Cancelled }
 
         private CourseInstanceState _state;
@@ -22,7 +21,6 @@ namespace U3A_Attendance_Model
                 return _state.State; 
             }
         }
-
 
         public Guid SuburbId
         {
@@ -37,6 +35,34 @@ namespace U3A_Attendance_Model
             get
             {
                 return Location.VenueId;
+            }
+        }
+
+        public string StatusString
+        {
+            get
+            {
+                if (StateId == 1)
+                {
+                    return "Scheduled";
+                }
+
+                if (StateId == 2)
+                {
+                    return "Active";
+                }
+
+                if (StateId == 3)
+                {
+                    return "Complete";
+                }
+
+                if (StateId == 4)
+                {
+                    return "Cancelled";
+                }
+
+                else return null;
             }
         }
 
@@ -75,6 +101,11 @@ namespace U3A_Attendance_Model
 
         internal void delete(Action<CourseInstance> action)
         {
+            if (Sessions.Count > 0)
+            {
+                throw new AssociationDependencyException("This venue cannot be deleted as it has associated locations");
+            }
+            
             _state.delete(delegate() { action(this); });
         }
 

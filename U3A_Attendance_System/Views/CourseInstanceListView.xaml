@@ -23,6 +23,7 @@
                 </ResourceDictionary>
             </DataGrid.Resources>
             <DataGrid.Columns>
+                <DataGridTextColumn Width="1*" Header="Status" Binding="{Binding Path=StatusString}" CellStyle="{StaticResource NoFocusColumnStyle}"></DataGridTextColumn>
                 <DataGridTextColumn Width="2*" Header="Course Description Name" Binding="{Binding Path=CourseDescription.Title}" CellStyle="{StaticResource NoFocusColumnStyle}"></DataGridTextColumn>
                 <DataGridTextColumn Width="1*" Header="Region Name" Binding="{Binding Path=Region.Description}" CellStyle="{StaticResource NoFocusColumnStyle}"></DataGridTextColumn>
                 <DataGridTextColumn Width="1*" Header="Suburb Name" Binding="{Binding Path=Location.Venue.Suburb.Name}" CellStyle="{StaticResource NoFocusColumnStyle}"></DataGridTextColumn>
@@ -31,7 +32,7 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <Button Content="Edit" Width="80" cal:Message.Attach="ShowCIEdit($dataContext)"></Button>
-                                <Button Content="Delete" Width="80"></Button>
+                                <Button Content="Delete" Width="80" cal:Message.Attach="ShowCIDelete($dataContext)"></Button>
                             </StackPanel>
                         </DataTemplate>
 

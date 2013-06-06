@@ -42,7 +42,6 @@ namespace U3A_Attendance_System.ViewModels
             s.Close();
         }
 
-
         //TODO: For some reason it cant distinquish between paramater types...
         public void ShowCIEdit(Object obj)
         {

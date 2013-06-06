@@ -37,9 +37,7 @@ namespace U3A_Attendance_System.Views
 
             //(DataContext as CourseDescriptionListViewModel).ShowCDEdit(courseDesc);
             //var view = new CourseDescriptionEdit(courseDesc);
-            //DuhPump.MainFrame.Navigate(view.Content);
-           
-
+            //DuhPump.MainFrame.Navigate(view.Content);           
         }
 
         public void Refresh()
