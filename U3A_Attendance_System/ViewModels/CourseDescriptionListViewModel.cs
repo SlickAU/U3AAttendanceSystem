@@ -17,7 +17,6 @@ namespace U3A_Attendance_System.ViewModels
     public class CourseDescriptionListViewModel : BaseViewModel
     {
         private ObservableCollection<ICourseDescription> courseDescriptions;
-
         private string titleSearch;
         private MainViewModel main;
         private TabbedViewModel tabbedView;
@@ -69,7 +68,7 @@ namespace U3A_Attendance_System.ViewModels
         public void ShowCIList(Object obj)
         {
             if (obj is ICourseDescription)
-                tabbedView.View2.FetchInstances((ICourseDescription)obj);
+                tabbedView.View2.FetchCDInstances((ICourseDescription)obj);
             tabbedView.Refresh();
             tabbedView.SelectedTab = 2;
         }
@@ -82,9 +81,6 @@ namespace U3A_Attendance_System.ViewModels
             settings.Title = "Delete Coordinator";
             _wm.ShowDialog(new DeleteViewModel(cd), null, settings);
             NotifyOfPropertyChange("CourseDescriptions");
-
-            NotifyOfPropertyChange("CourseDescriptions");
-
         }
 
         public void SearchTitles()

@@ -86,13 +86,11 @@ namespace U3A_Attendance_System.ViewModels
                 {
                     _facade.DeleteCourseInstance(courseInstance.Id, courseInstance.RegionId);
                     model.Refresh();
-                    model.RaisePropertyChangedEventImmediately("InstancesList");
                 }
                 catch (AssociationDependencyException e)
                 {
                     settings.Title = "Delete Instance Sessions";
                     _wm.ShowDialog(new WarningViewModel((ICourseInstance)courseInstance), null, settings);
-                    model.RaisePropertyChangedEventImmediately("InstancesList");
                 }
 
                 

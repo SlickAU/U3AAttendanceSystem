@@ -441,7 +441,7 @@ namespace U3A_Attendance_System.ViewModels
 
             _ci = ci;
 
-            _facade.SerializeObject(ci);
+            //_facade.SerializeObject(ci);
 
             this.Refresh();
         }

@@ -49,13 +49,5 @@ namespace U3A_Attendance_System.ViewModels
             View2 = new CourseInstanceListViewModel();
             this.Refresh();
         }
-
-        public void ShowCIList(ICourseDescription cd)
-        {
-            View2 = new CourseInstanceListViewModel(cd);
-            this.Refresh();
-            //View3.PopulateInstancesList(cd.CourseInstances);
-        }
-
     }
 }

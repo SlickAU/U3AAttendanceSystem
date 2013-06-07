@@ -52,9 +52,9 @@ namespace U3A_Attendance_System.ViewModels
 
         public void ShowCIList(Object obj)
         {
-            if (obj is ICourseDescription)
-                ActivateItem(new CourseInstanceListViewModel((ICourseDescription)obj));
-            else
+            //if (obj is ICourseDescription)
+            //    ActivateItem(new CourseInstanceListViewModel((ICourseDescription)obj));
+            //else
                 ActivateItem(new CourseInstanceListViewModel());
         }
 

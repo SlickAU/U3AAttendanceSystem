@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -10,39 +11,37 @@ namespace U3A_Attendance_System.ViewModels
 {
     public class CourseInstanceListViewModel : BaseViewModel
     {
-        private List<ICourseInstance> ciList = new List<ICourseInstance>();
-
-        public BindingList<ICourseInstance> InstancesList
+        private ICourseDescription cd;
+        private ObservableCollection<ICourseInstance> ciList;
+ 
+        public ObservableCollection<ICourseInstance> InstancesList
         {
             get
             {
-                return new BindingList<ICourseInstance>(ciList);
+              // return new ObservableCollection<ICourseInstance>(_facade.FetchCourseInstancesByDescription(cd.Id));
+                return ciList;
             }
             set
             {
-                ciList = value.ToList();
+                ciList = value;
                 NotifyOfPropertyChange("InstancesList");
             }
         }
 
         public CourseInstanceListViewModel()
         {
-            InstancesList = new BindingList<ICourseInstance>(_facade.AllInstances().ToList());
-        }
-
-        public CourseInstanceListViewModel(ICourseDescription cd)
-        {
-            InstancesList = new BindingList<ICourseInstance>(cd.CourseInstances.ToList());
+            InstancesList = new ObservableCollection<ICourseInstance>(_facade.AllInstances().ToList());
         }
 
         public void RefreshList()
         {
-            InstancesList = new BindingList<ICourseInstance>(_facade.AllInstances().ToList());
+            InstancesList = new ObservableCollection<ICourseInstance>(_facade.AllInstances().ToList());
         }
 
-        public void FetchInstances(ICourseDescription cd)
+        public void FetchCDInstances(ICourseDescription cd)
         {
-            InstancesList = new BindingList<ICourseInstance>(cd.CourseInstances.ToList());
+            this.cd = cd;
+            InstancesList = new ObservableCollection<ICourseInstance>(_facade.FetchCourseInstancesByDescription(cd.Id));
         }
 
         public void ShowCIDelete(ICourseInstance ci)
@@ -50,6 +49,7 @@ namespace U3A_Attendance_System.ViewModels
             settings.Title = "Delete Course Instance";
             _wm.ShowDialog(new DeleteViewModel((ICourseInstance)ci, this), null, settings);
             NotifyOfPropertyChange("InstancesList");
+            this.Refresh();
         }
     }
 }
