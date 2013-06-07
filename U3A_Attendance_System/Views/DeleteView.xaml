@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen"
         ShowMaxRestoreButton="False"
         ShowMinButton="False"
-        Title="DeleteView" Height="200" Width="450">
+        Title="DeleteView" Height="200" Width="450" ResizeMode="NoResize">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -40,8 +40,8 @@
         <Label Content="{Binding Label2}" Grid.Row="3" Grid.Column="2" VerticalAlignment="Bottom" />
         <Image Source="deleteImage.png"  Grid.Column="1" Height="80" Width="80" Margin="0,0,21,13.667" Grid.RowSpan="3" Grid.Row="1" />
 
-        <Button Content="No" HorizontalAlignment="Left" VerticalAlignment="Center"  Click="Delete_Click"  Grid.Column="1" Grid.Row="6" />
-        <Button cal:Message.Attach="Delete" Content="Yes" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="2" Click="Delete_Click" Grid.Row="6" />
+        <Button Content="No" HorizontalAlignment="Left" VerticalAlignment="Center"  Click="Delete_Click"  Grid.Column="2" Width="140"  Grid.Row="4" Margin="151,15,0,10" />
+        <Button cal:Message.Attach="Delete" Content="Yes" HorizontalAlignment="Right" VerticalAlignment="Center" Width="140" Grid.Column="2" Click="Delete_Click" Grid.Row="4" Margin="0,15,156,10" />
 
     </Grid>
 </Controls:MetroWindow>

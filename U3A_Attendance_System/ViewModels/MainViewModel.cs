@@ -14,7 +14,6 @@ namespace U3A_Attendance_System.ViewModels
 {
     public class MainViewModel : Conductor<object>
     {
-        //private WindowManager _wm = new WindowManager();
         protected Facade _facade;
         private TabbedViewModel tabbedView;
         private readonly BackgroundWorker worker = new BackgroundWorker();
@@ -32,8 +31,8 @@ namespace U3A_Attendance_System.ViewModels
 
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            _facade = FacadeFactory.Instance();
-            tabbedView = new TabbedViewModel();
+            //_facade = FacadeFactory.Instance();
+            tabbedView = new TabbedViewModel(this);
             ShowTabbedView();
         }
 
@@ -66,7 +65,7 @@ namespace U3A_Attendance_System.ViewModels
 
         public void ShowTabbedView()
         {
-            //tabbedView = new TabbedViewModel();
+            tabbedView.SelectedTab = 0 ;
             ActivateItem(tabbedView);
         }
 

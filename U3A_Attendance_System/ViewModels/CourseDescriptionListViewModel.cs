@@ -19,7 +19,9 @@ namespace U3A_Attendance_System.ViewModels
         private ObservableCollection<ICourseDescription> courseDescriptions;
 
         private string titleSearch;
-        
+        private MainViewModel main;
+        private TabbedViewModel tabbedView;
+
         #region Properties
 
 
@@ -32,12 +34,18 @@ namespace U3A_Attendance_System.ViewModels
                         _facade.FetchCourseDescriptions().OrderBy(cd => cd.CourseNumber)
                     );
                 return courseDescriptions;
-            } 
+            }
         }
 
         public string TitleSearch { get { return titleSearch; } set { titleSearch = value; SearchTitles(); } }
 
         #endregion
+
+        public CourseDescriptionListViewModel(MainViewModel main, TabbedViewModel tabbedView)
+        {
+            this.main = main;
+            this.tabbedView = tabbedView;
+        }
 
         #region Commands/Behaviours
 
@@ -58,13 +66,25 @@ namespace U3A_Attendance_System.ViewModels
             }
         }
 
+        public void ShowCIList(Object obj)
+        {
+            if (obj is ICourseDescription)
+                tabbedView.View2.FetchInstances((ICourseDescription)obj);
+            tabbedView.Refresh();
+            tabbedView.SelectedTab = 2;
+        }
+
         public void DeleteDescriptionConfirm(ICourseDescription cd)
         {
-            settings.Title = "Delete Course Description";
-            _wm.ShowDialog(new DeleteViewModel((ICourseDescription)cd), null, settings);
             //if (MessageBox.Show("Are you sure you want to delete the Course Descripton: '" + cd.Title + "' ?", "Confirm Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             //    _facade.DeleteCourseDescription(cd.Id);
+
+            settings.Title = "Delete Coordinator";
+            _wm.ShowDialog(new DeleteViewModel(cd), null, settings);
             NotifyOfPropertyChange("CourseDescriptions");
+
+            NotifyOfPropertyChange("CourseDescriptions");
+
         }
 
         public void SearchTitles()

@@ -13,6 +13,7 @@ namespace U3A_Attendance_System.ViewModels
         public string Label1 { get; set; }
         public string Label2 { get; set; }
         object itemToDelete;
+        private object viewModel;
 
         public DeleteViewModel(ICourseDescription courseDescription)
         {
@@ -34,11 +35,12 @@ namespace U3A_Attendance_System.ViewModels
             itemToDelete = coordinator;
         }
 
-        public DeleteViewModel(ICourseInstance instance)
+        public DeleteViewModel(ICourseInstance instance, CourseInstanceListViewModel model)
         {
             Label1 = instance.CourseDescription.Title;
             Label2 = instance.CourseCode;
             itemToDelete = instance;
+            viewModel = model;
         }
 
         public DeleteViewModel(ISession session)
@@ -63,12 +65,10 @@ namespace U3A_Attendance_System.ViewModels
                 {
                     _facade.DeleteVenue(venue.Id, venue.RegionId, venue.SuburbId);
                 }
-
                 catch (AssociationDependencyException e)
                 {
                     settings.Title = "Delete Venue Locations";
-                    _wm.ShowDialog(new WarningViewModel((IVenue)venue), null, settings);
-                    NotifyOfPropertyChange("VenueList");                    
+                    _wm.ShowDialog(new WarningViewModel((IVenue)venue), null, settings);                 
                 }
             }
 
@@ -80,18 +80,22 @@ namespace U3A_Attendance_System.ViewModels
             if (itemToDelete is ICourseInstance)
             {
                 ICourseInstance courseInstance = (ICourseInstance)itemToDelete;
+                var model = viewModel as CourseInstanceListViewModel;
                 
                 try
                 {
                     _facade.DeleteCourseInstance(courseInstance.Id, courseInstance.RegionId);
+                    model.Refresh();
+                    model.RaisePropertyChangedEventImmediately("InstancesList");
                 }
-
                 catch (AssociationDependencyException e)
                 {
                     settings.Title = "Delete Instance Sessions";
                     _wm.ShowDialog(new WarningViewModel((ICourseInstance)courseInstance), null, settings);
-                    NotifyOfPropertyChange("InstanceList");
+                    model.RaisePropertyChangedEventImmediately("InstancesList");
                 }
+
+                
             }
 
             if (itemToDelete is ISession)

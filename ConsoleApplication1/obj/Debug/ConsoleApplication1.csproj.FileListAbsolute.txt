@@ -9,10 +9,10 @@ C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\ConsoleApplication1\bin\Debug
 C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
 C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
 C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
-C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
 C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe.config
 C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe
 C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\ConsoleApplication1\bin\Debug\ConsoleApplication1.pdb
 C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
 C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
 C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
+C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache

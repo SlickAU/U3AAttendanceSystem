@@ -40,5 +40,6 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Button Content="Refresh" HorizontalAlignment="Left" Margin="0,10,0,0" VerticalAlignment="Top" Width="75" cal:Message.Attach="RefreshList" RenderTransformOrigin="-1.367,0.269"/>
     </Grid>
 </UserControl>
