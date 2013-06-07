@@ -85,7 +85,7 @@ namespace U3A_Attendance_System.ViewModels
                 try
                 {
                     _facade.DeleteCourseInstance(courseInstance.Id, courseInstance.RegionId);
-                    model.Refresh();
+                    model.NotifyOfPropertyChange("InstancesList");
                 }
                 catch (AssociationDependencyException e)
                 {

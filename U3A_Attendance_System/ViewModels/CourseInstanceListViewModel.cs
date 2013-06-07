@@ -13,43 +13,52 @@ namespace U3A_Attendance_System.ViewModels
     {
         private ICourseDescription cd;
         private ObservableCollection<ICourseInstance> ciList;
- 
+        public CourseDescriptionListViewModel cdm;
+
         public ObservableCollection<ICourseInstance> InstancesList
         {
             get
             {
-              // return new ObservableCollection<ICourseInstance>(_facade.FetchCourseInstancesByDescription(cd.Id));
-                return ciList;
+                var b = ciList;
+                  return ciList;
             }
             set
             {
                 ciList = value;
-                NotifyOfPropertyChange("InstancesList");
             }
         }
 
+        //Constructor
         public CourseInstanceListViewModel()
         {
             InstancesList = new ObservableCollection<ICourseInstance>(_facade.AllInstances().ToList());
         }
 
+        //Manual Refresh of All Instances List
         public void RefreshList()
         {
             InstancesList = new ObservableCollection<ICourseInstance>(_facade.AllInstances().ToList());
+            NotifyOfPropertyChange("InstancesList");
         }
 
-        public void FetchCDInstances(ICourseDescription cd)
+        //Fetches all CourseDescription relevant instances
+        public void FetchCDInstances(ICourseDescription cd, CourseDescriptionListViewModel cdm)
         {
             this.cd = cd;
+            this.cdm = cdm;
             InstancesList = new ObservableCollection<ICourseInstance>(_facade.FetchCourseInstancesByDescription(cd.Id));
+            NotifyOfPropertyChange("InstancesList");
         }
 
         public void ShowCIDelete(ICourseInstance ci)
         {
             settings.Title = "Delete Course Instance";
             _wm.ShowDialog(new DeleteViewModel((ICourseInstance)ci, this), null, settings);
+            InstancesList = new ObservableCollection<ICourseInstance>(cd.CourseInstances.ToList());
             NotifyOfPropertyChange("InstancesList");
-            this.Refresh();
+            cdm.Refresh();
         }
+
+       
     }
 }

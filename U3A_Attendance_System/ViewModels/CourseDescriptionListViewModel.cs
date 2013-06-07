@@ -68,16 +68,12 @@ namespace U3A_Attendance_System.ViewModels
         public void ShowCIList(Object obj)
         {
             if (obj is ICourseDescription)
-                tabbedView.View2.FetchCDInstances((ICourseDescription)obj);
-            tabbedView.Refresh();
+                tabbedView.View2.FetchCDInstances((ICourseDescription)obj, this);
             tabbedView.SelectedTab = 2;
         }
 
         public void DeleteDescriptionConfirm(ICourseDescription cd)
         {
-            //if (MessageBox.Show("Are you sure you want to delete the Course Descripton: '" + cd.Title + "' ?", "Confirm Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-            //    _facade.DeleteCourseDescription(cd.Id);
-
             settings.Title = "Delete Coordinator";
             _wm.ShowDialog(new DeleteViewModel(cd), null, settings);
             NotifyOfPropertyChange("CourseDescriptions");
@@ -88,7 +84,6 @@ namespace U3A_Attendance_System.ViewModels
             if (TitleSearch != null)
             {
                 string search = TitleSearch.ToUpper();
-                //CourseDescriptions = _facade.FetchCourseDescriptions().Where(cd => cd.Title.Contains(search));
                 this.Refresh();
             }
         }
