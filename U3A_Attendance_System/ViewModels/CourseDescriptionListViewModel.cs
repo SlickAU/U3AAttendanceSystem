@@ -17,10 +17,6 @@ namespace U3A_Attendance_System.ViewModels
     public class CourseDescriptionListViewModel : BaseViewModel
     {
         private ObservableCollection<ICourseDescription> courseDescriptions;
-<<<<<<< HEAD
-
-=======
->>>>>>> 78054c6f6ad9be51d5d9f7a6c03e8a917dbe5ff6
         private string titleSearch;
         private MainViewModel main;
         private TabbedViewModel tabbedView;
@@ -37,11 +33,7 @@ namespace U3A_Attendance_System.ViewModels
                         _facade.FetchCourseDescriptions().OrderBy(cd => cd.CourseNumber)
                     );
                 return courseDescriptions;
-<<<<<<< HEAD
             } 
-=======
-            }
->>>>>>> 78054c6f6ad9be51d5d9f7a6c03e8a917dbe5ff6
         }
 
         public string TitleSearch { get { return titleSearch; } set { titleSearch = value; SearchTitles(); } }

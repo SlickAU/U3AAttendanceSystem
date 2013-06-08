@@ -157,6 +157,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="GenericError.htm" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -186,7 +187,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\files\U3A Attendance System User Guide v1.1 7.06.2013.docx" />
-    <None Include="Properties\PublishProfiles\Default Settings %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
   </ItemGroup>
   <PropertyGroup>

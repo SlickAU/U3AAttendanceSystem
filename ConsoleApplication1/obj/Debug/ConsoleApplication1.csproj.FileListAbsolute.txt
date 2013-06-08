@@ -19,7 +19,3 @@ C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\ConsoleApplication1\bin\Debu
 C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
 C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
 C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb
-<<<<<<< HEAD
-=======
-C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\ConsoleApplication1\obj\Debug\ConsoleApplication1.csprojResolveAssemblyReference.cache
->>>>>>> 78054c6f6ad9be51d5d9f7a6c03e8a917dbe5ff6
