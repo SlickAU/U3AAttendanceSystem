@@ -1,8 +1,17 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model U3AWeb.Models.HomeModel
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@ViewBag.Message</h2>
-<p>
-    To learn more about ASP.NET MVC visit <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
-</p>
+<p><a href="Content/files/U3A Attendance System User Guide v1.1 7.06.2013.docx">Download Help Document</a></p>
+
+<h2>U3A Course Descriptions</h2>
+
+@{
+    foreach (var cd in Model.CourseDescriptions)
+    {
+        <p>@cd.Title</p>
+    }   
+}

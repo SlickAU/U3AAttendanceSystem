@@ -1,0 +1,15 @@
+﻿@model U3AWeb.Models.HomeModel
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>U3A Course Descriptions</h2>
+
+@{
+    foreach (var cd in Model.CourseDescriptions)
+    {
+        <p>@cd.Title</p>
+    }   
+}

@@ -255,9 +255,9 @@ namespace U3A_Attendance_Model
             return fetchRegion(regionId).fetchVenues(suburbId);
         }
 
-        internal IEnumerable<Venue> fetchAllVenues()
+        internal DoubleLinkedList<IVenue> fetchAllVenues()
         {
-            List<Venue> venueList = new List<Venue>();
+            List<IVenue> venueList = new List<IVenue>();
 
             foreach (var r in Regions)
             {
@@ -272,7 +272,7 @@ namespace U3A_Attendance_Model
                 }
             }
 
-            return venueList.AsEnumerable();
+            return BubbleSort(venueList);
 
         }
 
@@ -288,7 +288,7 @@ namespace U3A_Attendance_Model
         internal Coordinator createCoordinator(string name, string email, string phoneNumber)
         {
             var coordinator = new Coordinator(name, email, phoneNumber, this.Id);
-            this.Coordinators.Add(coordinator);
+            this.Teachers.Add(coordinator);
             return coordinator;
         }
 
@@ -300,7 +300,7 @@ namespace U3A_Attendance_Model
 
         internal Coordinator fetchCoordinator(Guid coordinatorId)
         {
-            var result = Coordinators.Where(c => c.Id.Equals(coordinatorId)).FirstOrDefault();
+            var result = Teachers.OfType<Coordinator>().Where(c => c.Id.Equals(coordinatorId)).FirstOrDefault();
 
             if (result == null)
             {
@@ -450,6 +450,28 @@ namespace U3A_Attendance_Model
                 return result.AsEnumerable();
             }
 
+        }
+
+        public DoubleLinkedList<IVenue> BubbleSort(List<IVenue> listToSort)
+        {
+            IVenue venue;
+            int x = 0;
+            for (int i = 0; i < listToSort.Count(); i++)
+            {
+                x = 0;
+                for (int a = x + 1; a < listToSort.Count() - i; a++)
+                {
+                    if (listToSort[x].Locations.Count() < listToSort[a].Locations.Count())
+                    {
+                        venue = listToSort[x];
+                        listToSort[x] = listToSort[a];
+                        listToSort[a] = venue;
+                    }
+                    x++;
+                }
+            }
+
+            return new DoubleLinkedList<IVenue>(listToSort);
         }
     }
 }

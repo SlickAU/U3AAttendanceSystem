@@ -72,6 +72,8 @@
     <Compile Include="CourseInstance.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Double Linked List\DoubleLinkedList.cs" />
+    <Compile Include="Double Linked List\DoubleLinkedListNode.cs" />
     <Compile Include="Exceptions\AssociationDependencyException.cs" />
     <Compile Include="Facade.cs" />
     <Compile Include="Interfaces\IAttendance.cs">
@@ -97,6 +99,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Interfaces\ISuburb.cs" />
+    <Compile Include="Interfaces\ITeacher.cs" />
     <Compile Include="Interfaces\IU3A.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -158,6 +161,7 @@
     <Compile Include="Partials\Suburb.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Partials\Teacher.cs" />
     <Compile Include="Partials\U3A.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -177,6 +181,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Suburb.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Teacher.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="U3A.cs">

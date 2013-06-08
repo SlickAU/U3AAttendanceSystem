@@ -12,7 +12,7 @@ namespace U3A_Attendance_Model
         DateTime StartDate { get; }
         Guid CourseId { get; }
         Guid RegionId { get; }
-        Guid CoordinatorId { get; }
+        Guid TeacherId { get; }
         Guid DefaultLocationId { get; }
         string CourseCode { get; }
         int StateId { get; }

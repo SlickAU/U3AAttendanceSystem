@@ -67,6 +67,7 @@ namespace U3A_Attendance_System.ViewModels
 
         public void ShowTabbedView()
         {
+            //tabbedView = new TabbedViewModel();
             ActivateItem(tabbedView);
         }
 

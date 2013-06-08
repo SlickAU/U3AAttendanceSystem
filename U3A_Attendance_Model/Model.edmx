@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="U3AAttendanceModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="U3AAttendanceModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="U3AAttendanceModelStoreContainer">
           <EntitySet Name="Attendance" EntityType="U3AAttendanceModel.Store.Attendance" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Coordinator" EntityType="U3AAttendanceModel.Store.Coordinator" store:Type="Tables" Schema="dbo" />
@@ -15,6 +15,7 @@
           <EntitySet Name="Region" EntityType="U3AAttendanceModel.Store.Region" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Session" EntityType="U3AAttendanceModel.Store.Session" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Suburb" EntityType="U3AAttendanceModel.Store.Suburb" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Teacher" EntityType="U3AAttendanceModel.Store.Teacher" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="U3A" EntityType="U3AAttendanceModel.Store.U3A" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Venue" EntityType="U3AAttendanceModel.Store.Venue" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_Attendance_Member" Association="U3AAttendanceModel.Store.FK_Attendance_Member">
@@ -25,12 +26,16 @@
             <End Role="Session" EntitySet="Session" />
             <End Role="Attendance" EntitySet="Attendance" />
           </AssociationSet>
-          <AssociationSet Name="FK_Coordinator_U3A" Association="U3AAttendanceModel.Store.FK_Coordinator_U3A">
-            <End Role="U3A" EntitySet="U3A" />
+          <AssociationSet Name="FK_Coordinator_Teacher" Association="U3AAttendanceModel.Store.FK_Coordinator_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
             <End Role="Coordinator" EntitySet="Coordinator" />
           </AssociationSet>
+          <AssociationSet Name="FK_Coordinator_U3A" Association="U3AAttendanceModel.Store.FK_Coordinator_U3A">
+            <End Role="U3A" EntitySet="U3A" />
+            <End Role="Teacher" EntitySet="Teacher" />
+          </AssociationSet>
           <AssociationSet Name="FK_Course_Instance_Coordinator1" Association="U3AAttendanceModel.Store.FK_Course_Instance_Coordinator1">
-            <End Role="Coordinator" EntitySet="Coordinator" />
+            <End Role="Teacher" EntitySet="Teacher" />
             <End Role="CourseInstance" EntitySet="CourseInstance" />
           </AssociationSet>
           <AssociationSet Name="FK_Course_Instance_Course1" Association="U3AAttendanceModel.Store.FK_Course_Instance_Course1">
@@ -89,13 +94,9 @@
         </EntityType>
         <EntityType Name="Coordinator">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="TeacherId" />
           </Key>
-          <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="Phone" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="Email" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="U3AId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TeacherId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="CourseDescription">
           <Key>
@@ -112,10 +113,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
           <Property Name="CourseId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="RegionId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="CoordinatorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TeacherId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="StateId" Type="int" Nullable="false" />
           <Property Name="DefaultLocationId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CourseCode" Type="varchar" Nullable="false" MaxLength="50" />
@@ -161,8 +162,18 @@
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="RegionId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="PostCode" Type="int" />
+          <Property Name="PostCode" Type="int" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Email" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="U3AId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="U3A">
           <Key>
@@ -205,27 +216,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Coordinator_Teacher">
+          <End Role="Teacher" Type="U3AAttendanceModel.Store.Teacher" Multiplicity="1" />
+          <End Role="Coordinator" Type="U3AAttendanceModel.Store.Coordinator" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Coordinator">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Coordinator_U3A">
           <End Role="U3A" Type="U3AAttendanceModel.Store.U3A" Multiplicity="1" />
-          <End Role="Coordinator" Type="U3AAttendanceModel.Store.Coordinator" Multiplicity="*" />
+          <End Role="Teacher" Type="U3AAttendanceModel.Store.Teacher" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="U3A">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Coordinator">
+            <Dependent Role="Teacher">
               <PropertyRef Name="U3AId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Course_Instance_Coordinator1">
-          <End Role="Coordinator" Type="U3AAttendanceModel.Store.Coordinator" Multiplicity="1" />
+          <End Role="Teacher" Type="U3AAttendanceModel.Store.Teacher" Multiplicity="1" />
           <End Role="CourseInstance" Type="U3AAttendanceModel.Store.CourseInstance" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Coordinator">
+            <Principal Role="Teacher">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="CourseInstance">
-              <PropertyRef Name="CoordinatorId" />
+              <PropertyRef Name="TeacherId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -367,9 +390,7 @@
       <Schema Namespace="U3AAttendanceModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="U3AAttendanceEntities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="Attendances" EntityType="U3AAttendanceModel.Attendance" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <EntitySet Name="Coordinators" EntityType="U3AAttendanceModel.Coordinator" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
           <EntitySet Name="CourseDescriptions" EntityType="U3AAttendanceModel.CourseDescription" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
-          <EntitySet Name="CourseInstances" EntityType="U3AAttendanceModel.CourseInstance" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
           <EntitySet Name="Locations" EntityType="U3AAttendanceModel.Location" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
           <EntitySet Name="Members" EntityType="U3AAttendanceModel.Member" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
           <EntitySet Name="Regions" EntityType="U3AAttendanceModel.Region" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
@@ -385,33 +406,9 @@
             <End Role="Session" EntitySet="Sessions" />
             <End Role="Attendance" EntitySet="Attendances" />
           </AssociationSet>
-          <AssociationSet Name="FK_Coordinator_U3A" Association="U3AAttendanceModel.FK_Coordinator_U3A">
-            <End Role="U3A" EntitySet="U3A" />
-            <End Role="Coordinator" EntitySet="Coordinators" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Course_Instance_Coordinator1" Association="U3AAttendanceModel.FK_Course_Instance_Coordinator1">
-            <End Role="Coordinator" EntitySet="Coordinators" />
-            <End Role="CourseInstance" EntitySet="CourseInstances" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Course_Instance_Course1" Association="U3AAttendanceModel.FK_Course_Instance_Course1">
-            <End Role="CourseDescription" EntitySet="CourseDescriptions" />
-            <End Role="CourseInstance" EntitySet="CourseInstances" />
-          </AssociationSet>
           <AssociationSet Name="FK_Course_U3A1" Association="U3AAttendanceModel.FK_Course_U3A1">
             <End Role="U3A" EntitySet="U3A" />
             <End Role="CourseDescription" EntitySet="CourseDescriptions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Course_Instance_Location" Association="U3AAttendanceModel.FK_Course_Instance_Location">
-            <End Role="Location" EntitySet="Locations" />
-            <End Role="CourseInstance" EntitySet="CourseInstances" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Course_Instance_Region" Association="U3AAttendanceModel.FK_Course_Instance_Region">
-            <End Role="Region" EntitySet="Regions" />
-            <End Role="CourseInstance" EntitySet="CourseInstances" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Session_Course_Instance1" Association="U3AAttendanceModel.FK_Session_Course_Instance1">
-            <End Role="CourseInstance" EntitySet="CourseInstances" />
-            <End Role="Session" EntitySet="Sessions" />
           </AssociationSet>
           <AssociationSet Name="FK_Location_Venue1" Association="U3AAttendanceModel.FK_Location_Venue1">
             <End Role="Venue" EntitySet="Venues" />
@@ -437,6 +434,32 @@
             <End Role="Suburb" EntitySet="Suburbs" />
             <End Role="Venue" EntitySet="Venues" />
           </AssociationSet>
+          <EntitySet Name="CourseInstances" EntityType="U3AAttendanceModel.CourseInstance" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <EntitySet Name="Teachers" EntityType="U3AAttendanceModel.Teacher" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <AssociationSet Name="FK_Course_Instance_Course1" Association="U3AAttendanceModel.FK_Course_Instance_Course1">
+            <End Role="CourseDescription" EntitySet="CourseDescriptions" />
+            <End Role="CourseInstance" EntitySet="CourseInstances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_Instance_Coordinator1" Association="U3AAttendanceModel.FK_Course_Instance_Coordinator1">
+            <End Role="Teacher" EntitySet="Teachers" />
+            <End Role="CourseInstance" EntitySet="CourseInstances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_Instance_Location" Association="U3AAttendanceModel.FK_Course_Instance_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="CourseInstance" EntitySet="CourseInstances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_Instance_Region" Association="U3AAttendanceModel.FK_Course_Instance_Region">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="CourseInstance" EntitySet="CourseInstances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Session_Course_Instance1" Association="U3AAttendanceModel.FK_Session_Course_Instance1">
+            <End Role="CourseInstance" EntitySet="CourseInstances" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coordinator_U3A" Association="U3AAttendanceModel.FK_Coordinator_U3A">
+            <End Role="U3A" EntitySet="U3A" />
+            <End Role="Teacher" EntitySet="Teachers" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Attendance" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
           <Key>
@@ -444,22 +467,10 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MemberId" Type="Int32" Nullable="false" />
-          <Property Name="Presence" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="Presence" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
           <Property Name="SessionId" Type="Guid" Nullable="false" />
           <NavigationProperty Name="Member" Relationship="U3AAttendanceModel.FK_Attendance_Member" FromRole="Attendance" ToRole="Member" />
           <NavigationProperty Name="Session" Relationship="U3AAttendanceModel.FK_Attendance_Session1" FromRole="Attendance" ToRole="Session" />
-        </EntityType>
-        <EntityType Name="Coordinator" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="U3AId" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="U3A" Relationship="U3AAttendanceModel.FK_Coordinator_U3A" FromRole="Coordinator" ToRole="U3A" />
-          <NavigationProperty Name="CourseInstances" Relationship="U3AAttendanceModel.FK_Course_Instance_Coordinator1" FromRole="Coordinator" ToRole="CourseInstance" />
         </EntityType>
         <EntityType Name="CourseDescription" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
           <Key>
@@ -470,26 +481,8 @@
           <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="Description" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="U3AId" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="CourseInstances" Relationship="U3AAttendanceModel.FK_Course_Instance_Course1" FromRole="CourseDescription" ToRole="CourseInstance" />
           <NavigationProperty Name="U3A" Relationship="U3AAttendanceModel.FK_Course_U3A1" FromRole="CourseDescription" ToRole="U3A" />
-        </EntityType>
-        <EntityType Name="CourseInstance" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CourseId" Type="Guid" Nullable="false" />
-          <Property Name="RegionId" Type="Guid" Nullable="false" />
-          <Property Name="CoordinatorId" Type="Guid" Nullable="false" />
-          <Property Name="StateId" Type="Int32" Nullable="false" DefaultValue="1" />
-          <Property Name="DefaultLocationId" Type="Guid" Nullable="false" />
-          <Property Name="CourseCode" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="Coordinator" Relationship="U3AAttendanceModel.FK_Course_Instance_Coordinator1" FromRole="CourseInstance" ToRole="Coordinator" />
-          <NavigationProperty Name="CourseDescription" Relationship="U3AAttendanceModel.FK_Course_Instance_Course1" FromRole="CourseInstance" ToRole="CourseDescription" />
-          <NavigationProperty Name="Location" Relationship="U3AAttendanceModel.FK_Course_Instance_Location" FromRole="CourseInstance" ToRole="Location" />
-          <NavigationProperty Name="Region" Relationship="U3AAttendanceModel.FK_Course_Instance_Region" FromRole="CourseInstance" ToRole="Region" />
-          <NavigationProperty Name="Sessions" Relationship="U3AAttendanceModel.FK_Session_Course_Instance1" FromRole="CourseInstance" ToRole="Session" />
+          <NavigationProperty Name="CourseInstances" Relationship="U3AAttendanceModel.FK_Course_Instance_Course1" FromRole="CourseDescription" ToRole="CourseInstance" />
         </EntityType>
         <EntityType Name="Location" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
           <Key>
@@ -498,9 +491,9 @@
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Room" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="VenueId" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="CourseInstances" Relationship="U3AAttendanceModel.FK_Course_Instance_Location" FromRole="Location" ToRole="CourseInstance" />
           <NavigationProperty Name="Venue" Relationship="U3AAttendanceModel.FK_Location_Venue1" FromRole="Location" ToRole="Venue" />
           <NavigationProperty Name="Sessions" Relationship="U3AAttendanceModel.FK_Session_Location" FromRole="Location" ToRole="Session" />
+          <NavigationProperty Name="CourseInstances" Relationship="U3AAttendanceModel.FK_Course_Instance_Location" FromRole="Location" ToRole="CourseInstance" />
         </EntityType>
         <EntityType Name="Member" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
           <Key>
@@ -519,9 +512,9 @@
           <Property Name="CodeId" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="U3AId" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="CourseInstances" Relationship="U3AAttendanceModel.FK_Course_Instance_Region" FromRole="Region" ToRole="CourseInstance" />
           <NavigationProperty Name="U3A" Relationship="U3AAttendanceModel.FK_Region_U3A" FromRole="Region" ToRole="U3A" />
           <NavigationProperty Name="Suburbs" Relationship="U3AAttendanceModel.FK_Suburb_Region" FromRole="Region" ToRole="Suburb" />
+          <NavigationProperty Name="CourseInstances" Relationship="U3AAttendanceModel.FK_Course_Instance_Region" FromRole="Region" ToRole="CourseInstance" />
         </EntityType>
         <EntityType Name="Session" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
           <Key>
@@ -533,8 +526,8 @@
           <Property Name="LocationId" Type="Guid" Nullable="false" />
           <Property Name="VisitorCount" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Attendances" Relationship="U3AAttendanceModel.FK_Attendance_Session1" FromRole="Session" ToRole="Attendance" />
-          <NavigationProperty Name="CourseInstance" Relationship="U3AAttendanceModel.FK_Session_Course_Instance1" FromRole="Session" ToRole="CourseInstance" />
           <NavigationProperty Name="Location" Relationship="U3AAttendanceModel.FK_Session_Location" FromRole="Session" ToRole="Location" />
+          <NavigationProperty Name="CourseInstance" Relationship="U3AAttendanceModel.FK_Session_Course_Instance1" FromRole="Session" ToRole="CourseInstance" />
         </EntityType>
         <EntityType Name="Suburb" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
           <Key>
@@ -554,10 +547,10 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="Coordinators" Relationship="U3AAttendanceModel.FK_Coordinator_U3A" FromRole="U3A" ToRole="Coordinator" />
           <NavigationProperty Name="CourseDescriptions" Relationship="U3AAttendanceModel.FK_Course_U3A1" FromRole="U3A" ToRole="CourseDescription" />
           <NavigationProperty Name="Members" Relationship="U3AAttendanceModel.FK_Member_U3A" FromRole="U3A" ToRole="Member" />
           <NavigationProperty Name="Regions" Relationship="U3AAttendanceModel.FK_Region_U3A" FromRole="U3A" ToRole="Region" />
+          <NavigationProperty Name="Teachers" Relationship="U3AAttendanceModel.FK_Coordinator_U3A" FromRole="U3A" ToRole="Teacher" />
         </EntityType>
         <EntityType Name="Venue" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
           <Key>
@@ -595,42 +588,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Coordinator_U3A">
-          <End Role="U3A" Type="U3AAttendanceModel.U3A" Multiplicity="1" />
-          <End Role="Coordinator" Type="U3AAttendanceModel.Coordinator" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="U3A">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Coordinator">
-              <PropertyRef Name="U3AId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Course_Instance_Coordinator1">
-          <End Role="Coordinator" Type="U3AAttendanceModel.Coordinator" Multiplicity="1" />
-          <End Role="CourseInstance" Type="U3AAttendanceModel.CourseInstance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Coordinator">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CourseInstance">
-              <PropertyRef Name="CoordinatorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Course_Instance_Course1">
-          <End Role="CourseDescription" Type="U3AAttendanceModel.CourseDescription" Multiplicity="1" />
-          <End Role="CourseInstance" Type="U3AAttendanceModel.CourseInstance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CourseDescription">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CourseInstance">
-              <PropertyRef Name="CourseId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Course_U3A1">
           <End Role="U3A" Type="U3AAttendanceModel.U3A" Multiplicity="1" />
           <End Role="CourseDescription" Type="U3AAttendanceModel.CourseDescription" Multiplicity="*" />
@@ -640,42 +597,6 @@
             </Principal>
             <Dependent Role="CourseDescription">
               <PropertyRef Name="U3AId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Course_Instance_Location">
-          <End Role="Location" Type="U3AAttendanceModel.Location" Multiplicity="1" />
-          <End Role="CourseInstance" Type="U3AAttendanceModel.CourseInstance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Location">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CourseInstance">
-              <PropertyRef Name="DefaultLocationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Course_Instance_Region">
-          <End Role="Region" Type="U3AAttendanceModel.Region" Multiplicity="1" />
-          <End Role="CourseInstance" Type="U3AAttendanceModel.CourseInstance" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Region">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CourseInstance">
-              <PropertyRef Name="RegionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Session_Course_Instance1">
-          <End Role="CourseInstance" Type="U3AAttendanceModel.CourseInstance" Multiplicity="1" />
-          <End Role="Session" Type="U3AAttendanceModel.Session" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CourseInstance">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Session">
-              <PropertyRef Name="CourseInstanceId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -751,6 +672,110 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Coordinator" BaseType="U3AAttendanceModel.Teacher" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+          </EntityType>
+        <EntityType Name="CourseInstance" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="StartDate" Nullable="false" Precision="0" />
+          <Property Type="Guid" Name="CourseId" Nullable="false" />
+          <Property Type="Guid" Name="RegionId" Nullable="false" />
+          <Property Type="Guid" Name="TeacherId" Nullable="false" />
+          <Property Type="Int32" Name="StateId" Nullable="false" />
+          <Property Type="Guid" Name="DefaultLocationId" Nullable="false" />
+          <Property Type="String" Name="CourseCode" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CourseDescription" Relationship="U3AAttendanceModel.FK_Course_Instance_Course1" FromRole="CourseInstance" ToRole="CourseDescription" />
+          <NavigationProperty Name="Teacher" Relationship="U3AAttendanceModel.FK_Course_Instance_Coordinator1" FromRole="CourseInstance" ToRole="Teacher" />
+          <NavigationProperty Name="Location" Relationship="U3AAttendanceModel.FK_Course_Instance_Location" FromRole="CourseInstance" ToRole="Location" />
+          <NavigationProperty Name="Region" Relationship="U3AAttendanceModel.FK_Course_Instance_Region" FromRole="CourseInstance" ToRole="Region" />
+          <NavigationProperty Name="Sessions" Relationship="U3AAttendanceModel.FK_Session_Course_Instance1" FromRole="CourseInstance" ToRole="Session" />
+        </EntityType>
+        <EntityType Name="Teacher" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Phone" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Guid" Name="U3AId" Nullable="false" />
+          <NavigationProperty Name="CourseInstances" Relationship="U3AAttendanceModel.FK_Course_Instance_Coordinator1" FromRole="Teacher" ToRole="CourseInstance" />
+          <NavigationProperty Name="U3A" Relationship="U3AAttendanceModel.FK_Coordinator_U3A" FromRole="Teacher" ToRole="U3A" />
+        </EntityType>
+        <Association Name="FK_Course_Instance_Course1">
+          <End Type="U3AAttendanceModel.CourseDescription" Role="CourseDescription" Multiplicity="1" />
+          <End Type="U3AAttendanceModel.CourseInstance" Role="CourseInstance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseDescription">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseInstance">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_Instance_Coordinator1">
+          <End Type="U3AAttendanceModel.Teacher" Role="Teacher" Multiplicity="1" />
+          <End Type="U3AAttendanceModel.CourseInstance" Role="CourseInstance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseInstance">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_Instance_Location">
+          <End Type="U3AAttendanceModel.Location" Role="Location" Multiplicity="1" />
+          <End Type="U3AAttendanceModel.CourseInstance" Role="CourseInstance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseInstance">
+              <PropertyRef Name="DefaultLocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Course_Instance_Region">
+          <End Type="U3AAttendanceModel.Region" Role="Region" Multiplicity="1" />
+          <End Type="U3AAttendanceModel.CourseInstance" Role="CourseInstance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseInstance">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Session_Course_Instance1">
+          <End Type="U3AAttendanceModel.CourseInstance" Role="CourseInstance" Multiplicity="1" />
+          <End Type="U3AAttendanceModel.Session" Role="Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseInstance">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="CourseInstanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coordinator_U3A">
+          <End Type="U3AAttendanceModel.U3A" Role="U3A" Multiplicity="1" />
+          <End Type="U3AAttendanceModel.Teacher" Role="Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="U3A">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Teacher">
+              <PropertyRef Name="U3AId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -767,17 +792,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Coordinators">
-            <EntityTypeMapping TypeName="U3AAttendanceModel.Coordinator">
-              <MappingFragment StoreEntitySet="Coordinator">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="U3AId" ColumnName="U3AId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CourseDescriptions">
             <EntityTypeMapping TypeName="U3AAttendanceModel.CourseDescription">
               <MappingFragment StoreEntitySet="CourseDescription">
@@ -786,20 +800,6 @@
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="U3AId" ColumnName="U3AId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CourseInstances">
-            <EntityTypeMapping TypeName="U3AAttendanceModel.CourseInstance">
-              <MappingFragment StoreEntitySet="CourseInstance">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
-                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
-                <ScalarProperty Name="CoordinatorId" ColumnName="CoordinatorId" />
-                <ScalarProperty Name="StateId" ColumnName="StateId" />
-                <ScalarProperty Name="DefaultLocationId" ColumnName="DefaultLocationId" />
-                <ScalarProperty Name="CourseCode" ColumnName="CourseCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -868,6 +868,36 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="CodeId" ColumnName="CodeId" />
                 <ScalarProperty Name="SuburbId" ColumnName="SuburbId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseInstances">
+            <EntityTypeMapping TypeName="U3AAttendanceModel.CourseInstance">
+              <MappingFragment StoreEntitySet="CourseInstance">
+                <ScalarProperty Name="CourseCode" ColumnName="CourseCode" />
+                <ScalarProperty Name="DefaultLocationId" ColumnName="DefaultLocationId" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teachers">
+            <EntityTypeMapping TypeName="IsTypeOf(U3AAttendanceModel.Teacher)">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="U3AId" ColumnName="U3AId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(U3AAttendanceModel.Coordinator)">
+              <MappingFragment StoreEntitySet="Coordinator" >
+                <ScalarProperty Name="Id" ColumnName="TeacherId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

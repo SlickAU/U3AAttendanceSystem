@@ -90,7 +90,7 @@ namespace U3A_Attendance_Model
 		}
     
         public virtual ICollection<Attendance> Attendances { get; set; }
-        public virtual CourseInstance CourseInstance { get; set; }
         public virtual Location Location { get; set; }
+        public virtual CourseInstance CourseInstance { get; set; }
     }
 }

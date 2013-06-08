@@ -20,8 +20,8 @@ namespace U3A_Attendance_Model
     
         public Region()
         {
-            this.CourseInstances = new HashSet<CourseInstance>();
             this.Suburbs = new HashSet<Suburb>();
+            this.CourseInstances = new HashSet<CourseInstance>();
         }
     
     	private System.Guid _id;
@@ -77,8 +77,8 @@ namespace U3A_Attendance_Model
 			}
 		}
     
-        public virtual ICollection<CourseInstance> CourseInstances { get; set; }
         public virtual U3A U3A { get; set; }
         public virtual ICollection<Suburb> Suburbs { get; set; }
+        public virtual ICollection<CourseInstance> CourseInstances { get; set; }
     }
 }

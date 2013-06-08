@@ -27,12 +27,13 @@
         <!--Course Instance Management-->
         <Grid Grid.Row="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
+                <RowDefinition Height="80" />
                 <RowDefinition />
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Orientation="Vertical">
                 <Label Content="Course Management" />
                 <Label Content="{Binding Path=CDTitle, Mode=TwoWay}" />
+                <Label Name="CIHash" />
             </StackPanel>
             <GroupBox Header="Course Information" Grid.Row="1">
 

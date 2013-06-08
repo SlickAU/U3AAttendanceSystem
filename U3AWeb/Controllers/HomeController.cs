@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using U3AWeb.Models;
 
 namespace U3AWeb.Controllers
 {
@@ -10,14 +11,9 @@ namespace U3AWeb.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Welcome to ASP.NET MVC!";
+            HomeModel model = new HomeModel();
 
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            return View();
+            return View(model);
         }
     }
 }

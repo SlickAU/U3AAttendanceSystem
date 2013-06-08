@@ -6,27 +6,19 @@ using System.Text;
 using System.Threading.Tasks;
 using U3A_Attendance_Model;
 using System.Windows;
+using System.Collections.ObjectModel;
 
 namespace U3A_Attendance_System.ViewModels
 {
     public class CoordinatorListViewModel : BaseViewModel
     {
-        private IEnumerable<ICoordinator> coordinators;
+        private ObservableCollection<ICoordinator> coordinators;
 
-        public BindingList<ICoordinator> Coordinators
+        public ObservableCollection<ICoordinator> Coordinators
         {
             get
             {
-                /*if (coordinators == null)
-                {
-                    return _facade.FetchCoordinators();
-                }
-
-                else
-                {
-                    return coordinators;
-                }*/
-                return new BindingList<ICoordinator>(new List<ICoordinator>(_facade.FetchCoordinators()));
+                return new ObservableCollection<ICoordinator>(_facade.FetchCoordinators());
             }
             set { }
         }

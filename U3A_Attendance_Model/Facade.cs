@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using U3A_Attendance_Model.Interfaces;
@@ -23,8 +26,11 @@ namespace U3A_Attendance_Model
         public Facade(Guid u3aId)
         {
             _u3a = fetchU3a(u3aId);
-            
+        }
 
+        public Facade(bool loadDescriptionsOnly)
+        {
+            _u3a = fetchU3a(true);
         }
 
 
@@ -43,7 +49,7 @@ namespace U3A_Attendance_Model
             var u3a = _context.U3A
                 .Include("Regions.Suburbs.Venues.Locations")
                 .Include("CourseDescriptions.CourseInstances.Sessions.Attendances")
-                .Include("Coordinators")
+                .Include("Teachers")
                 .Include("Members.Attendances")
                 .FirstOrDefault();
             
@@ -68,6 +74,20 @@ namespace U3A_Attendance_Model
             if (u3a == null)
             {
                 throw new BusinessRuleException("Invalid U3A identifier supplied");
+            }
+
+            return u3a;
+        }
+
+        //Lightweight version which only fetches CourseDescriptions (used in MVC website)
+        private U3A fetchU3a(bool loadDescriptionsOnly)
+        {
+            var u3a = _context.U3A
+                .Include("CourseDescriptions").FirstOrDefault();
+
+            if (u3a == null)
+            {
+                throw new BusinessRuleException("Could not locate U3A");
             }
 
             return u3a;
@@ -314,7 +334,7 @@ namespace U3A_Attendance_Model
         }
 
         //Fetches all venues in the database
-        public IEnumerable<IVenue> FetchAllVenues()
+        public DoubleLinkedList<IVenue> FetchAllVenues()
         {
             return _u3a.fetchAllVenues();
         }
@@ -467,7 +487,7 @@ namespace U3A_Attendance_Model
         //Fetches multiple Coordinators
         public IEnumerable<ICoordinator> FetchCoordinators()
         {
-            return _u3a.Coordinators;
+            return _u3a.Teachers.OfType<ICoordinator>();
         }
 
         //Updates a Coordinator
@@ -484,7 +504,7 @@ namespace U3A_Attendance_Model
             Action<Coordinator> action
                 = delegate(Coordinator c)
                 {
-                    _context.Coordinators.Remove(c);
+                    _context.Teachers.Remove(c);
                     _context.SaveChanges();
                 };
 
@@ -577,6 +597,29 @@ namespace U3A_Attendance_Model
         }
 
         #endregion
+
+
+        public void SerializeObject(object o)
+        {
+            IFormatter formatter = new BinaryFormatter();
+            //Create a new FileStream
+            Stream stream = new FileStream(o.GetType().ToString().Split('.')[1] + ".obj", FileMode.Create, FileAccess.Write, FileShare.None);
+            //Use the formatter to serialize the Person object using the stream
+            formatter.Serialize(stream, o);
+            //close the stream
+            stream.Close();
+        }
+
+        public void DesirealizeObject(object o)
+        {
+            //Create a new FileStream to read the file
+            Stream stream = new FileStream(o.GetType().ToString() + ".obj", FileMode.Open, FileAccess.Read, FileShare.Read);
+            IFormatter formatter = new BinaryFormatter();
+            //Use the formatter to deserialize the Person object from file
+            //Note: The person needs to be cast back to type Person
+            var obj = formatter.Deserialize(stream);
+            Console.WriteLine("{0} has been deserialized", o.GetType().ToString());
+        }
 
         public void Dispose()
         {

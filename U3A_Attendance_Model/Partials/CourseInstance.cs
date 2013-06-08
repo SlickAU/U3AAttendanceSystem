@@ -45,7 +45,7 @@ namespace U3A_Attendance_Model
             StartDate = startDate;
             CourseId = description.Id; 
             RegionId = regionId;
-            CoordinatorId = coordinator.Id;
+            TeacherId = coordinator.Id;
             DefaultLocationId = location.Id;
             CourseCode = courseCode;
             Sessions = new List<Session>();
@@ -65,7 +65,7 @@ namespace U3A_Attendance_Model
         internal CourseInstance update(Guid regionId, Coordinator coordinator, Location location, DateTime startDate, int stateId, string courseCode)
         {
             RegionId = regionId;
-            CoordinatorId = coordinator.Id;
+            TeacherId = coordinator.Id;
             DefaultLocationId = location.Id;
             StartDate = startDate;
             StateId = stateId;  
