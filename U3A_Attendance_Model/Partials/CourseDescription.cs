@@ -68,6 +68,7 @@ namespace U3A_Attendance_Model
             {
                 return true; 
             }
+            
             if(Title.ToLower().Trim().Contains(keyword))
             {
                 return true; 

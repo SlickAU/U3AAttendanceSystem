@@ -17,9 +17,14 @@ namespace U3A_Attendance_System.ViewModels
     public class CourseDescriptionListViewModel : BaseViewModel
     {
         private ObservableCollection<ICourseDescription> courseDescriptions;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 78054c6f6ad9be51d5d9f7a6c03e8a917dbe5ff6
         private string titleSearch;
-        
+        private MainViewModel main;
+        private TabbedViewModel tabbedView;
+
         #region Properties
 
 
@@ -32,12 +37,22 @@ namespace U3A_Attendance_System.ViewModels
                         _facade.FetchCourseDescriptions().OrderBy(cd => cd.CourseNumber)
                     );
                 return courseDescriptions;
+<<<<<<< HEAD
             } 
+=======
+            }
+>>>>>>> 78054c6f6ad9be51d5d9f7a6c03e8a917dbe5ff6
         }
 
         public string TitleSearch { get { return titleSearch; } set { titleSearch = value; SearchTitles(); } }
 
         #endregion
+
+        public CourseDescriptionListViewModel(MainViewModel main, TabbedViewModel tabbedView)
+        {
+            this.main = main;
+            this.tabbedView = tabbedView;
+        }
 
         #region Commands/Behaviours
 
@@ -58,13 +73,18 @@ namespace U3A_Attendance_System.ViewModels
             }
         }
 
+        public void ShowCIList(Object obj)
+        {
+            if (obj is ICourseDescription)
+                tabbedView.View2.FetchCDInstances((ICourseDescription)obj, this);
+            tabbedView.SelectedTab = 2;
+        }
+
         public void DeleteDescriptionConfirm(ICourseDescription cd)
         {
-            if (MessageBox.Show("Are you sure you want to delete the Course Descripton: '" + cd.Title + "' ?", "Confirm Delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                _facade.DeleteCourseDescription(cd.Id);
-
+            settings.Title = "Delete Coordinator";
+            _wm.ShowDialog(new DeleteViewModel(cd), null, settings);
             NotifyOfPropertyChange("CourseDescriptions");
-
         }
 
         public void SearchTitles()
@@ -72,7 +92,6 @@ namespace U3A_Attendance_System.ViewModels
             if (TitleSearch != null)
             {
                 string search = TitleSearch.ToUpper();
-                //CourseDescriptions = _facade.FetchCourseDescriptions().Where(cd => cd.Title.Contains(search));
                 this.Refresh();
             }
         }

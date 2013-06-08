@@ -39,31 +39,35 @@ namespace U3A_Attendance_System.ViewModels
 
         public void Delete(IVenue venue)
         {
-            if (MessageBox.Show("Are you sure you want to delete this venue?", "Confirm delete", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
-            {
-                try
-                {
-                    _facade.DeleteVenue(venue.Id, venue.RegionId, venue.SuburbId);
-                }
-                catch (AssociationDependencyException e)
-                {
-                    if (MessageBox.Show("Warning! This venue has corresponding locations, deleting this venue will also delete all corresponding locations, continue?", "Confirm delete", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
-                    {
-            
-                        var locations = venue.Locations.AsEnumerable();
-                        int count = locations.Count();
-
-                        for (int i = 0; i < count; i++)
-                        {
-                            _facade.DeleteLocation(venue.RegionId, venue.SuburbId, venue.Id, locations.ElementAt(0).Id);
-                        }
-
-                        _facade.DeleteVenue(venue.Id, venue.RegionId, venue.SuburbId);
-                    }
-                }
-
-            }
+            settings.Title = "Delete Venue";
+            _wm.ShowDialog(new DeleteViewModel(venue), null, settings);
             NotifyOfPropertyChange("VenueList");
+            
+            //if (MessageBox.Show("Are you sure you want to delete this venue?", "Confirm delete", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            //{
+            //    try
+            //    {
+            //        _facade.DeleteVenue(venue.Id, venue.RegionId, venue.SuburbId);
+            //    }
+            //    catch (AssociationDependencyException e)
+            //    {
+            //        if (MessageBox.Show("Warning! This venue has corresponding locations, deleting this venue will also delete all corresponding locations, continue?", "Confirm delete", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            //        {
+            
+            //            var locations = venue.Locations.AsEnumerable();
+            //            int count = locations.Count();
+
+            //            for (int i = 0; i < count; i++)
+            //            {
+            //                _facade.DeleteLocation(venue.RegionId, venue.SuburbId, venue.Id, locations.ElementAt(0).Id);
+            //            }
+
+            //            _facade.DeleteVenue(venue.Id, venue.RegionId, venue.SuburbId);
+            //        }
+            //    }
+
+            //}
+            //NotifyOfPropertyChange("VenueList");
         }
         #endregion
     }

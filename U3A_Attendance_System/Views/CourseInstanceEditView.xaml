@@ -20,12 +20,12 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="180" />
-            <RowDefinition Height="150" />
-            <RowDefinition />
+            <RowDefinition Height="500" />
         </Grid.RowDefinitions>
+        <Label Content="Course Management" FontSize="30" Opacity="10" Foreground="#FFBEBEBE" HorizontalAlignment="Left" Width="287" Margin="0,0,0,447" />
+        <Label Content="{Binding CDTitle, Mode=TwoWay}"  HorizontalAlignment="Left" Margin="10,53,0,419" Width="287" Foreground="#FFBEBEBE" Padding="0"  />
         <!--Course Instance Management-->
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Margin="0,36,0,284">
             <Grid.RowDefinitions>
                 <RowDefinition Height="80" />
                 <RowDefinition />
@@ -81,8 +81,8 @@
             </GroupBox>
         </Grid>
         <!--Sessions Management-->
-        <Grid Grid.Row="1" IsEnabled="{Binding Path=IsSessionsEditEnabled}">
-            <GroupBox Header="Sessions &amp; Attendance">
+        <Grid IsEnabled="{Binding Path=IsSessionsEditEnabled}" Margin="0,216,0,134">
+            <GroupBox Header="Sessions &amp; Attendance" >
                 <!-- Sessions Specific -->
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -141,7 +141,8 @@
                 </Grid>
             </GroupBox>
         </Grid>
-        <Grid Grid.Row="2" IsEnabled="{Binding IsAttendanceEnabled}">
+
+        <Grid IsEnabled="{Binding IsAttendanceEnabled}" Margin="0,366,0,-36">
             <!--Attendance Related-->
             <Grid>
                 <Grid.RowDefinitions>
@@ -172,9 +173,8 @@
                     </GroupBox>
                 </Grid>
 
-                <Grid Grid.Row="1" Margin="0, 20, 0, 0">
-                    <DataGrid Name="Attendances" HeadersVisibility="None" Background="White">
-                    </DataGrid>
+                <Grid Grid.Row="1" Margin="0,20,0,-700">
+                    <DataGrid Name="Attendances" HeadersVisibility="None" Background="White" Margin="0,-15,0,0" EnableRowVirtualization="True" EnableColumnVirtualization="False"  />
                 </Grid>
             </Grid>
         </Grid>

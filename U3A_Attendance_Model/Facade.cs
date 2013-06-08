@@ -37,8 +37,7 @@ namespace U3A_Attendance_Model
         public void Examples()
         {
             //TODO: Implement somewhere (Example Only)
-            var result = _searchEngine.Search((FetchCourseDescriptions() as IEnumerable<ISearchable>), "a"); 
-     
+            var result = _searchEngine.Search((FetchCourseDescriptions() as IEnumerable<ISearchable>), "a");     
         }
 
         #region U3A Management
@@ -197,8 +196,7 @@ namespace U3A_Attendance_Model
 
         public string CheckCourseCode(string courseCode, Guid regionId, Guid venueId)
         {
-            //Implement increment checker to see if course code number already exists - Current value is hardcoded
-            //Exception handling on UI to make sure Date, Venue and Region fields have been filled
+            //Super Dodgy, If values are 01, 02, 09 the generated value will be 10
 
             var courses = FetchCourseInstances(regionId);
             List<string> coursecodes = new List<string>();

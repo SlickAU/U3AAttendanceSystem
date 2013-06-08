@@ -43,10 +43,13 @@ namespace U3A_Attendance_System.ViewModels
  
         public void ShowCoordinatorDelete(ICoordinator coordinator)
         {
-            if (MessageBox.Show("Are you sure you want to delete this Coordinator?", "Confirm delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                _facade.DeleteCoordinator(coordinator.Id);
-
+            settings.Title = "Delete Coordinator";
+            _wm.ShowDialog(new DeleteViewModel(coordinator), null, settings);
             NotifyOfPropertyChange("Coordinators");
+            //if (MessageBox.Show("Are you sure you want to delete this Coordinator?", "Confirm delete", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            //    _facade.DeleteCoordinator(coordinator.Id);
+
+            //NotifyOfPropertyChange("Coordinators");
          }
 
         #endregion

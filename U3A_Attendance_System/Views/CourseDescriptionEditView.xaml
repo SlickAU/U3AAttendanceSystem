@@ -8,7 +8,7 @@
       ShowMaxRestoreButton="False"
       ShowMinButton="False"
       mc:Ignorable="d" 
-      d:DesignHeight="250" d:DesignWidth="450" MaxHeight="250" MinHeight="250" MaxWidth="450" MinWidth="450">
+      d:DesignHeight="250" d:DesignWidth="450" MaxHeight="450" MinHeight="450" MaxWidth="450" MinWidth="450">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

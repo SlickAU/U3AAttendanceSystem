@@ -37,7 +37,10 @@ C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\U3AWeb\bin\System.Web.Razor.x
 C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\U3AWeb\bin\System.Web.WebPages.xml
 C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\U3AWeb\bin\System.Web.WebPages.Deployment.xml
 C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\U3AWeb\bin\System.Web.WebPages.Razor.xml
+<<<<<<< HEAD
 C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\U3AWeb\obj\Debug\U3AWeb.csprojResolveAssemblyReference.cache
+=======
+>>>>>>> 78054c6f6ad9be51d5d9f7a6c03e8a917dbe5ff6
 C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\U3AWeb\obj\Debug\U3AWeb.dll
 C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\U3AWeb\obj\Debug\U3AWeb.pdb
 C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\U3AWeb\bin\U3AWeb.dll
@@ -61,6 +64,7 @@ C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\U3AWeb\bin\System.Web.WebPag
 C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\U3AWeb\obj\Debug\U3AWeb.csprojResolveAssemblyReference.cache
 C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\U3AWeb\obj\Debug\U3AWeb.dll
 C:\Users\Study\Documents\GitHub\U3AAttendanceSystem\U3AWeb\obj\Debug\U3AWeb.pdb
+<<<<<<< HEAD
 C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AWeb\bin\U3AWeb.dll
 C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AWeb\bin\U3AWeb.pdb
 C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AWeb\bin\EntityFramework.dll
@@ -84,3 +88,6 @@ C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AWeb\bin\System.Web.WebPages.
 C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AWeb\obj\Debug\U3AWeb.csprojResolveAssemblyReference.cache
 C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AWeb\obj\Debug\U3AWeb.dll
 C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AWeb\obj\Debug\U3AWeb.pdb
+=======
+C:\Users\Mike\Documents\GitHub\U3AAttendanceSystem\U3AWeb\obj\Debug\U3AWeb.csprojResolveAssemblyReference.cache
+>>>>>>> 78054c6f6ad9be51d5d9f7a6c03e8a917dbe5ff6

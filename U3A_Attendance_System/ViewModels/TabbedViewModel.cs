@@ -29,9 +29,11 @@ namespace U3A_Attendance_System.ViewModels
         public CourseInstanceListViewModel View2 { get; set; }
         public VenueListViewModel View3 { get; set; }
         public CoordinatorListViewModel View4 { get; set; }
-        public TabbedViewModel()
+
+
+        public TabbedViewModel(MainViewModel main)
         {
-            View1 = new CourseDescriptionListViewModel();
+            View1 = new CourseDescriptionListViewModel(main, this);
             View2 = new CourseInstanceListViewModel();
             View3 = new VenueListViewModel();
             View4 = new CoordinatorListViewModel();
@@ -47,13 +49,5 @@ namespace U3A_Attendance_System.ViewModels
             View2 = new CourseInstanceListViewModel();
             this.Refresh();
         }
-
-        public void ShowCIList(ICourseDescription cd)
-        {
-            View2 = new CourseInstanceListViewModel(cd);
-            this.Refresh();
-            //View3.PopulateInstancesList(cd.CourseInstances);
-        }
-
     }
 }
