@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:cal="http://www.caliburnproject.org"
       mc:Ignorable="d" 
-      d:DesignHeight="500" d:DesignWidth="1062" Background="White">
+      d:DesignHeight="600" d:DesignWidth="1062" Background="White">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -20,20 +20,19 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="500" />
+            <RowDefinition Height="200" />
+            <RowDefinition Height="150" />
+            <RowDefinition />
         </Grid.RowDefinitions>
-        <Label Content="Course Management" FontSize="30" Opacity="10" Foreground="#FFBEBEBE" HorizontalAlignment="Left" Width="287" Margin="0,0,0,447" />
-        <Label Content="{Binding CDTitle, Mode=TwoWay}"  HorizontalAlignment="Left" Margin="10,53,0,419" Width="287" Foreground="#FFBEBEBE" Padding="0"  />
         <!--Course Instance Management-->
-        <Grid Grid.Row="0" Margin="0,36,0,284">
+        <Grid Grid.Row="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="80" />
+                <RowDefinition Height="70" />
                 <RowDefinition />
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Orientation="Vertical">
-                <Label Content="Course Management" />
-                <Label Content="{Binding Path=CDTitle, Mode=TwoWay}" />
-                <Label Name="CIHash" />
+                <Label Content="Course Management" FontSize="27" Opacity="10" Foreground="#FFBEBEBE" />
+                <Label Content="{Binding Path=CDTitle, Mode=TwoWay}" Foreground="#FFBEBEBE" />
             </StackPanel>
             <GroupBox Header="Course Information" Grid.Row="1">
 
@@ -73,7 +72,6 @@
                     <Button Name="GenerateCourseCode" Content="Generate Course Code" Grid.Row="2" Grid.Column="6" />
 
                     <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                        <Button Content="Cancel" />
                         <Button Name="Save" Content="Save" />
                     </StackPanel>
 
@@ -81,7 +79,7 @@
             </GroupBox>
         </Grid>
         <!--Sessions Management-->
-        <Grid IsEnabled="{Binding Path=IsSessionsEditEnabled}" Margin="0,216,0,134">
+        <Grid IsEnabled="{Binding Path=IsSessionsEditEnabled}" Grid.Row="1">
             <GroupBox Header="Sessions &amp; Attendance" >
                 <!-- Sessions Specific -->
                 <Grid>
@@ -142,11 +140,11 @@
             </GroupBox>
         </Grid>
 
-        <Grid IsEnabled="{Binding IsAttendanceEnabled}" Margin="0,366,0,-36">
+        <Grid IsEnabled="{Binding IsAttendanceEnabled}" Grid.Row="2">
             <!--Attendance Related-->
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="100" />
+                    <RowDefinition Height="110" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
@@ -173,7 +171,7 @@
                     </GroupBox>
                 </Grid>
 
-                <Grid Grid.Row="1" Margin="0,20,0,-700">
+                <Grid Grid.Row="1" Margin="0, 20, 0, 0">
                     <DataGrid Name="Attendances" HeadersVisibility="None" Background="White" Margin="0,-15,0,0" EnableRowVirtualization="True" EnableColumnVirtualization="False"  />
                 </Grid>
             </Grid>
