@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using U3A_Attendance_Model;
 using U3A_Attendance_System.Views;
 
@@ -459,11 +460,16 @@ namespace U3A_Attendance_System.ViewModels
 
             CheckForNullValues();
 
-            if(_ci == null)
-                 ci = _facade.CreateCourseInstance(_cd.Id, _selectedCoordinator.Id, _selectedRegion.Id, _selectedSuburb.Id, _selectedVenue.Id, _selectedLocation.Id, StartDate, CourseCode);
+            if (_ci == null)
+            {
+                ci = _facade.CreateCourseInstance(_cd.Id, _selectedCoordinator.Id, _selectedRegion.Id, _selectedSuburb.Id, _selectedVenue.Id, _selectedLocation.Id, StartDate, CourseCode);
+                System.Windows.Forms.MessageBox.Show("Course Instance was successfully created.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             else
-                 ci = _facade.UpdateCourseInstance(_ci.Id, _selectedCoordinator.Id, _selectedRegion.Id, _selectedSuburb.Id, _selectedVenue.Id, _selectedLocation.Id, StartDate, _ci.StateId, CourseCode);
-
+            {
+                ci = _facade.UpdateCourseInstance(_ci.Id, _selectedCoordinator.Id, _selectedRegion.Id, _selectedSuburb.Id, _selectedVenue.Id, _selectedLocation.Id, StartDate, _ci.StateId, CourseCode);
+                System.Windows.Forms.MessageBox.Show("Course Instance was successfully Updated.", "Update Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             _ci = ci;
 
             //_facade.SerializeObject(ci);
