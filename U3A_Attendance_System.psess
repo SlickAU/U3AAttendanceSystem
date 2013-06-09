@@ -67,6 +67,11 @@
       <ProjName>U3A_Attendance_System</ProjName>
     </ProjBinary>
   </Binaries>
+  <Reports>
+    <Report>
+      <Path>U3A_Attendance_System130609.vspx</Path>
+    </Report>
+  </Reports>
   <Launches>
     <ProjBinary>
       <Path>:PB:{A497B806-8C72-43D7-8530-9FA2CC1D063B}|U3A_Attendance_System\U3A_Attendance_System.csproj</Path>
