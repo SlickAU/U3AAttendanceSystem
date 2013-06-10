@@ -63,6 +63,7 @@
     <Compile Include="Attendance.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Binary Tree\BinaryTree.cs" />
     <Compile Include="Coordinator.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

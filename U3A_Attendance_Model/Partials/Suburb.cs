@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace U3A_Attendance_Model
 {
+    [Serializable]
     internal partial class Suburb : ISuburb
     {
         public Suburb(Guid regionId, string name, int postcode, string description)

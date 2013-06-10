@@ -29,8 +29,7 @@ namespace U3A_Attendance_Model
 
         public DoubleLinkedList(List<T> list)
         {
-            foreach (var i in list)
-                Add(i);
+            _list = list;
         }
 
         public int Count

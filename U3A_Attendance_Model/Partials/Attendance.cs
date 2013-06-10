@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace U3A_Attendance_Model
-{
+{[Serializable]
     internal partial class Attendance : IAttendance
     {
+        
         internal Attendance() { }
 
         public Attendance(Member member, string presence, Session session)

@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace U3A_Attendance_Model
-{
+{[Serializable]
     internal partial class Region : IRegion
     {
+        
         //Region constructor
         public Region(string codeId, string description, Guid u3aId)
         {

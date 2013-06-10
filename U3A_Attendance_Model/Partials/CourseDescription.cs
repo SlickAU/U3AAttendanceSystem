@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 using U3A_Attendance_Model.Interfaces;
 
 namespace U3A_Attendance_Model
-{
+{[Serializable]
     internal partial class CourseDescription : ICourseDescription, ISearchable
     {
+        
         public bool HasInstances
         {
             get
