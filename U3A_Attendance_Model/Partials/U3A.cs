@@ -149,7 +149,7 @@ namespace U3A_Attendance_Model
         {
             var member = fetchMember(memberId);
 
-            return fetchRegion(regionId).createAttendance(courseInstanceId, sessionId, member, presence);
+             return fetchRegion(regionId).createAttendance(courseInstanceId, sessionId, member, presence);
         }
 
         internal Attendance fetchAttendance(Guid regionId, Guid courseInstanceId, Guid sessionId, Guid attendanceId)
@@ -371,8 +371,13 @@ namespace U3A_Attendance_Model
 
             if (result == null)
             {
-                throw new BusinessRuleException("Invalid Member Identifier supplied");
+                result = createMember(memberId);
             }
+
+            //if (result == null)
+            //{
+            //    throw new BusinessRuleException("Invalid Member Identifier supplied");
+            //}
 
             return result;
         }

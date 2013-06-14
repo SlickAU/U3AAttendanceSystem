@@ -7,7 +7,8 @@
         xmlns:cal="http://www.caliburnproject.org"
         mc:Ignorable="d"
         xmlns:userControls="a"
-        d:DesignWidth="1000" d:DesignHeight="1000">
+        d:DesignWidth="1000" d:DesignHeight="1000"> 
+
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -22,13 +23,19 @@
     </Window.Resources>
     <Controls:MetroWindow.WindowCommands>
         <Controls:WindowCommands>
-            <Button cal:Message.Attach="ShowHome">
-                <Image Source="home.png" Height="28" Width="28" VerticalAlignment="Center"></Image>
+            <Button cal:Message.Attach="ShowHome" SnapsToDevicePixels="True">
+                <Image Source="home.png" Height="28" Width="28" VerticalAlignment="Center" HorizontalAlignment="Center"></Image>
             </Button>
         </Controls:WindowCommands>
     </Controls:MetroWindow.WindowCommands>
-
-    <ContentControl Grid.Row="1" x:Name="ActiveItem" VerticalAlignment="Stretch"></ContentControl>
     
-
+   
+    <ContentControl Grid.Row="1" x:Name="ActiveItem" VerticalAlignment="Stretch"></ContentControl>
 </Controls:MetroWindow>
+
+
+<!--<Grid SnapsToDevicePixels="True" Height=" 50" Margin="0,0,0,919">
+    <Button cal:Message.Attach="ShowHome" SnapsToDevicePixels="True" Margin="948,0,0,0" BorderThickness="0">
+        <Image Source="home.png" Height="28" Width="28" VerticalAlignment="Center" HorizontalAlignment="Center" ></Image>
+    </Button>
+</Grid>-->

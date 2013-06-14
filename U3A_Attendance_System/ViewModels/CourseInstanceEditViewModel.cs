@@ -259,15 +259,15 @@ namespace U3A_Attendance_System.ViewModels
             }
         }
 
-        public bool IsOccurancesEnabled
-        {
-            get
-            {
-                return (SessionOccurances != 0);
-            }
+        //public bool IsOccurancesEnabled
+        //{
+        //    get
+        //    {
+        //        return (SessionOccurances != 0);
+        //    }
 
-            set { }
-        }
+        //    set { }
+        //}
 
         public IEnumerable<ISession> Sessions
         {
