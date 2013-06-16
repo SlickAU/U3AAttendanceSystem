@@ -63,6 +63,7 @@ namespace U3A_Attendance_System.ViewModels
             {
                 Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "CourseCode" });
                 _courseCode = value;
+                IsUnsaved = "Visible";
                 NotifyOfPropertyChange("CourseCode");
             }
         }
@@ -86,6 +87,7 @@ namespace U3A_Attendance_System.ViewModels
             set
             {
                 _selectedRegion = value;
+                IsUnsaved = "Visible";
                 NotifyOfPropertyChange("SelectedRegion");
             }
         }
@@ -99,6 +101,7 @@ namespace U3A_Attendance_System.ViewModels
             set
             {
                 _selectedSuburb = value;
+                IsUnsaved = "Visible";
                 NotifyOfPropertyChange("SelectedSuburb");
             }
         }
@@ -110,19 +113,6 @@ namespace U3A_Attendance_System.ViewModels
             }
         }
         public IEnumerable<IVenue> Venues { get; set; }
-        //private IEnumerable<IVenue> _venues;
-        //public IEnumerable<IVenue> Venues 
-        //{
-        //    get
-        //    {
-        //        return _venues;
-        //    }
-        //    set
-        //    {
-        //        _venues = value;
-        //    }
-        //}
-
         public IVenue SelectedVenue
         {
             get
@@ -132,7 +122,7 @@ namespace U3A_Attendance_System.ViewModels
             set
             {
                 _selectedVenue = value;
-                NotifyOfPropertyChange("SelectedVenue");
+                IsUnsaved = "Visible";
             }
         }
         public Boolean IsVenuesEnabled
@@ -141,6 +131,11 @@ namespace U3A_Attendance_System.ViewModels
             {
                 return !(SelectedSuburb == null);
             }
+        }
+        public string IsUnsaved
+        {
+            get;
+            set;
         }
         public IEnumerable<ILocation> Locations { get; set; }
         public ILocation SelectedLocation
@@ -152,6 +147,7 @@ namespace U3A_Attendance_System.ViewModels
             set
             {
                 _selectedLocation = value;
+                IsUnsaved = "Visible";
                 NotifyOfPropertyChange("SelectedLocation");
             }
         }
@@ -162,7 +158,6 @@ namespace U3A_Attendance_System.ViewModels
                 return !(SelectedVenue == null || Locations.Count() <= 0);
             }
         }
-
         public Boolean VenueSelected
         {
             get
@@ -170,7 +165,6 @@ namespace U3A_Attendance_System.ViewModels
                 return true;
             }
         }
-
         private IEnumerable<ICoordinator> _coordinators;
         public IEnumerable<ICoordinator> Coordinators 
         { 
@@ -192,6 +186,7 @@ namespace U3A_Attendance_System.ViewModels
             set
             {
                 _selectedCoordinator = value;
+                IsUnsaved = "Visible";
                 NotifyOfPropertyChange("SelectedCoordinator");
             }
         }
@@ -229,6 +224,12 @@ namespace U3A_Attendance_System.ViewModels
         }
 
         //Session Specific Properties
+
+        public string SaveOrUpdate
+        {
+            get;
+            set;
+        }
 
         private DateTime _sessionStartDate;
         public DateTime SessionStartDate
@@ -432,7 +433,7 @@ namespace U3A_Attendance_System.ViewModels
             Coordinators = _facade.FetchCoordinators().ToList();
             StartDate = DateTime.Now;
             SessionStartDate = DateTime.Now;
-
+            SaveOrUpdate = "Save";
             _cd = cd;
         }
 
@@ -454,6 +455,8 @@ namespace U3A_Attendance_System.ViewModels
             SelectedVenue = Venues.Where(ven => ven.Id.Equals(ci.VenueId)).FirstOrDefault();
             SelectedLocation = Locations.Where(loc => loc.Id.Equals(ci.DefaultLocationId)).FirstOrDefault();
             SelectedCoordinator = Coordinators.Where(co => co.Id.Equals(ci.TeacherId)).FirstOrDefault();
+            IsUnsaved = "Hidden";
+            SaveOrUpdate = "Update";
         }
 
         public void UpdateSuburbs(Guid regionId)
@@ -526,13 +529,14 @@ namespace U3A_Attendance_System.ViewModels
             }
             else
             {
-                ci = _facade.UpdateCourseInstance(_ci.Id, _selectedCoordinator.Id, _selectedRegion.Id, _selectedSuburb.Id, _selectedVenue.Id, _selectedLocation.Id, StartDate, _ci.StateId, CourseCode);
+                ci = _facade.UpdateCourseInstance(_ci.Id, _selectedCoordinator.Id,_selectedRegion.Id, _ci.RegionId, _selectedSuburb.Id, _selectedVenue.Id, _selectedLocation.Id, StartDate, _ci.StateId, CourseCode);
                 System.Windows.Forms.MessageBox.Show("Course Instance was successfully Updated.", "Update Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             _ci = ci;
 
             _facade.SerializeObject(ci);
-
+            IsUnsaved = "Hidden";
+            NotifyOfPropertyChange("IsUnsaved");
             this.Refresh();
         }
 

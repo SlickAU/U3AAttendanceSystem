@@ -89,9 +89,9 @@ namespace U3A_Attendance_Model
 
         #region Course Instance Management
 
-        internal CourseInstance update(Guid regionId, Coordinator coordinator, Location location, DateTime startDate, int stateId, string courseCode)
+        internal CourseInstance update(Region newRegion, Coordinator coordinator, Location location, DateTime startDate, int stateId, string courseCode)
         {
-            RegionId = regionId;
+            RegionId = newRegion.Id;
             TeacherId = coordinator.Id;
             DefaultLocationId = location.Id;
             StartDate = startDate;

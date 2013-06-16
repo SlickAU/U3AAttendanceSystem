@@ -85,10 +85,11 @@ namespace U3A_Attendance_Model
             return fetchRegion(regionId).createCourseInstance(description, coordinator,suburbId,venueId, defaultLocationId, startDate, courseCode);
         }
 
-        internal CourseInstance updateCourseInstance(Guid courseInstanceId, Guid coordinatorId, Guid regionId, Guid suburbId, Guid venueId, Guid defaultLocationId, DateTime startDate, int stateId, string courseCode)
+        internal CourseInstance updateCourseInstance(Guid courseInstanceId, Guid coordinatorId, Guid updatedRegionId, Guid currentRegionId, Guid suburbId, Guid venueId, Guid defaultLocationId, DateTime startDate, int stateId, string courseCode)
         {
             var coordinator = fetchCoordinator(coordinatorId);
-            return fetchRegion(regionId).updateCourseInstance(courseInstanceId, coordinator, suburbId, venueId, defaultLocationId, startDate, stateId, courseCode);
+            var newRegion = fetchRegion(updatedRegionId);
+            return fetchRegion(currentRegionId).updateCourseInstance(courseInstanceId, coordinator, newRegion, suburbId, venueId, defaultLocationId, startDate, stateId, courseCode);
         }
         
         internal CourseInstance fetchCourseInstance(Guid courseInstanceId, Guid regionId)

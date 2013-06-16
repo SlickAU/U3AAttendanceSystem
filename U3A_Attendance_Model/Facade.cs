@@ -174,9 +174,9 @@ namespace U3A_Attendance_Model
         }
 
         //Updates a CourseInstance
-        public ICourseInstance UpdateCourseInstance(Guid courseInstanceId, Guid coordinatorId, Guid regionId, Guid suburbId, Guid venueId, Guid defaultLocationId, DateTime startDate, int stateId, string courseCode)
+        public ICourseInstance UpdateCourseInstance(Guid courseInstanceId, Guid coordinatorId, Guid updatedRegionId, Guid currentRegionId, Guid suburbId, Guid venueId, Guid defaultLocationId, DateTime startDate, int stateId, string courseCode)
         {
-            var courseInstance = _u3a.updateCourseInstance(courseInstanceId, coordinatorId, regionId, suburbId, venueId, defaultLocationId, startDate, stateId, courseCode);        
+            var courseInstance = _u3a.updateCourseInstance(courseInstanceId, coordinatorId, updatedRegionId, currentRegionId, suburbId, venueId, defaultLocationId, startDate, stateId, courseCode);        
             _context.SaveChanges();
             return courseInstance;
         }

@@ -49,7 +49,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="25" />
                         <RowDefinition Height="27" />
-                        <RowDefinition />
+                        <RowDefinition Height="29" />
                     </Grid.RowDefinitions>
 
                     <Label Content="Coordinator" Grid.Column="0" Grid.Row="0" Margin="0,0,28,0" />
@@ -72,8 +72,10 @@
                     <Button Name="GenerateCourseCode" Content="Generate Course Code" Grid.Row="2" Grid.Column="6" />
 
                     <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                        <Button Name="Save" Content="Save" />
+                        <Button Name="Save" Content="{Binding Path=SaveOrUpdate}" />
+
                     </StackPanel>
+                    <Label Content ="Please save your Changes."  Width="321" Grid.ColumnSpan="3" Grid.Row="2" Foreground="Red" HorizontalAlignment="Left" Margin="57,4,0,-4" Visibility="{Binding Path=IsUnsaved}" />
                     <Button Content="+" HorizontalAlignment="Right" VerticalAlignment="Center" Width="25" Height="14" cal:Message.Attach="AddNewCoordinator" ToolTip="Add Coordinator"/>
                     <Button Content="+" HorizontalAlignment="Right" VerticalAlignment="Center" Width="25" Height="14" Grid.Column="4" cal:Message.Attach="AddNewVenue" ToolTip="Add Venue"/>
                     <Button Content="+" HorizontalAlignment="Right" VerticalAlignment="Center" Width="25" Height="14" Grid.Column="5" cal:Message.Attach="AddNewLocation" ToolTip="Add Location" />

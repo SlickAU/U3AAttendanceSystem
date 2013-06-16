@@ -55,11 +55,13 @@ namespace U3A_Attendance_Model
             return courseInstance;
         }
 
-        internal CourseInstance updateCourseInstance(Guid courseInstanceId, Coordinator coordinator, Guid suburbId, Guid venueId, Guid locationId, DateTime startDate, int stateId, string courseCode)
+        internal CourseInstance updateCourseInstance(Guid courseInstanceId, Coordinator coordinator, Region newRegion, Guid suburbId, Guid venueId, Guid locationId, DateTime startDate, int stateId, string courseCode)
         {
-            var location = fetchSuburb(suburbId).fetchLocation(venueId, locationId);
+            //Bad but its a hack WOrk around
+            var location = newRegion.fetchSuburb(suburbId).fetchLocation(venueId, locationId);
+            //var location = fetchSuburb(suburbId).fetchLocation(venueId, locationId);
             var courseInstance = fetchCourseInstance(courseInstanceId);
-            return courseInstance.update(this.Id, coordinator, location, startDate, stateId, courseCode);
+            return courseInstance.update(newRegion, coordinator, location, startDate, stateId, courseCode);
         }
 
         internal CourseInstance fetchCourseInstance(Guid courseInstanceId)
@@ -68,7 +70,7 @@ namespace U3A_Attendance_Model
 
             if (result == null)
             {
-                throw new BusinessRuleException("Invalid region identifier supplied");
+                throw new BusinessRuleException("Invalid Course Instance identifier supplied");
             }
             
             return result; 
