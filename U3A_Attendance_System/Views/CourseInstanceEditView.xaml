@@ -111,7 +111,9 @@
                             <Label Content="Frequency" Grid.Column="2" Grid.Row="0" />
                             <Label Content="Occurances" Grid.Column="3" Grid.Row="0" />
 
-                            <DatePicker Name="SessionStartDate" Grid.Column="0" Grid.Row="1" />
+                            <DatePicker Name="SessionStartDate" Grid.Column="0" Grid.Row="1" DisplayDateStart="{Binding StartDate}"/>
+
+
                             <Label Name="SessionStartDateDay" Grid.Column="1" Grid.Row="1" />
                             <ComboBox Name="SessionFrequency" DisplayMemberPath="Key" SelectedValuePath="Value" Grid.Column="2" Grid.Row="1"></ComboBox>
                             <TextBox Name="SessionOccurances" Grid.Column="3" Grid.Row="1" IsEnabled="{Binding Path=IsOccurancesEnabled}" />
