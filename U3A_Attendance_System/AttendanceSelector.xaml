@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="U3A_Attendance_System.AttendanceSelector"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="100" Width="100" Height="30">
+    <Grid>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Y" Background="Transparent" BorderBrush="Transparent" FontWeight="Bold" />
+            <Button Content="N" Background="Transparent" BorderBrush="Transparent" FontWeight="Bold" />
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using U3A_Attendance_Model;
 using U3A_Attendance_System.Views;
 
@@ -38,10 +39,16 @@ namespace U3A_Attendance_System.ViewModels
         {
             if(ValuesNotNull())
             {
-		        if (_cd != null)
-                     _facade.UpdateCourseDescription(CourseDescriptionProperties.Id, Title.Trim(), Description.Trim());
-                  else
-                     _facade.CreateCourseDescription(Title.Trim(), Description.Trim());  
+                if (_cd != null)
+                {
+                    _facade.UpdateCourseDescription(CourseDescriptionProperties.Id, Title.Trim(), Description.Trim());
+                    MessageBox.Show("Course Description successfully updated.", "Update Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    _facade.CreateCourseDescription(Title.Trim(), Description.Trim());
+                    MessageBox.Show("Course Description was successfully created.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
 

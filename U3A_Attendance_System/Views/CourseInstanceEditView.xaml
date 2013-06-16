@@ -171,7 +171,7 @@
                     </GroupBox>
                 </Grid>
 
-                <Grid Grid.Row="1" Margin="0, 20, 0, 0">
+                <Grid Grid.Row="1" Margin="5, 20, 5, 5">
                     <DataGrid Name="Attendances" HeadersVisibility="None" Background="White" Margin="0,-15,0,0" EnableRowVirtualization="True" EnableColumnVirtualization="False"  />
                 </Grid>
             </Grid>

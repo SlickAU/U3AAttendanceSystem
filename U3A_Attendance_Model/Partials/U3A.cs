@@ -9,6 +9,7 @@ using U3A_Attendance_Model.Partials;
 
 namespace U3A_Attendance_Model
 {
+    [Serializable]
     internal partial class U3A : IU3A
     {
         #region Course Description Management
@@ -271,8 +272,9 @@ namespace U3A_Attendance_Model
                     }
                 }
             }
+            BubbleSort(ref venueList);
 
-            return BubbleSort(venueList);
+            return new DoubleLinkedList<IVenue>(venueList);
 
         }
 
@@ -452,7 +454,7 @@ namespace U3A_Attendance_Model
 
         }
 
-        public DoubleLinkedList<IVenue> BubbleSort(List<IVenue> listToSort)
+        public void BubbleSort(ref List<IVenue> listToSort)
         {
             IVenue venue;
             int x = 0;
@@ -471,7 +473,6 @@ namespace U3A_Attendance_Model
                 }
             }
 
-            return new DoubleLinkedList<IVenue>(listToSort);
         }
     }
 }

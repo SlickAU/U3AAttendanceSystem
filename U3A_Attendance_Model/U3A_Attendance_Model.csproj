@@ -63,6 +63,7 @@
     <Compile Include="Attendance.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Binary Tree\BinaryTree.cs" />
     <Compile Include="Coordinator.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -186,6 +187,9 @@
     <Compile Include="Teacher.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Tests\LocationTest.cs" />
+    <Compile Include="Tests\SessionTest.cs" />
+    <Compile Include="Tests\SuburbTest.cs" />
     <Compile Include="U3A.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -197,6 +201,7 @@
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />

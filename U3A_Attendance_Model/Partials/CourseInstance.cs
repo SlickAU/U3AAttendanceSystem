@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 using U3A_Attendance_Model.Partials.CourseState; 
 
 namespace U3A_Attendance_Model
-{
+{[Serializable]
     internal partial class CourseInstance : ICourseInstance
     {
+        
         internal enum State {Scheduled ,Active, Complete,Cancelled }
 
         private CourseInstanceState _state;

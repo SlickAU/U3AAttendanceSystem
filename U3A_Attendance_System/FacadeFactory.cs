@@ -11,11 +11,18 @@ namespace U3A_Attendance_System
     {
         private static Facade _facade;
 
+        /// <summary>
+        /// Empty FacadeFactory Constructor.
+        /// </summary>
         protected FacadeFactory()
         {
 
         }
 
+        /// <summary>
+        /// Initalises static _facade field.
+        /// </summary>
+        /// <returns>_facade</returns>
         public static Facade Instance()
         {
             if (_facade == null)

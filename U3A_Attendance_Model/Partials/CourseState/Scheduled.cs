@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace U3A_Attendance_Model.Partials.CourseState
-{
+{[Serializable]
     internal class Scheduled : CourseInstanceState
     {
+        
         internal override void delete(Action action)
         {
             action();

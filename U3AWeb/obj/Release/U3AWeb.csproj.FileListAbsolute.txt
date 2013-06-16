@@ -20,3 +20,4 @@ C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AWeb\bin\System.Web.WebPages.
 C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AWeb\bin\System.Web.WebPages.Razor.xml
 C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AWeb\obj\Release\U3AWeb.dll
 C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AWeb\obj\Release\U3AWeb.pdb
+C:\Users\p401\Desktop\U3AAttendanceSystem-master\U3AWeb\obj\Release\U3AWeb.csprojResolveAssemblyReference.cache
