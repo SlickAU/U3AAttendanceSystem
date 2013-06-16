@@ -16,3 +16,9 @@ C:\Users\p401\Desktop\U3AAttendanceSystem-master\ConsoleApplication\bin\Debug\Co
 C:\Users\p401\Desktop\U3AAttendanceSystem-master\ConsoleApplication\obj\Debug\ConsoleApplication.csprojResolveAssemblyReference.cache
 C:\Users\p401\Desktop\U3AAttendanceSystem-master\ConsoleApplication\obj\Debug\ConsoleApplication.exe
 C:\Users\p401\Desktop\U3AAttendanceSystem-master\ConsoleApplication\obj\Debug\ConsoleApplication.pdb
+C:\Users\Kevin\Documents\GitHub\U3AAttendanceSystem\ConsoleApplication\bin\Debug\ConsoleApplication.exe.config
+C:\Users\Kevin\Documents\GitHub\U3AAttendanceSystem\ConsoleApplication\bin\Debug\ConsoleApplication.exe
+C:\Users\Kevin\Documents\GitHub\U3AAttendanceSystem\ConsoleApplication\bin\Debug\ConsoleApplication.pdb
+C:\Users\Kevin\Documents\GitHub\U3AAttendanceSystem\ConsoleApplication\obj\Debug\ConsoleApplication.csprojResolveAssemblyReference.cache
+C:\Users\Kevin\Documents\GitHub\U3AAttendanceSystem\ConsoleApplication\obj\Debug\ConsoleApplication.exe
+C:\Users\Kevin\Documents\GitHub\U3AAttendanceSystem\ConsoleApplication\obj\Debug\ConsoleApplication.pdb

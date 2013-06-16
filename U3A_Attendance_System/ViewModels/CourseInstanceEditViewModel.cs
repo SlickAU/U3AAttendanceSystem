@@ -16,6 +16,7 @@ using System.Windows.Documents;
 using System.Windows.Forms;
 using U3A_Attendance_Model;
 using U3A_Attendance_System.Views;
+using System.Windows.Forms;
 
 namespace U3A_Attendance_System.ViewModels
 {
@@ -32,6 +33,7 @@ namespace U3A_Attendance_System.ViewModels
         private ICoordinator _selectedCoordinator;
         private string _courseCode;
         private int _sessionOccurances;
+        private int _selectedFrequency;
 
         private string[] _members;
         private Dictionary<Guid, string> _sessions = new Dictionary<Guid, string>();
@@ -221,16 +223,29 @@ namespace U3A_Attendance_System.ViewModels
             get
             {
                 var freqs = new Dictionary<string, int>();
-                freqs.Add("", 0);
+                freqs.Add("Single", 0);
                 freqs.Add("Weekly", 1);
                 freqs.Add("Fortnightly", 2);
                 freqs.Add("Monthly", 3);
-
                 return freqs;
             }
         }
 
-        [Required(ErrorMessage = "Minimum number of occurances required is 1")]
+        public int SelectedFrequency
+        {
+            get
+            {
+                return _selectedFrequency;
+            }
+            set
+            {
+                _selectedFrequency = value;
+                NotifyOfPropertyChange("SessionFrequency");
+            }
+        }
+
+        [Required(ErrorMessage = "Number of Occurances is required")]
+        //[RegularExpression(@"^([1-52])$", ErrorMessage = "Minimum number of occurances is 1, Maximum is 50")]
         public int SessionOccurances
         {
             get { return _sessionOccurances; }
@@ -243,6 +258,16 @@ namespace U3A_Attendance_System.ViewModels
                 NotifyOfPropertyChange("SessionOccurances");
             }
         }
+
+        //public bool IsOccurancesEnabled
+        //{
+        //    get
+        //    {
+        //        return (SessionOccurances != 0);
+        //    }
+
+        //    set { }
+        //}
 
         public IEnumerable<ISession> Sessions
         {
@@ -515,57 +540,108 @@ namespace U3A_Attendance_System.ViewModels
                 throw new BusinessRuleException("CourseCode cannot be Empty");
             }
         }
-
-
+        
         //Session Management
-
         public void CreateSession(int frequency)
         {
-
-            if (frequency != 0 && SessionOccurances != 0)
+            try
             {
-                DateTime newSession = SessionStartDate;
-
-                for (int i = 0; i < SessionOccurances; i++)
+                if (frequency != null && SessionOccurances != null)
                 {
-                    if (i == 0)
-                        _facade.CreateSession(_ci.Id, _ci.RegionId, SelectedSuburb.Id, SelectedVenue.Id, _ci.DefaultLocationId, SessionStartDate);
-                    else
+                    DateTime newSession = SessionStartDate;
+
+                    if (frequency == 0)
                     {
-                        switch (frequency)
+                        SessionOccurances = 1;
+                    }
+
+                    for (int i = 0; i < SessionOccurances; i++)
+                    {
+                        if (SessionOccurances == 1 && frequency != 0)
                         {
-                            case 1:
-                                //Week
-                                newSession = newSession.AddDays(7);
-                                break;
-                            
-                            case 2:
-                                //Fortnightly
-                                newSession = newSession.AddDays(14);
-                                break;
-                            case 3:
-                                //Monthly
-                                newSession = newSession.AddMonths(1);
-                                break;
+                            _facade.CreateSession(_ci.Id, _ci.RegionId, SelectedSuburb.Id, SelectedVenue.Id, _ci.DefaultLocationId, SessionStartDate);
+                            break;
                         }
 
-                        _facade.CreateSession(_ci.Id, _ci.RegionId, SelectedSuburb.Id, SelectedVenue.Id, _ci.DefaultLocationId, newSession);
-                    }
-                }
-            }
-            else
-            {
-                _facade.CreateSession(_ci.Id, _ci.RegionId, SelectedSuburb.Id, SelectedVenue.Id, _ci.DefaultLocationId, SessionStartDate);
-            }
+                        if (frequency == 0)
+                        {
+                            _facade.CreateSession(_ci.Id, _ci.RegionId, SelectedSuburb.Id, SelectedVenue.Id, _ci.DefaultLocationId, SessionStartDate);
+                            break;
+                        }
 
-            this.Refresh();
+                        else
+                        {
+                            switch (frequency)
+                            {
+                                case 1:
+                                    //Week
+                                    if (SessionOccurances > 52 || 1 > SessionOccurances)
+                                    {
+                                        throw new BusinessRuleException("Weekly occurances have to be between 1 and 52!");
+                                    }
+                                    else
+                                    {
+                                        newSession = newSession.AddDays(7);
+                                        break;
+                                    }
+                                case 2:
+                                    //Fortnightly
+                                    if (SessionOccurances > 26 || 1 > SessionOccurances)
+                                    {
+                                        throw new BusinessRuleException("Fortnightly occurances have to be between 1 and 26!");
+                                    }
+                                    else
+                                    {
+                                        newSession = newSession.AddDays(14);
+                                        break;
+                                    }
+                                case 3:
+                                    //Monthly
+                                    if (SessionOccurances > 12 || 1 > SessionOccurances)
+                                    {
+                                        throw new BusinessRuleException("Monthly occurances have to be between 1 and 12!");
+                                    }
+                                    else
+                                    {
+                                        newSession = newSession.AddMonths(1);
+                                        break;
+                                    }
+                            }
+
+                            _facade.CreateSession(_ci.Id, _ci.RegionId, SelectedSuburb.Id, SelectedVenue.Id, _ci.DefaultLocationId, newSession);
+                        }
+                    }
+                    
+                    System.Windows.Forms.MessageBox.Show("The Session(s) were succesfully created!", "Success", MessageBoxButtons.OK);
+                }
+              
+                this.Refresh();
+            }
+            catch (BusinessRuleException e)
+            {
+                System.Windows.Forms.MessageBox.Show( e.Message, "Error", MessageBoxButtons.OK);
+            }
         }
 
         public void DeleteSession(ISession session)
         {
-            settings.Title = "Delete Session";
-            _wm.ShowDialog(new DeleteViewModel((ISession)session), null, settings);
-            this.Refresh();
+            try
+            {
+                if (session != null)
+                {
+                    settings.Title = "Delete Session";
+                    _wm.ShowDialog(new DeleteViewModel((ISession)session), null, settings);
+                    this.Refresh();
+                }
+                else
+                {
+                    throw new BusinessRuleException("A session must be selected in order to delete");
+                }
+            }
+            catch (BusinessRuleException e)
+            {              
+                System.Windows.Forms.MessageBox.Show( e.Message, "Error", MessageBoxButtons.OK);
+            }
         }
 
         //Attendance Management
@@ -581,7 +657,6 @@ namespace U3A_Attendance_System.ViewModels
             }*/
             
         }
-
 
         private void constructMembersArray(IEnumerable<IMember> members)
         {
@@ -623,13 +698,27 @@ namespace U3A_Attendance_System.ViewModels
 
         }
 
-
         public void ShowCISessionEdit(ISession session)
         {
-            settings.Title = "Edit Session";
-            _wm.ShowDialog(new CourseInstanceSessionEditViewModel(session), null, settings);
-            this.Refresh();
-            
+            try
+            {
+                if(session != null)
+                {
+                    settings.Title = "Edit Session";
+                    _wm.ShowDialog(new CourseInstanceSessionEditViewModel(session), null, settings);
+                    this.Refresh();  
+                }
+        
+                else
+                {
+                    throw new BusinessRuleException("A session must be selected in order to edit");
+                }
+            }
+        
+            catch (BusinessRuleException e)
+            {              
+                System.Windows.Forms.MessageBox.Show( e.Message, "Error", MessageBoxButtons.OK);
+            }
         }
 
         #endregion

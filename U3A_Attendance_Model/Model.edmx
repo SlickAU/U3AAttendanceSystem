@@ -133,7 +133,7 @@
           <Key>
             <PropertyRef Name="MemberId" />
           </Key>
-          <Property Name="U3AId" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="U3AId" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="None" />
           <Property Name="MemberId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Region">
@@ -499,7 +499,7 @@
           <Key>
             <PropertyRef Name="MemberId" />
           </Key>
-          <Property Name="U3AId" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="U3AId" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="None" />
           <Property Name="MemberId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Attendances" Relationship="U3AAttendanceModel.FK_Attendance_Member" FromRole="Member" ToRole="Attendance" />
           <NavigationProperty Name="U3A" Relationship="U3AAttendanceModel.FK_Member_U3A" FromRole="Member" ToRole="U3A" />
