@@ -149,7 +149,18 @@ namespace U3A_Attendance_System.ViewModels
                 return !(SelectedVenue == null || Locations.Count() <= 0);
             }
         }
-        public IEnumerable<ICoordinator> Coordinators { get; set; }
+        private IEnumerable<ICoordinator> _coordinators;
+        public IEnumerable<ICoordinator> Coordinators 
+        { 
+            get
+            {
+                return _coordinators;
+            } 
+            set
+            {
+                _coordinators = value;
+            } 
+        }
         public ICoordinator SelectedCoordinator
         {
             get
@@ -721,6 +732,14 @@ namespace U3A_Attendance_System.ViewModels
             }
         }
 
+
+        public void AddNewCoordinator()
+        {
+            settings.Title = "Create Coordinator";
+            _wm.ShowDialog(new CoordinatorEditViewModel(), null, settings);
+             Coordinators = _facade.FetchCoordinators().ToList();
+             NotifyOfPropertyChange("Coordinators");
+        }
         #endregion
 
     }

@@ -52,11 +52,11 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <Label Content="Coordinator" Grid.Column="0" Grid.Row="0" />
-                    <Label Content="Start Date" Grid.Column="1" Grid.Row="0" />
+                    <Label Content="Coordinator" Grid.Column="0" Grid.Row="0" Margin="0,0,28,0" />
+                    <Label Content="Start Date" Grid.Column="1" Grid.Row="0" Margin="0,0,53,0" />
                     <Label Content="Region" Grid.Column="2" Grid.Row="0" />
                     <Label Content="Suburb" Grid.Column="3" Grid.Row="0" />
-                    <Label Content="Venue" Grid.Column="4" Grid.Row="0" />
+                    <Label Content="Venue" Grid.Column="4" Grid.Row="0" Margin="0,0,30,0" />
                     <Label Content="Location" Grid.Column="5" Grid.Row="0" />
                     <Label Content="Course Code" Grid.Column="6" Grid.Row="0" />
 
@@ -74,6 +74,8 @@
                     <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Bottom">
                         <Button Name="Save" Content="Save" />
                     </StackPanel>
+                    <Button Content="+" HorizontalAlignment="Right" VerticalAlignment="Center" Width="25" Height="14" cal:Message.Attach="AddNewCoordinator" ToolTip="Add Coordinator"/>
+                    <Button Content="+" HorizontalAlignment="Right" VerticalAlignment="Center" Width="25" Height="14" Grid.Column="4"/>
 
                 </Grid>
             </GroupBox>

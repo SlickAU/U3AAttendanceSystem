@@ -28,6 +28,10 @@ namespace U3A_Attendance_Model
 
         internal void delete(Action<Coordinator> action)
         {
+            if (this.CourseInstances.Count() > 0)
+            {
+                throw new BusinessRuleException("Coordinator cannot be deleted as it is associated with other records");
+            }
             action(this);
         }
     }
