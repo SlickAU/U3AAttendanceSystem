@@ -332,12 +332,19 @@ namespace U3A_Attendance_Model
         }
 
         //Fetches all venues in the database
-        public DoubleLinkedList<IVenue> FetchAllVenues()
+        public IEnumerable<IVenue> FetchAllVenues()
         {
             return _u3a.fetchAllVenues();
         }
 
+        //Fetches all venues in the database
+        //public DoubleLinkedList<IVenue> FetchAllVenues()
+        //{
+        //    return _u3a.fetchAllVenues();
+        //}
+
         //Updates a Venue
+
         public IVenue UpdateVenue(Guid venueId, Guid regionId, Guid suburbId, string name, string address, string codeId)
         {
             var venue = _u3a.updateVenue(venueId, regionId, suburbId, name, address, codeId);            

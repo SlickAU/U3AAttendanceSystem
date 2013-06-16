@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,10 +12,24 @@ namespace U3A_Attendance_System.ViewModels
     public class VenueListViewModel : BaseViewModel
     {
         #region Properties
-        public DoubleLinkedList<IVenue> VenueList
+        private ObservableCollection<IVenue> venueList;
+
+        public ObservableCollection<IVenue> VenueList
         {
-            get { return _facade.FetchAllVenues(); }
+            get 
+            {
+                venueList = new ObservableCollection<IVenue>
+                    (
+                        _facade.FetchAllVenues().OrderBy(v => v.Name)
+                    );
+                return venueList; 
+            }
         }
+
+        //public IEnumerable<IVenue> VenueList
+        //{
+        //    get { return _facade.FetchAllVenues().OrderBy(v => v.Name); }
+        //}
         #endregion
 
 

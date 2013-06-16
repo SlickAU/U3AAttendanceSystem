@@ -256,13 +256,13 @@ namespace U3A_Attendance_Model
             return fetchRegion(regionId).fetchVenues(suburbId);
         }
 
-        internal DoubleLinkedList<IVenue> fetchAllVenues()
+        internal IEnumerable<Venue> fetchAllVenues()
         {
-            List<IVenue> venueList = new List<IVenue>();
+            List<Venue> venueList = new List<Venue>();
 
             foreach (var r in Regions)
             {
-                var value = r.fetchAllVenues() ;
+                var value = r.fetchAllVenues();
 
                 if (value != null)
                 {
@@ -271,12 +271,31 @@ namespace U3A_Attendance_Model
                         venueList.Add(v);
                     }
                 }
-            }
-            BubbleSort(ref venueList);
-
-            return new DoubleLinkedList<IVenue>(venueList);
-
+            }       
+            return venueList;
         }
+
+
+        //internal DoubleLinkedList<IVenue> fetchAllVenues()
+        //{
+        //    List<IVenue> venueList = new List<IVenue>();
+
+        //    foreach (var r in Regions)
+        //    {
+        //        var value = r.fetchAllVenues() ;
+
+        //        if (value != null)
+        //        {
+        //            foreach (var v in value)
+        //            {
+        //                venueList.Add(v);
+        //            }
+        //        }
+        //    }
+        //    BubbleSort(ref venueList);
+
+        //    return new DoubleLinkedList<IVenue>(venueList);
+        //}
 
         internal void deleteVenue(Guid venueId, Guid regionId, Guid suburbId, Action<Venue> action)
         {

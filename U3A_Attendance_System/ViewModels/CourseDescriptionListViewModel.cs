@@ -30,7 +30,7 @@ namespace U3A_Attendance_System.ViewModels
             {
                 courseDescriptions = new ObservableCollection<ICourseDescription>
                     (
-                        _facade.FetchCourseDescriptions().OrderBy(cd => cd.CourseNumber)
+                        _facade.FetchCourseDescriptions().OrderBy(cd => cd.Title)
                     );
                 return courseDescriptions;
             } 

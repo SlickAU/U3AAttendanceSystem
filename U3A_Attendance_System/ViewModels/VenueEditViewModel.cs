@@ -238,15 +238,15 @@ namespace U3A_Attendance_System.ViewModels
         }
         public void Update()
         {
-            if (Validator.TryValidateObject(this, new ValidationContext(this, null, null), null, true))
-            {
+            //if (Validator.TryValidateObject(this, new ValidationContext(this, null, null), null, true))
+            //{
                 if (existingVenue != null)
                     existingVenue = _facade.UpdateVenue(existingVenue.Id, _selectedRegion.Id, _selectedSuburb.Id, VenueName.Trim(), Address.Trim(), CodeId.Trim());
                 else
                     existingVenue = _facade.CreateVenue(_selectedRegion.Id, _selectedSuburb.Id, VenueName.Trim(), Address.Trim(), CodeId.Trim());
 
                 this.Refresh();
-            }
+            //}
         }
 
         //--------------------------------------
