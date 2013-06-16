@@ -110,6 +110,19 @@ namespace U3A_Attendance_System.ViewModels
             }
         }
         public IEnumerable<IVenue> Venues { get; set; }
+        //private IEnumerable<IVenue> _venues;
+        //public IEnumerable<IVenue> Venues 
+        //{
+        //    get
+        //    {
+        //        return _venues;
+        //    }
+        //    set
+        //    {
+        //        _venues = value;
+        //    }
+        //}
+
         public IVenue SelectedVenue
         {
             get
@@ -149,6 +162,15 @@ namespace U3A_Attendance_System.ViewModels
                 return !(SelectedVenue == null || Locations.Count() <= 0);
             }
         }
+
+        public Boolean VenueSelected
+        {
+            get
+            {
+                return true;
+            }
+        }
+
         private IEnumerable<ICoordinator> _coordinators;
         public IEnumerable<ICoordinator> Coordinators 
         { 
@@ -417,7 +439,7 @@ namespace U3A_Attendance_System.ViewModels
         public CourseInstanceEditViewModel(ICourseInstance ci)
         {
             Regions = _facade.FetchRegions().ToList();
-            Suburbs = _facade.FetchSuburbs(ci.RegionId);
+            Suburbs = _facade.FetchSuburbsWithVenues(ci.RegionId);
             Venues = _facade.FetchVenues(ci.RegionId, ci.SuburbId);
             Locations = _facade.FetchLocations(ci.RegionId, ci.SuburbId, ci.VenueId);
             Coordinators = _facade.FetchCoordinators().ToList();
@@ -439,6 +461,7 @@ namespace U3A_Attendance_System.ViewModels
             Suburbs = _facade.FetchSuburbsWithVenues(regionId);
             Venues = Enumerable.Empty<IVenue>();
             Locations = Enumerable.Empty<ILocation>();
+            NotifyOfPropertyChange("Suburbs");
             this.Refresh();
         }
 
@@ -740,6 +763,27 @@ namespace U3A_Attendance_System.ViewModels
              Coordinators = _facade.FetchCoordinators().ToList();
              NotifyOfPropertyChange("Coordinators");
         }
+
+        public void AddNewVenue()
+        {
+            settings.Title = "Create Venue";
+            _wm.ShowDialog(new VenueEditViewModel(), null, settings);
+            UpdateSuburbs(_selectedRegion.Id);
+            NotifyOfPropertyChange("Venues");
+        }
+
+        public void AddNewLocation()
+        {
+            settings.Title = "Add Location";
+            if (_selectedVenue == null)
+            {
+                throw new BusinessRuleException("Please select a venue first");
+            }
+            _wm.ShowDialog(new VenueEditViewModel(_selectedVenue), null, settings);
+            Locations = _facade.FetchLocations(_selectedRegion.Id, _selectedSuburb.Id, _selectedVenue.Id);
+            NotifyOfPropertyChange("Locations");
+        }
+
         #endregion
 
     }

@@ -237,7 +237,7 @@ namespace U3A_Attendance_System.ViewModels
             this.Refresh();
         }
         public void Update()
-        {
+            {
             //if (Validator.TryValidateObject(this, new ValidationContext(this, null, null), null, true))
             //{
                 if (existingVenue != null)

@@ -23,7 +23,7 @@
     </Window.Resources>
     <Controls:MetroWindow.WindowCommands>
         <Controls:WindowCommands>
-            <Button cal:Message.Attach="ShowHome" SnapsToDevicePixels="True">
+            <Button cal:Message.Attach="ShowHome" SnapsToDevicePixels="True" ToolTip="Home" >
                 <Image Source="home.png" Height="28" Width="28" VerticalAlignment="Center" HorizontalAlignment="Center"></Image>
             </Button>
         </Controls:WindowCommands>
