@@ -56,7 +56,13 @@ namespace U3A_Attendance_System.ViewModels
             {
                 if (itemToDelete is ICourseDescription)
                 {
-                    _facade.DeleteCourseDescription((itemToDelete as ICourseDescription).Id);
+                    try
+                    {
+                        _facade.DeleteCourseDescription((itemToDelete as ICourseDescription).Id);
+                    }
+                    catch (AssociationDependencyException e)
+                    { 
+                    }
                 }
 
                 if (itemToDelete is IVenue)
@@ -76,7 +82,15 @@ namespace U3A_Attendance_System.ViewModels
 
                 if (itemToDelete is ICoordinator)
                 {
-                    _facade.DeleteCoordinator((itemToDelete as ICoordinator).Id);
+                    ICoordinator coordinator = (ICoordinator)itemToDelete;
+                    try
+                    {
+                        _facade.DeleteCoordinator(coordinator.Id);
+                    }
+                    catch (InvalidOperationException e)
+                    {
+                      
+                    }
                 }
 
                 if (itemToDelete is ICourseInstance)

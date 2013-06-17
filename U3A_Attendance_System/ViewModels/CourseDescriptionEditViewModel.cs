@@ -7,15 +7,79 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using U3A_Attendance_Model;
 using U3A_Attendance_System.Views;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 
 namespace U3A_Attendance_System.ViewModels
 {
     public class CourseDescriptionEditViewModel : BaseViewModel
     {
         #region Properties
+        private string _title;
+        private string _description;
 
-        public string Title { get; set; }
-        public string Description { get; set; }
+        public bool IsSavingEnabled { get; set; }
+
+        [Required]
+        public string Title
+        {
+            get { return _title; }
+
+            [DebuggerNonUserCode]
+            set
+            {
+                if (Validator.TryValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "Title" }, null))
+                {
+                    _title = value;
+                    NotifyOfPropertyChange("Title");
+                    Validate();
+                }
+                if (_title != value)
+                {
+                    _title = value;
+                    NotifyOfPropertyChange("Title");
+                    Validate();
+                    Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "Title" });
+                }
+
+            }
+        }
+
+        [Required]
+        public string Description
+        {
+            get { return _description; }
+
+            [DebuggerNonUserCode]
+            set
+            {
+                if (Validator.TryValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "Description" }, null))
+                {
+                    _description = value;
+                    NotifyOfPropertyChange("Description");
+                    Validate();
+                }
+                if (_description != value)
+                {
+                    _description = value;
+                    NotifyOfPropertyChange("Description");
+                    Validate();
+                    Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "Description" });
+                }
+
+            }
+        }
+
+
+        public void Validate()
+        {
+            if (Validator.TryValidateObject(this, new ValidationContext(this, null, null), null, true))
+            { IsSavingEnabled = true; this.Refresh(); }
+            else
+            { IsSavingEnabled = false; this.Refresh(); }
+        }
+
+        
         ICourseDescription _cd;
 
         #endregion

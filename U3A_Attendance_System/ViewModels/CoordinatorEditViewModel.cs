@@ -15,9 +15,10 @@ namespace U3A_Attendance_System.ViewModels
         private string _name;
         private string _phone;
         private string _email;
+        public bool IsSavingEnabled { get; set; }
 
         [Required(ErrorMessage="Required")]
-        [RegularExpression(@"^(([a-zA-Z]*)(\s)([a-zA-Z]*))$", ErrorMessage="Name Surname")]
+        [RegularExpression(@"^([A-Za-z'\-\p{L}\p{Zs}\p{Lu}\p{Ll}\']+)$", ErrorMessage = "Name Surname")]
         public string Name
         {
             get { return _name; }
@@ -26,13 +27,23 @@ namespace U3A_Attendance_System.ViewModels
             set
             {
 
-                Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "Name" });
-                _name = value;
-                NotifyOfPropertyChange("Name");
+                if (Validator.TryValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "Name" }, null))
+                {
+                    _name = value;
+                    NotifyOfPropertyChange("Name");
+                    Validate();
+                }
+                if (_name != value)
+                {
+                    _name = value;
+                    NotifyOfPropertyChange("Name");
+                    Validate();
+                    Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "Name" });
+                }
             }
         }
 
-        [Required(ErrorMessage = "Required")]
+      [Required(ErrorMessage = "Required")]
         public string Phone
         {
             get { return _phone; }
@@ -41,11 +52,24 @@ namespace U3A_Attendance_System.ViewModels
             set
             {
 
-                Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "Phone" });
-                _phone = value;
-                NotifyOfPropertyChange("Phone");
+                if (Validator.TryValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "Phone" }, null))
+                {
+                    _phone = value;
+                    NotifyOfPropertyChange("Phone");
+                    Validate();
+                }
+                if (_phone != value)
+                {
+                    _phone = value;
+                    NotifyOfPropertyChange("Phone");
+                    Validate();
+                    Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "Phone" });
+                }
             }
         }
+
+
+
 
         [Required(ErrorMessage = "Required")]
         [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage = "Please enter a valid email: email@email.com")]
@@ -57,9 +81,21 @@ namespace U3A_Attendance_System.ViewModels
             set
             {
 
-                Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "Email" });
-                _email = value;
-                NotifyOfPropertyChange("Email");
+                if (Validator.TryValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "Email" }, null))
+                {
+
+                    _email = value;
+                    NotifyOfPropertyChange("Email");
+                    Validate();
+                }
+                if (_email != value)
+                {
+                    _email = value;
+                    NotifyOfPropertyChange("Email");
+                    Validate();
+                    Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "Email" });
+                }
+              
             }
         }
 
@@ -79,16 +115,29 @@ namespace U3A_Attendance_System.ViewModels
             Email = coordinator.Email;
             _coo = coordinator;
         }
-        
+
+        public bool Validate()
+        {                      
+            if (Validator.TryValidateObject(this, new ValidationContext(this, null, null), null, true))
+            { IsSavingEnabled = true; this.Refresh(); return true; }
+            else
+            { IsSavingEnabled = false; this.Refresh(); return false; }
+ 
+        }
+
+
         public void Update()
         {
-            if (_coo != null)
+            if (Validate() == true)
             {
-                _facade.UpdateCoordinator(CoordinatorProperties.Id, Name, Email, Phone);
-            }
-            else
-            {
-                _facade.CreateCoordinator(Name, Email, Phone);
+                if (_coo != null)
+                {
+                    _facade.UpdateCoordinator(CoordinatorProperties.Id, Name, Email, Phone);
+                }
+                else
+                {
+                    _facade.CreateCoordinator(Name, Email, Phone);
+                }
             }
         }
     }

@@ -37,6 +37,6 @@
         <Label Content="Course Description" Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom" />
         <TextBox x:Name="Description" TextWrapping="Wrap" Grid.Row="3" Grid.Column="1" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" />
         <Button Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Center"  Click="Update_Click"  Grid.Column="1" Grid.Row="4" />
-        <Button  x:Name="Update" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Click="Update_Click" Grid.Row="4" />
+        <Button  x:Name="Update" IsEnabled="{Binding IsSavingEnabled, Mode=TwoWay}" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Click="Update_Click" Grid.Row="4" />
     </Grid>
 </Controls:MetroWindow>
