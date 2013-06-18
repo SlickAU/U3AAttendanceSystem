@@ -138,7 +138,7 @@
                 <Label Content="Suburb" Grid.Row="8"/>
                 <ComboBox Name="Suburbs" DisplayMemberPath="Name" SelectedValuePath="Id" IsEnabled="{Binding Path=IsSuburbsEnabled}" Grid.Row="9" />
                 <Button Content="Cancel" Click="Cancel_Click" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Row="10" />
-                <Button Name="Update" Content="Save" Grid.Row="10" VerticalAlignment="Center" HorizontalAlignment="Right" />
+                <Button Name="Update" IsEnabled="{Binding IsSavingEnabled}" Content="Save" Grid.Row="10" VerticalAlignment="Center" HorizontalAlignment="Right" />
 
             </Grid>
         </GroupBox>
@@ -159,11 +159,11 @@
                 
                 <Label Content="Room Name" Grid.Row="0" />
                 <TextBox Name="RoomName" Grid.Row="1" Width="200" HorizontalAlignment="Left"></TextBox>
-                <Button Content="+" Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" cal:Message.Attach="UpdateLocations" HorizontalAlignment="Right" Width="25" />
+                <Button Content="+" Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" cal:Message.Attach="UpdateLocations" IsEnabled="{Binding IsAddingEnabled}" HorizontalAlignment="Right" Width="25" />
                 <Label Content="Rooms" Grid.Row="2" />
                 <ListBox Name="ListOfLocations" DisplayMemberPath="Room" SelectedValuePath="Id" VerticalAlignment="Stretch" Height="80" Grid.Row="3" />
-                <Button Name="ClearListOfLocations" Content="Clear List" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                <Button Content="Delete" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" cal:Message.Attach="DeleteLocation(ListOfLocations.SelectedValue)"></Button>
+                <Button Name="ClearListOfLocations" IsEnabled="{Binding IsDeletingEnabled}" Content="Clear List" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Button Content="Delete" IsEnabled="{Binding IsDeletingEnabled}" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" cal:Message.Attach="DeleteLocation(ListOfLocations.SelectedValue)"></Button>
                 
             </Grid>
         </GroupBox>

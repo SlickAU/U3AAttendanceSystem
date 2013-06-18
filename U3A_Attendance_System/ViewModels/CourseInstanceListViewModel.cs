@@ -56,7 +56,7 @@ namespace U3A_Attendance_System.ViewModels
             _wm.ShowDialog(new DeleteViewModel((ICourseInstance)ci, this), null, settings);
             InstancesList = new ObservableCollection<ICourseInstance>(cd.CourseInstances.ToList());
             NotifyOfPropertyChange("InstancesList");
-            cdm.Refresh();
+            this.Refresh();
         }
 
        

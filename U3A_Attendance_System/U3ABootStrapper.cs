@@ -47,11 +47,19 @@ namespace U3A_Attendance_System
                 MessageBox.Show(e.Exception.InnerException.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 e.Handled = true;
             }
+
+            if (e.Exception.InnerException is InvalidOperationException)
+            {
+                MessageBox.Show("This record cannot be deleted as it is tied to other records.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                e.Handled = true;
+            }
             else
             {
                 MessageBox.Show("Whoops! Something went wrong.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 e.Handled = true;
             }
+
+
         }
 
 

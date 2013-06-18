@@ -179,7 +179,7 @@
                 </Grid>
 
                 <Grid Grid.Row="1" Margin="5, 20, 5, 5">
-                    <DataGrid Name="Attendances" HeadersVisibility="None" Background="White" Margin="0,-15,0,0" EnableRowVirtualization="True" EnableColumnVirtualization="False"  AlternatingRowBackground="AliceBlue"/>
+                    <DataGrid Name="Attendances" HeadersVisibility="None" Background="White" Margin="0,-15,0,0" EnableRowVirtualization="True" EnableColumnVirtualization="False"  AlternatingRowBackground="AliceBlue" VerticalGridLinesBrush="LightGray"/>
                 </Grid>
             </Grid>
         </Grid>

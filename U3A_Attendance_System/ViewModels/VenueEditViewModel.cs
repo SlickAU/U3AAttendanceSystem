@@ -28,6 +28,9 @@ namespace U3A_Attendance_System.ViewModels
         private string _address;
         private string _codeId;
         private string _roomName;
+        public bool IsSavingEnabled { get; set; }
+        public bool IsAddingEnabled { get; set; }
+        public bool IsDeletingEnabled { get; set; }
 
 
         [Required(ErrorMessage = "Required")]
@@ -38,10 +41,21 @@ namespace U3A_Attendance_System.ViewModels
             [DebuggerNonUserCode]
             set
             {
+                if (Validator.TryValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "VenueName" }, null))
+                {
+                    _venueName = value;
+                    NotifyOfPropertyChange("VenueName");
+                    ValidateVenue();
+                }
 
-                Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "VenueName" });
-                _venueName = value;
-                NotifyOfPropertyChange("VenueName");
+                if (_venueName != value)
+                {                    
+                    _venueName = value;
+                    NotifyOfPropertyChange("VenueName");
+                    ValidateVenue();
+                    Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "VenueName" });
+                }
+                
             }
         }
 
@@ -53,9 +67,20 @@ namespace U3A_Attendance_System.ViewModels
             [DebuggerNonUserCode]
             set
             {
-                Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "Address" });
-                _address = value;
-                NotifyOfPropertyChange("Address");
+                if (Validator.TryValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "Address" }, null))
+                {
+                   
+                    _address = value;
+                    NotifyOfPropertyChange("Address");
+                    ValidateVenue();
+                }
+                if (_address != value)
+                {
+                    _address = value;
+                    NotifyOfPropertyChange("Address");
+                    ValidateVenue();
+                    Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "Address" });
+                }
             }
         }
 
@@ -67,9 +92,19 @@ namespace U3A_Attendance_System.ViewModels
             [DebuggerNonUserCode]
             set
             {
-                Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "CodeId" });
-                _codeId = value;
-                NotifyOfPropertyChange("CodeId");
+                if (Validator.TryValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "CodeId" }, null))
+                {
+                    _codeId = value;
+                    NotifyOfPropertyChange("CodeId");
+                    ValidateVenue();
+                }
+                if (_codeId != value)
+                {
+                    _codeId = value;
+                    NotifyOfPropertyChange("CodeId");
+                    ValidateVenue();
+                    Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "CodeId" });
+                }
             }
         }
 
@@ -93,6 +128,7 @@ namespace U3A_Attendance_System.ViewModels
             {
                 _selectedSuburb = value;
                 NotifyOfPropertyChange("SelectedSuburb");
+                ValidateVenue();
             }
         }
         public IEnumerable<IRegion> Regions
@@ -114,6 +150,7 @@ namespace U3A_Attendance_System.ViewModels
             {
                 _selectedRegion = value;
                 NotifyOfPropertyChange("SelectedRegion");
+                ValidateVenue();
             }
         }
         //--------------------------------------
@@ -137,6 +174,8 @@ namespace U3A_Attendance_System.ViewModels
             SelectedRegion = Regions.Where(r => r.Id.Equals(existingVenue.RegionId)).FirstOrDefault();
             Suburbs = _facade.FetchSuburbs(SelectedRegion.Id);
             SelectedSuburb = Suburbs.Where(s => s.Id.Equals(existingVenue.SuburbId)).FirstOrDefault();
+            IsDeletingEnabled = true;
+            this.Refresh();
         }
         //--------------------------------------
         #endregion
@@ -166,10 +205,19 @@ namespace U3A_Attendance_System.ViewModels
             [DebuggerNonUserCode]
             set
             {
-
-                Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "RoomName" });
-                _roomName = value;
-                NotifyOfPropertyChange("RoomName");
+                if (Validator.TryValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "RoomName" }, null))
+                {
+                    _roomName = value;
+                    NotifyOfPropertyChange("RoomName");
+                    ValidateRoom();
+                }
+                if (_roomName != value)
+                { 
+                    _roomName = value;
+                    NotifyOfPropertyChange("RoomName");
+                    ValidateRoom();
+                    Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = "RoomName" });
+                }
             }
         }
 
@@ -180,10 +228,19 @@ namespace U3A_Attendance_System.ViewModels
 
         public void DeleteLocation(Guid locationId)
         {
-            _facade.DeleteLocation(SelectedRegion.Id, SelectedSuburb.Id, existingVenue.Id, locationId);
-         //  ListOfLocations.ToList().Remove(ListOfLocations.Where(l => l.Id.Equals(locationId)).FirstOrDefault());
-            NotifyOfPropertyChange("ListOfLocations");
+            if (locationId != Guid.Empty)
+            {
+                _facade.DeleteLocation(SelectedRegion.Id, SelectedSuburb.Id, existingVenue.Id, locationId);
+                //  ListOfLocations.ToList().Remove(ListOfLocations.Where(l => l.Id.Equals(locationId)).FirstOrDefault());
+                NotifyOfPropertyChange("ListOfLocations");
+                if (ListOfLocations.Count == 0)
+                    IsDeletingEnabled = false;
+                this.Refresh();
+            }
+            else
+                throw new BusinessRuleException("Please select a location");
         }
+
 
         public void ClearListOfLocations()
         {
@@ -196,6 +253,10 @@ namespace U3A_Attendance_System.ViewModels
            }
 
            NotifyOfPropertyChange("ListOfLocations");
+           if (ListOfLocations.Count == 0)
+               IsDeletingEnabled = false;
+           this.Refresh();
+
         }
 
         public void UpdateLocations()
@@ -222,9 +283,10 @@ namespace U3A_Attendance_System.ViewModels
             this.Refresh();*/
 
             if (RoomName != null)
-                _facade.CreateLocation(_selectedRegion.Id, existingVenue.SuburbId, existingVenue.Id, RoomName);
-
+                ListOfLocations.Add(_facade.CreateLocation(_selectedRegion.Id, existingVenue.SuburbId, existingVenue.Id, RoomName));
+            IsDeletingEnabled = true;
             NotifyOfPropertyChange("ListOfLocations");
+            this.Refresh();
         }
         //--------------------------------------
         #endregion
@@ -237,7 +299,8 @@ namespace U3A_Attendance_System.ViewModels
             this.Refresh();
         }
         public void Update()
-            {
+        {
+       
             //if (Validator.TryValidateObject(this, new ValidationContext(this, null, null), null, true))
             //{
                 if (existingVenue != null)
@@ -253,5 +316,47 @@ namespace U3A_Attendance_System.ViewModels
         #endregion
 
         #endregion
+
+        public class ValidateVenueProperties
+        {
+            [Required]
+            public string _VenueName { get; set; }
+            [Required]
+            public string _Address { get; set; }
+            [Required]
+            public string _CodeId {get;set;}
+            [Required]
+            public IRegion _SelectedRegion { get; set; }
+            [Required]
+            public ISuburb _SelectedSuburb { get; set; }
+           
+        }
+
+        public class ValidateLocationProperties
+        {
+            [Required]
+            public string _RoomName { get; set; }
+        }
+
+
+        public void ValidateVenue()
+        {
+            ValidateVenueProperties testObject = new ValidateVenueProperties() { _VenueName = VenueName, _Address = Address, _CodeId = CodeId, _SelectedRegion = SelectedRegion, _SelectedSuburb = SelectedSuburb };
+
+            if (Validator.TryValidateObject(testObject, new ValidationContext(testObject, null, null), null, true))
+            { IsSavingEnabled = true; this.Refresh(); }
+            else
+            { IsSavingEnabled = false; this.Refresh(); }
+        }
+
+        public void ValidateRoom()
+        {
+            ValidateLocationProperties testObject = new ValidateLocationProperties() { _RoomName = RoomName };
+
+            if (Validator.TryValidateObject(testObject, new ValidationContext(testObject, null, null), null, true))
+            { IsAddingEnabled = true; this.Refresh(); }
+            else
+            { IsAddingEnabled = false; this.Refresh(); }
+        }
     }
 }

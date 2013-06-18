@@ -17,6 +17,7 @@ using System.Windows.Forms;
 using U3A_Attendance_Model;
 using U3A_Attendance_System.Views;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace U3A_Attendance_System.ViewModels
 {
@@ -102,7 +103,6 @@ namespace U3A_Attendance_System.ViewModels
             {
                 _selectedSuburb = value;
                 IsUnsaved = "Visible";
-                NotifyOfPropertyChange("SelectedSuburb");
             }
         }
         public Boolean IsSuburbsEnabled
@@ -110,6 +110,19 @@ namespace U3A_Attendance_System.ViewModels
             get
             {
                 return !(SelectedRegion == null);
+            }
+        }
+
+        private bool isVenueEnabled;
+        public bool IsVenueEnabled
+        {
+            get
+            {
+                return isVenueEnabled;
+            }
+            set
+            {
+                isVenueEnabled = value;
             }
         }
         public IEnumerable<IVenue> Venues { get; set; }
@@ -509,7 +522,7 @@ namespace U3A_Attendance_System.ViewModels
 
                 courseCode = string.Format("{0}{1}{2}{3}", year, semester, region, venue);
 
-                string result = _facade.CheckCourseCode(courseCode, SelectedRegion.Id, SelectedVenue.Id);
+                string result = _facade.CheckCourseCode(courseCode.ToUpper(), SelectedRegion.Id, SelectedVenue.Id);
 
                 CourseCode = result;
                 this.Refresh();
@@ -536,6 +549,7 @@ namespace U3A_Attendance_System.ViewModels
 
             _facade.SerializeObject(ci);
             IsUnsaved = "Hidden";
+            SaveOrUpdate = "Update";
             NotifyOfPropertyChange("IsUnsaved");
             this.Refresh();
         }
@@ -578,7 +592,8 @@ namespace U3A_Attendance_System.ViewModels
                 throw new BusinessRuleException("CourseCode cannot be Empty");
             }
         }
-        
+
+ 
         //Session Management
         public void CreateSession(int frequency)
         {
@@ -768,12 +783,29 @@ namespace U3A_Attendance_System.ViewModels
              NotifyOfPropertyChange("Coordinators");
         }
 
+        private bool isValueNull;
+        public bool IsSuburbNull
+        {
+            get
+            {
+                return isValueNull;
+            }
+            set
+            {
+                isValueNull = value;
+            } 
+        }
         public void AddNewVenue()
         {
             settings.Title = "Create Venue";
+            
+            if (_selectedRegion == null)
+            {
+                throw new BusinessRuleException("Please select a Region before creating a new Venue");
+            }
             _wm.ShowDialog(new VenueEditViewModel(), null, settings);
             UpdateSuburbs(_selectedRegion.Id);
-            NotifyOfPropertyChange("Venues");
+            this.Refresh();
         }
 
         public void AddNewLocation()
@@ -781,11 +813,12 @@ namespace U3A_Attendance_System.ViewModels
             settings.Title = "Add Location";
             if (_selectedVenue == null)
             {
-                throw new BusinessRuleException("Please select a venue first");
+                throw new BusinessRuleException("Venue must be selected before a new Location can be created.");
             }
             _wm.ShowDialog(new VenueEditViewModel(_selectedVenue), null, settings);
             Locations = _facade.FetchLocations(_selectedRegion.Id, _selectedSuburb.Id, _selectedVenue.Id);
             NotifyOfPropertyChange("Locations");
+            this.Refresh();
         }
 
         #endregion

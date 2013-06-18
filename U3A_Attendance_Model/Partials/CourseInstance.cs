@@ -77,7 +77,7 @@ namespace U3A_Attendance_Model
             CourseCode = courseCode;
             Sessions = new List<Session>();
 
-            if (startDate > DateTime.Today)
+            if (startDate < DateTime.Today)
             {
                 StateId = 2;
             }
